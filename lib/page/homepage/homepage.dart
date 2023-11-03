@@ -94,8 +94,23 @@ class _HomePageState extends State<Homepage> {
                     // Add your content here SINI WOI
                     child: const Column(
                       children: [
-                        Text("PROFILE"),
-                        Text("Username:"),
+
+                        SizedBox(height: 20),
+                        Text(
+                          "My Profile",
+                          style: TextStyle(
+                            fontSize:
+                                35,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+
+                        SizedBox(height: 20),
+                        SizedBox(
+                          height: 20,
+                          width: 20,
+                        ),
+
                       ],
                     ),
                   ),
