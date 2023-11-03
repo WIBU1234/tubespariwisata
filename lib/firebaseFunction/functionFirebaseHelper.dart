@@ -59,3 +59,15 @@ User searchUserByLogin(List<User> user, String username, String password) {
       token: "",
       imageFoto: "");
 }
+
+void editUserData(String idUser, Map<String, dynamic> newData) {
+  FirebaseFirestore.instance
+      .collection('user')
+      .where('id', isEqualTo: idUser)
+      .get()
+      .then((QuerySnapshot querySnapshot) {
+    querySnapshot.docs.forEach((doc) {
+      doc.reference.update(newData);
+    });
+  });
+}

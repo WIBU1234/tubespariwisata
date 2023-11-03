@@ -1,5 +1,9 @@
+// IMPORT LIB FROM FLUTTER
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
+import 'package:intl/intl.dart';
+
+// IMPORT LIB FROM ENTITY
 import 'package:tubespariwisata/entity/user.dart';
 
 class Homepage extends StatefulWidget {
@@ -37,8 +41,7 @@ class _HomePageState extends State<Homepage> {
         ),
       ),
       child: Padding(
-        padding:
-            const EdgeInsets.only(bottom: 50), // Adjust the top value as needed
+        padding: const EdgeInsets.only(bottom: 50),
         child: Center(
           child: Container(
             width: 330,
@@ -57,6 +60,22 @@ class _HomePageState extends State<Homepage> {
 
   // PROFILE CONTAINER
   Widget _buildPersonContainer() {
+  TextEditingController controllerTanggalLahir = TextEditingController();
+
+  Future<void> selectDate() async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime(3000));
+    if (picked != null) {
+      setState(() {
+        controllerTanggalLahir.text =
+            DateFormat('yyyy-MM-dd').format(picked).toString().split(" ")[0];
+      });
+    }
+  }
+
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
@@ -92,25 +111,54 @@ class _HomePageState extends State<Homepage> {
                     ),
 
                     // Add your content here SINI WOI
-                    child: const Column(
+                    child: Column(
                       children: [
-
-                        SizedBox(height: 20),
-                        Text(
+                        const SizedBox(height: 20),
+                        const Text(
                           "My Profile",
                           style: TextStyle(
-                            fontSize:
-                                35,
+                            fontSize: 35,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-
-                        SizedBox(height: 20),
-                        SizedBox(
-                          height: 20,
-                          width: 20,
+                        const SizedBox(height: 20),
+                        const Padding(
+                          padding: EdgeInsets.all(10.0),
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            child: CircleAvatar(
+                              radius: 80,
+                              backgroundImage:
+                                  AssetImage("resources/images/bali.jpg"),
+                            ),
+                          ),
                         ),
-
+                        const SizedBox(height: 20),
+                        Padding(
+                          padding: const EdgeInsets.only(right: 30, left: 30),
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Colors.black,
+                                  width: 1.0,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Container(
+                            height: 270,
+                            width: 260,
+                            child: SingleChildScrollView(
+                              child: Column(
+                                children: [
+                                  // ADD CONTENT FOR INPUT
+                                ],
+                              ),
+                            )
+                          ),
                       ],
                     ),
                   ),
