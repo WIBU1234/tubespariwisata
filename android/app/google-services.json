@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "215893863372",
+    "project_id": "flutter-firebase-be52a",
+    "storage_bucket": "flutter-firebase-be52a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215893863372:android:2fb74421ccbf8e22404b69",
+        "android_client_info": {
+          "package_name": "com.example.gd6_a_1186"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY-Wrc2hPkA0b_-49yTHAgAnVUqNgYHi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215893863372:android:6dd79d61d9bf419a404b69",
+        "android_client_info": {
+          "package_name": "com.example.tubespariwisata"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY-Wrc2hPkA0b_-49yTHAgAnVUqNgYHi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215893863372:android:b4d693253c8b5ebd404b69",
+        "android_client_info": {
+          "package_name": "com.example.ugd3_pariwisata"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY-Wrc2hPkA0b_-49yTHAgAnVUqNgYHi4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
