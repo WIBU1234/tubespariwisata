@@ -27,6 +27,7 @@ class _HomePageState extends State<Homepage> {
     }
   }
 
+  // HOME CONTAINER
   Widget _buildHomeContainer() {
     return Container(
       decoration: const BoxDecoration(
@@ -54,6 +55,7 @@ class _HomePageState extends State<Homepage> {
     );
   }
 
+  // PROFILE CONTAINER
   Widget _buildPersonContainer() {
     return Container(
       decoration: const BoxDecoration(
@@ -74,13 +76,39 @@ class _HomePageState extends State<Homepage> {
               color: Colors.white.withOpacity(0.8),
             ),
             // Add your content here
-            child: const Text('Profile Screen'),
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Center(
+                  child: Container(
+                    width: 300,
+                    height: 580,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 1,
+                      ),
+                    ),
+
+                    // Add your content here SINI WOI
+                    child: const Column(
+                      children: [
+                        Text("PROFILE"),
+                        Text("Username:"),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ),
         ),
       ),
     );
   }
 
+  // GRID ITEM CONTAINER
   Widget _buildSearchContainer() {
     return Container(
       decoration: const BoxDecoration(
@@ -108,6 +136,7 @@ class _HomePageState extends State<Homepage> {
     );
   }
 
+  // SETTINGS CONTAINER
   Widget _buildSettingsContainer() {
     return Container(
       decoration: const BoxDecoration(

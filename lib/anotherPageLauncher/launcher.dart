@@ -1,6 +1,7 @@
 // MODULES IMPORT
 import 'package:flutter/material.dart';
 import 'package:tubespariwisata/entity/user.dart';
+
 // LAUNCHER VIEW
 import 'package:tubespariwisata/page/firstLanding/registerpage.dart';
 import 'package:tubespariwisata/page/firstLanding/loginpage.dart';

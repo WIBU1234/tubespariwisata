@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 
-// LAUNCHER PAGE
+// FIRST PAGE LAUNCHER
 import 'package:tubespariwisata/page/firstLanding/loginpage.dart';
 
 Future main() async {
@@ -24,7 +24,7 @@ class MainApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue
       ),
-       home: const Loginpage(),
+      home: const Loginpage(),
     );
   }
 }
