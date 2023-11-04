@@ -147,7 +147,7 @@ class _LoginPageState extends State<Loginpage> {
                         if (userTemp.id.isNotEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text('Welcome, ${userTemp.username}!'),
+                              content: Text('Welcome, ${userTemp.id}!'),
                             ),
                           );
                           saveUserID(userTemp.id);

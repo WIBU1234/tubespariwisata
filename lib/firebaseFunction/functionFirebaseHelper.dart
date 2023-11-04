@@ -2,6 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tubespariwisata/entity/user.dart';
 
 // USER DATA MANAGEMENT OR MANIPULATION
+User createEmptyUser() {
+  return User(
+      id: "",
+      username: "",
+      email: "",
+      password: "",
+      nomorTelepon: "",
+      tanggalLahir: "",
+      token: "",
+      imageFoto: "");
+}
+
 Future createUser({
   required String username,
   required String email,
@@ -41,6 +53,20 @@ bool isUserInList(List<User> user, String email) {
     }
   }
   return false;
+}
+
+Future<User?> searchUserByShared(String idUser) async {
+  final querySnapshot = await FirebaseFirestore.instance
+      .collection('user')
+      .where('id', isEqualTo: idUser)
+      .get();
+  if (querySnapshot.size > 0) {
+    final doc = querySnapshot.docs[0];
+    final data = doc.data();
+    return User.fromJson(data);
+  } else {
+    return null;
+  }
 }
 
 User searchUserByLogin(List<User> user, String username, String password) {

@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:intl/intl.dart';
-// IMPORT LIB FROM ENTITY
+// IMPORT LIB FROM FUNCTION
+import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
+import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -15,6 +17,31 @@ class Homepage extends StatefulWidget {
 class _HomePageState extends State<Homepage> {
   var _selectedTab = _SelectedTab.home;
   bool isPasswordVisible = true;
+  String? userId;
+  User? userTemp;
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchData();
+  }
+
+  void _fetchData() async {
+    String? userID = await getUserID();
+    if (userID != null) {
+      setState(() {
+        userId = userID;
+      });
+
+      searchUserByShared(userID).then((value) {
+        setState(() {
+          userTemp = value;
+        });
+      });
+    } else {
+      print('User ID not found');
+    }
+  }
 
   Widget _getSelectedScreen() {
     switch (_selectedTab) {
@@ -66,12 +93,7 @@ class _HomePageState extends State<Homepage> {
     TextEditingController controllerTanggalLahir = TextEditingController();
     bool isPasswordVisible = true;
 
-    @override
-    void initState() {
-      super.initState();
-    }
-
-    Future<void> _selectDate() async {
+    Future<void> selectDate() async {
       DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
@@ -170,7 +192,7 @@ class _HomePageState extends State<Homepage> {
                                       controller: controllerName,
                                       decoration: InputDecoration(
                                         prefixIcon: const Icon(Icons.person),
-                                        labelText: 'Name',
+                                        labelText: userTemp!.username,
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(50),
@@ -193,7 +215,7 @@ class _HomePageState extends State<Homepage> {
                                       controller: controllerEmail,
                                       decoration: InputDecoration(
                                         prefixIcon: const Icon(Icons.mail),
-                                        labelText: 'Email',
+                                        labelText: userTemp!.email,
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(50),
@@ -216,7 +238,7 @@ class _HomePageState extends State<Homepage> {
                                       controller: controllerPassword,
                                       decoration: InputDecoration(
                                         prefixIcon: const Icon(Icons.lock),
-                                        labelText: 'Password',
+                                        labelText: userTemp!.password,
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(50),
@@ -261,7 +283,7 @@ class _HomePageState extends State<Homepage> {
                                       controller: controllerNomorTelepon,
                                       decoration: InputDecoration(
                                         prefixIcon: const Icon(Icons.phone),
-                                        labelText: 'Phone Number',
+                                        labelText: userTemp!.nomorTelepon,
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(50),
@@ -282,11 +304,11 @@ class _HomePageState extends State<Homepage> {
                                   const SizedBox(height: 24),
                                   TextFormField(
                                       controller: controllerTanggalLahir,
-                                      onTap: _selectDate,
+                                      onTap: selectDate,
                                       decoration: InputDecoration(
                                         prefixIcon:
                                             const Icon(Icons.date_range),
-                                        labelText: 'Date of Birth',
+                                        labelText: userTemp!.tanggalLahir,
                                         border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(50),
