@@ -11,3 +11,8 @@ Future<String?> getUserID() async {
   String? stringValue = prefs.getString('userID');
   return stringValue;
 }
+
+Future removeUserID() async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.remove('userID');
+}
