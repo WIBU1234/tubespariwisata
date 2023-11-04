@@ -1,3 +1,3 @@
 # tubespariwisata
 
-A new Flutter project.
+Ingat, semua kembali kemana? Kembali ke mindset
