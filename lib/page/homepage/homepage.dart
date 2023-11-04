@@ -23,10 +23,10 @@ class _HomePageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    _fetchData();
+    fetchData();
   }
 
-  void _fetchData() async {
+  void fetchData() async {
     String? userID = await getUserID();
     if (userID != null) {
       setState(() {
@@ -38,8 +38,6 @@ class _HomePageState extends State<Homepage> {
           userTemp = value;
         });
       });
-    } else {
-      print('User ID not found');
     }
   }
 
@@ -185,6 +183,7 @@ class _HomePageState extends State<Homepage> {
                             height: 270,
                             width: 260,
                             child: SingleChildScrollView(
+                              
                               child: Column(
                                 children: [
                                   const SizedBox(height: 24),
@@ -325,7 +324,8 @@ class _HomePageState extends State<Homepage> {
                                       }),
                                 ],
                               ),
-                            )),
+                            )
+                          ),
                       ],
                     ),
                   ),
@@ -387,7 +387,30 @@ class _HomePageState extends State<Homepage> {
               color: Colors.white.withOpacity(0.8),
             ),
             // Add your content here
-            child: const Text('Settings Screen'),
+            child: Container(      
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 450.0),
+                child: Center(
+                  child: Container(
+                    width: 300,
+                    height: 120,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Colors.black,
+                        width: 1,
+                      ),
+                    ),
+
+                    child: const Row(
+                      // BUILD HEREE
+                    ),
+
+                  ),
+                )
+
+              ),
+            )
           ),
         ),
       ),
