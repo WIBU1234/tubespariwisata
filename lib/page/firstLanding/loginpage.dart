@@ -6,6 +6,7 @@ import 'dart:ui';
 import 'package:tubespariwisata/entity/user.dart';
 // FUNCTION IMPORTER
 import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
+import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 // LAUNCHER IMPORTER
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 
@@ -149,6 +150,7 @@ class _LoginPageState extends State<Loginpage> {
                               content: Text('Welcome, ${userTemp.username}!'),
                             ),
                           );
+                          saveUserID(userTemp.id);
                         pushHomePage(context, userTemp);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(

@@ -16,5 +16,5 @@ void pushLogin(BuildContext context) {
 }
 
 void pushHomePage(BuildContext context, User user) {
-  Navigator.push(context, MaterialPageRoute(builder: (_) => Homepage(user: user)));
+  Navigator.push(context, MaterialPageRoute(builder: (_) => const Homepage()));
 }

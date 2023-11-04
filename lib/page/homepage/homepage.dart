@@ -2,14 +2,11 @@
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:intl/intl.dart';
-
 // IMPORT LIB FROM ENTITY
 import 'package:tubespariwisata/entity/user.dart';
 
 class Homepage extends StatefulWidget {
-  const Homepage({Key? key, required this.user}) : super(key: key);
-
-  final User user;
+  const Homepage({Key? key}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -17,6 +14,7 @@ class Homepage extends StatefulWidget {
 
 class _HomePageState extends State<Homepage> {
   var _selectedTab = _SelectedTab.home;
+  bool isPasswordVisible = true;
 
   Widget _getSelectedScreen() {
     switch (_selectedTab) {
@@ -60,21 +58,34 @@ class _HomePageState extends State<Homepage> {
 
   // PROFILE CONTAINER
   Widget _buildPersonContainer() {
-  TextEditingController controllerTanggalLahir = TextEditingController();
+    final _formKey = GlobalKey<FormState>();
+    TextEditingController controllerName = TextEditingController();
+    TextEditingController controllerEmail = TextEditingController();
+    TextEditingController controllerPassword = TextEditingController();
+    TextEditingController controllerNomorTelepon = TextEditingController();
+    TextEditingController controllerTanggalLahir = TextEditingController();
+    bool isPasswordVisible = true;
 
-  Future<void> selectDate() async {
-    DateTime? picked = await showDatePicker(
+    @override
+    void initState() {
+      super.initState();
+    }
+
+    Future<void> _selectDate() async {
+      DateTime? picked = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(1900),
-        lastDate: DateTime(3000));
-    if (picked != null) {
-      setState(() {
-        controllerTanggalLahir.text =
-            DateFormat('yyyy-MM-dd').format(picked).toString().split(" ")[0];
-      });
+        lastDate: DateTime(3000),
+      );
+
+      if (picked != null) {
+        setState(() {
+          controllerTanggalLahir.text =
+              DateFormat('yyyy-MM-dd').format(picked).toString().split(" ")[0];
+        });
+      }
     }
-  }
 
     return Container(
       decoration: const BoxDecoration(
@@ -154,11 +165,145 @@ class _HomePageState extends State<Homepage> {
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
-                                  // ADD CONTENT FOR INPUT
+                                  const SizedBox(height: 24),
+                                  TextFormField(
+                                      controller: controllerName,
+                                      decoration: InputDecoration(
+                                        prefixIcon: const Icon(Icons.person),
+                                        labelText: 'Name',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 17),
+                                      ),
+                                      validator: (value) {
+                                        if (value == '') {
+                                          return 'Please enter your name';
+                                        }
+                                        if (value == 'admin') {
+                                          return 'Username admin is not permitted!';
+                                        }
+                                        return null;
+                                      }),
+                                  const SizedBox(height: 24),
+                                  TextFormField(
+                                      controller: controllerEmail,
+                                      decoration: InputDecoration(
+                                        prefixIcon: const Icon(Icons.mail),
+                                        labelText: 'Email',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 17),
+                                      ),
+                                      validator: (value) {
+                                        if (value == '') {
+                                          return 'Please enter your email';
+                                        }
+                                        if (value == 'admin') {
+                                          return 'Email admin is not permitted!';
+                                        }
+                                        return null;
+                                      }),
+                                  const SizedBox(height: 24),
+                                  TextFormField(
+                                      controller: controllerPassword,
+                                      decoration: InputDecoration(
+                                        prefixIcon: const Icon(Icons.lock),
+                                        labelText: 'Password',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 17),
+                                        suffixIcon: IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              isPasswordVisible =
+                                                  !isPasswordVisible;
+                                            });
+                                          },
+                                          icon: Icon(
+                                            isPasswordVisible
+                                                ? Icons.visibility_off
+                                                : Icons.visibility,
+                                            color: isPasswordVisible
+                                                ? Colors.grey
+                                                : Colors.blue,
+                                          ),
+                                        ),
+                                      ),
+                                      obscureText: isPasswordVisible,
+                                      validator: (value) {
+                                        if (value == '') {
+                                          return 'Please enter your password';
+                                        }
+                                        if (value?.length == 5 ||
+                                            value?.length == 4 ||
+                                            value?.length == 3 ||
+                                            value?.length == 2 ||
+                                            value?.length == 1) {
+                                          return 'Password is too short!';
+                                        }
+                                        return null;
+                                      }),
+                                  const SizedBox(height: 24),
+                                  TextFormField(
+                                      keyboardType: TextInputType.number,
+                                      controller: controllerNomorTelepon,
+                                      decoration: InputDecoration(
+                                        prefixIcon: const Icon(Icons.phone),
+                                        labelText: 'Phone Number',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 17),
+                                      ),
+                                      validator: (value) {
+                                        if (value == '') {
+                                          return 'Please enter your phone number';
+                                        }
+                                        if (value == '444') {
+                                          return 'This number is prohibited';
+                                        }
+                                        return null;
+                                      }),
+                                  const SizedBox(height: 24),
+                                  TextFormField(
+                                      controller: controllerTanggalLahir,
+                                      onTap: _selectDate,
+                                      decoration: InputDecoration(
+                                        prefixIcon:
+                                            const Icon(Icons.date_range),
+                                        labelText: 'Date of Birth',
+                                        border: OutlineInputBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        contentPadding:
+                                            const EdgeInsets.symmetric(
+                                                vertical: 17),
+                                      ),
+                                      validator: (value) {
+                                        if (value == '') {
+                                          return 'Please enter your date of birth';
+                                        }
+                                        return null;
+                                      }),
                                 ],
                               ),
-                            )
-                          ),
+                            )),
                       ],
                     ),
                   ),

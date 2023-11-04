@@ -104,6 +104,7 @@ class _InputPageState extends State<RegisterPage> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+
                       const SizedBox(height: 10),
                       const Text(
                         'Please enter input your data below',
@@ -111,6 +112,7 @@ class _InputPageState extends State<RegisterPage> {
                           fontSize: 16, 
                           color: Colors.grey),
                       ),
+
                       const SizedBox(height: 24),
                       TextFormField(
                         controller: controllerName,
@@ -132,6 +134,7 @@ class _InputPageState extends State<RegisterPage> {
                           return null;
                         }
                       ),
+
                       const SizedBox(height: 24),
                       TextFormField(
                         controller: controllerEmail,
@@ -214,6 +217,7 @@ class _InputPageState extends State<RegisterPage> {
                           return null;
                         }
                       ),
+
                       const SizedBox(height: 24),
                       TextFormField(
                         controller: controllerTanggalLahir,
