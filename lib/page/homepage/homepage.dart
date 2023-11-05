@@ -179,6 +179,7 @@ class _HomePageState extends State<Homepage> {
                             ),
                           ),
                         ),
+                        
                         const SizedBox(height: 10),
                         Container(
                             height: 270,
@@ -187,8 +188,24 @@ class _HomePageState extends State<Homepage> {
                               child: Column(
                                 children: [
                                   const SizedBox(height: 24),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 0.0),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "Full Name",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+
                                   TextFormField(
                                       controller: controllerName,
+                                      enabled: false,
                                       decoration: InputDecoration(
                                         prefixIcon: const Icon(Icons.person),
                                         labelText: userTemp!.username,
@@ -209,9 +226,26 @@ class _HomePageState extends State<Homepage> {
                                         }
                                         return null;
                                       }),
+
                                   const SizedBox(height: 24),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 0.0),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "Email",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+
                                   TextFormField(
                                       controller: controllerEmail,
+                                      enabled: false,
                                       decoration: InputDecoration(
                                         prefixIcon: const Icon(Icons.mail),
                                         labelText: userTemp!.email,
@@ -232,11 +266,28 @@ class _HomePageState extends State<Homepage> {
                                         }
                                         return null;
                                       }),
+                                  
                                   const SizedBox(height: 24),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 0.0),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "Password",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+
                                   TextFormField(
                                       controller: controllerPassword,
+                                      enabled: false,
                                       decoration: InputDecoration(
-                                        prefixIcon: const Icon(Icons.lock),
+                                        prefixIcon: Icon(Icons.lock),
                                         labelText: userTemp!.password,
                                         border: OutlineInputBorder(
                                           borderRadius:
@@ -252,14 +303,15 @@ class _HomePageState extends State<Homepage> {
                                                   !isPasswordVisible;
                                             });
                                           },
-                                          icon: Icon(
+                                          icon: const Icon(
+                                            Icons.visibility_off,
                                             // TF DEAD CODE
-                                            isPasswordVisible
-                                                ? Icons.visibility_off
-                                                : Icons.visibility,
-                                            color: isPasswordVisible
-                                                ? Colors.grey
-                                                : Colors.blue,
+                                            // isPasswordVisible
+                                            //     ? Icons.visibility_off
+                                            //     : Icons.visibility,
+                                            // color: isPasswordVisible
+                                            //     ? Colors.grey
+                                            //     : Colors.blue,
                                           ),
                                         ),
                                       ),
@@ -277,10 +329,27 @@ class _HomePageState extends State<Homepage> {
                                         }
                                         return null;
                                       }),
+
                                   const SizedBox(height: 24),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 0.0),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "Number",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+
                                   TextFormField(
                                       keyboardType: TextInputType.number,
                                       controller: controllerNomorTelepon,
+                                      enabled: false,
                                       decoration: InputDecoration(
                                         prefixIcon: const Icon(Icons.phone),
                                         labelText: userTemp!.nomorTelepon,
@@ -301,10 +370,27 @@ class _HomePageState extends State<Homepage> {
                                         }
                                         return null;
                                       }),
+
                                   const SizedBox(height: 24),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 0.0),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "Date of Birth",
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.normal,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+
                                   TextFormField(
                                       controller: controllerTanggalLahir,
                                       onTap: selectDate,
+                                      enabled: false,
                                       decoration: InputDecoration(
                                         prefixIcon:
                                             const Icon(Icons.date_range),
@@ -322,10 +408,58 @@ class _HomePageState extends State<Homepage> {
                                           return 'Please enter your date of birth';
                                         }
                                         return null;
-                                      }),
+                                      }
+                                    ),
+
+                                  const SizedBox(height: 24),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.green,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 30, vertical: 16),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(16),
+                                          ),
+                                          elevation: 6,
+                                        ),
+                                        onPressed: () {
+                                          // pushHomePage(context, userTemp);
+                                        },
+                                        child: const Text(
+                                          'Update',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ),
+
+                                      ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.red,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 30, vertical: 16),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(16),
+                                          ),
+                                          elevation: 6,
+                                        ),
+                                        onPressed: () {
+                                          // pushHomePage(context, userTemp);
+                                        },
+                                        child: const Text(
+                                          'Delete',
+                                          style: TextStyle(fontSize: 18),
+                                        ),
+                                      ),
+
+                                    ],
+                                  )
+
                                 ],
                               ),
-                            )),
+                            )
+                          ),
                       ],
                     ),
                   ),
