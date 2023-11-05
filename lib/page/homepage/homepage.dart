@@ -2,11 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:intl/intl.dart';
+import 'package:camera/camera.dart';
+import 'dart:convert';
+import 'dart:typed_data';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
 import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
+// IMPORT FORCE PAGE
+import 'package:tubespariwisata/hardware/camera.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -91,6 +96,7 @@ class _HomePageState extends State<Homepage> {
     TextEditingController controllerNomorTelepon = TextEditingController();
     TextEditingController controllerTanggalLahir = TextEditingController();
     bool isPasswordVisible = true;
+    
 
     Future<void> selectDate() async {
       DateTime? picked = await showDatePicker(
@@ -154,17 +160,47 @@ class _HomePageState extends State<Homepage> {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        const Padding(
+
+                        Padding(
                           padding: EdgeInsets.all(10.0),
                           child: Align(
                             alignment: Alignment.topCenter,
-                            child: CircleAvatar(
-                              radius: 80,
-                              backgroundImage:
-                                  AssetImage("resources/images/bali.jpg"),
+                            child: Container(
+                              width: 100,
+                              height: 100,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.grey,
+                              ),
+                              child: InkWell(
+                                onTap: () async {
+                                  await availableCameras().then((value) => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              CameraPage(cameras: value, user: userTemp!))));
+                                },
+                                child: Center(
+                                  // child: widget.picture != null
+                                  child: userTemp!.imageFoto != ""
+                                      ? ClipOval(
+                                          child: Image.memory(
+                                              Uint8List.fromList(base64.decode(userTemp!.imageFoto)),
+                                              fit: BoxFit.cover,
+                                              width: 100,
+                                              height: 100),
+                                        )
+                                      : const Icon(
+                                          Icons.photo_camera,
+                                          color: Colors.white,
+                                          size: 50.0,
+                                        ),
+                                ),
+                              ),
                             ),
                           ),
                         ),
+
                         const SizedBox(height: 20),
                         Padding(
                           padding: const EdgeInsets.only(right: 30, left: 30),
@@ -182,7 +218,7 @@ class _HomePageState extends State<Homepage> {
                         
                         const SizedBox(height: 10),
                         Container(
-                            height: 270,
+                            height: 340,
                             width: 260,
                             child: SingleChildScrollView(
                               child: Column(
