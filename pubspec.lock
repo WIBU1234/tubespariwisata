@@ -137,6 +137,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  equatable:
+    dependency: transitive
+    description:
+      name: equatable
+      sha256: c2b87cb7756efdf69892005af546c56c0b5037f54d2a88269b4f347a505e3ca2
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -224,6 +232,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  gyroscope:
+    dependency: "direct main"
+    description:
+      name: gyroscope
+      sha256: ae967777baf893f47774e8e07fd47c1652a723b3f5bd7d47cb581d7c657b800a
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.1"
   intl:
     dependency: "direct main"
     description:
@@ -328,6 +344,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
+  sensors:
+    dependency: "direct main"
+    description:
+      name: sensors
+      sha256: "69c10fe94a63dd7c6f5e6557366e5329a713bf6c45d885d95a56642dd8722e35"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.3"
   shared_preferences:
     dependency: "direct main"
     description:

@@ -16,6 +16,8 @@ dependencies:
   camera: ^0.9.4+19
   dot_navigation_bar: ^1.0.2
   shared_preferences: ^2.1.0
+  gyroscope: ^0.0.1
+  sensors: ^2.0.3
 
 dev_dependencies:
   flutter_test:

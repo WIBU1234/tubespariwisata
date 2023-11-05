@@ -5,6 +5,9 @@ import 'package:intl/intl.dart';
 import 'package:camera/camera.dart';
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:gyroscope/gyroscope.dart';
+import 'package:sensors/sensors.dart';
+
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
@@ -25,11 +28,20 @@ class _HomePageState extends State<Homepage> {
   bool isPasswordVisible = true;
   String? userId;
   User? userTemp;
+  bool isMenuVisible = false;
 
   @override
   void initState() {
-    super.initState();
     fetchData();
+    super.initState();
+
+    accelerometerEvents.listen((event) {
+      if (event.x.abs() > 500 || event.y.abs() > 500 || event.z.abs() > 500) {
+        setState(() {
+          isMenuVisible = !isMenuVisible;
+        });
+      }
+    });
   }
 
   void fetchData() async {
@@ -80,7 +92,31 @@ class _HomePageState extends State<Homepage> {
               color: Colors.white.withOpacity(0.8),
             ),
             // Add your content here
-            child: const Text('Home Screen'),
+            //child: const Text('Home Screen'),
+
+            child: Center(
+              child: isMenuVisible
+              ? GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      isMenuVisible = !isMenuVisible;
+                    });
+                  },
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    color: Colors.black,
+                    child: Center(
+                      child: Text(
+                        'Pop Up Menu',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    ),
+                  ),
+                )
+              : Container(),
+            ),
+            
           ),
         ),
       ),
