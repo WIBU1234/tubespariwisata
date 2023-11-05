@@ -426,7 +426,8 @@ class _HomePageState extends State<Homepage> {
                                           elevation: 6,
                                         ),
                                         onPressed: () {
-                                          // pushHomePage(context, userTemp);
+
+                                          pushUpdateProfile(context, userTemp!);
                                         },
                                         child: const Text(
                                           'Update',
