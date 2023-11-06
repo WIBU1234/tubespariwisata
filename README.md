@@ -1,6 +1,6 @@
 Kelas A // Kelompok 1 :
 
-200710613 I Kadek Nikki Lababa // 
+200710613 I Kadek Nikki Lababa // Memikirkan ide pengimplementasian hardware
 
 210711185 Klasik Solafide Kabor Mambri Taidi //  
 
