@@ -10,6 +10,7 @@ import 'package:tubespariwisata/page/homepage/updateProfile.dart';
 
 // LAUNCHER HARDWARE
 import 'package:tubespariwisata/hardware/camera.dart';
+import 'package:tubespariwisata/hardware/scanqr.dart';
 
 void pushRegister(BuildContext context) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => const RegisterPage()));
@@ -29,4 +30,8 @@ void pushUpdateProfile(BuildContext context, User user) {
 
 void pushCameraPage(BuildContext context, User user) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => CameraPage(cameras: null, user: user)));
+}
+
+void pushScanQr(BuildContext context) {
+  Navigator.push(context, MaterialPageRoute(builder: (_) => const ScanPage()));
 }

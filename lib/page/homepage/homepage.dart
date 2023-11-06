@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:camera/camera.dart';
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:gyroscope/gyroscope.dart';
 import 'package:sensors/sensors.dart';
 
 // IMPORT LIB FROM FUNCTION
@@ -20,7 +19,7 @@ class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<Homepage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<Homepage> {
@@ -36,7 +35,7 @@ class _HomePageState extends State<Homepage> {
     super.initState();
 
     accelerometerEvents.listen((event) {
-      if (event.x.abs() > 500 || event.y.abs() > 500 || event.z.abs() > 500) {
+      if (event.x.abs() > 20 || event.y.abs() > 20 || event.z.abs() > 20) {
         setState(() {
           isMenuVisible = !isMenuVisible;
         });
@@ -96,26 +95,54 @@ class _HomePageState extends State<Homepage> {
 
             child: Center(
               child: isMenuVisible
-              ? GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      isMenuVisible = !isMenuVisible;
-                    });
-                  },
-                  child: Container(
-                    width: 200,
-                    height: 200,
-                    color: Colors.black,
-                    child: Center(
-                      child: Text(
-                        'Pop Up Menu',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                  ? GestureDetector(
+                      onTap: () {
+                          pushScanQr(context);
+                      },
+                      child: Container(
+                        width: 250,
+                        height: 400,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.white.withOpacity(0.5),
+                          border: Border.all(
+                            color: Colors.black.withOpacity(0.3),
+                            width: 1,
+                          ),
+                        ),
+                        child: Column(
+                          // mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+
+                            const SizedBox(height: 30),
+                            const Text(
+                              "Suprise Me",
+                              style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+
+                            const SizedBox(height: 10),
+                            Container(
+                              width: 220,
+                              height: 220,
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage("resources/images/BarcodeRick.png"),
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+
+
+                          ],
+                        ),
                       ),
-                    ),
-                  ),
-                )
-              : Container(),
+                    )
+                  : Container(),
             ),
+
             
           ),
         ),
@@ -133,7 +160,6 @@ class _HomePageState extends State<Homepage> {
     TextEditingController controllerTanggalLahir = TextEditingController();
     bool isPasswordVisible = true;
     
-
     Future<void> selectDate() async {
       DateTime? picked = await showDatePicker(
         context: context,
@@ -198,7 +224,7 @@ class _HomePageState extends State<Homepage> {
                         const SizedBox(height: 20),
 
                         Padding(
-                          padding: EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(10.0),
                           child: Align(
                             alignment: Alignment.topCenter,
                             child: Container(
@@ -359,7 +385,7 @@ class _HomePageState extends State<Homepage> {
                                       controller: controllerPassword,
                                       enabled: false,
                                       decoration: InputDecoration(
-                                        prefixIcon: Icon(Icons.lock),
+                                        prefixIcon: const Icon(Icons.lock),
                                         labelText: userTemp!.password,
                                         border: OutlineInputBorder(
                                           borderRadius:

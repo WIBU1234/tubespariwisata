@@ -240,9 +240,6 @@ class _InputPageState extends State<RegisterPage> {
 
                       const SizedBox(height: 28),
                       ElevatedButton(
-                        child: Text(
-                          'Register', style: TextStyle(fontSize: 18),
-                        ),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
@@ -274,6 +271,9 @@ class _InputPageState extends State<RegisterPage> {
                             }
                           }
                         },
+                        child: const Text(
+                          'Register', style: TextStyle(fontSize: 18),
+                        ),
                       ),
                     ],
                   ),
