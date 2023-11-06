@@ -1,11 +1,17 @@
 // IMPORT LIB FROM FLUTTER
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:intl/intl.dart';
 import 'package:camera/camera.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:sensors/sensors.dart';
+import 'package:tubespariwisata/data/wisata.dart';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
@@ -96,7 +102,7 @@ class _HomePageState extends State<Homepage> {
               child: isMenuVisible
                   ? GestureDetector(
                       onTap: () {
-                          pushScanQr(context);
+                        pushScanQr(context);
                       },
                       child: Container(
                         width: 250,
@@ -112,7 +118,6 @@ class _HomePageState extends State<Homepage> {
                         child: Column(
                           // mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-
                             const SizedBox(height: 30),
                             const Text(
                               "Suprise Me !!",
@@ -121,27 +126,22 @@ class _HomePageState extends State<Homepage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-
                             const SizedBox(height: 10),
-                            Container(
+                            SizedBox(
                               width: 220,
                               height: 220,
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage("resources/images/BarcodeRick.png"),
-                                  fit: BoxFit.cover,
-                                ),
+                              child: QrImageView(
+                                data: Random().nextInt(daftarWisata.length).toString(),
+                                size: 220,
+                                version: QrVersions.auto,
                               ),
                             ),
-
                           ],
                         ),
                       ),
                     )
                   : Container(),
             ),
-
-            
           ),
         ),
       ),
@@ -157,7 +157,7 @@ class _HomePageState extends State<Homepage> {
     TextEditingController controllerNomorTelepon = TextEditingController();
     TextEditingController controllerTanggalLahir = TextEditingController();
     bool isPasswordVisible = true;
-    
+
     Future<void> selectDate() async {
       DateTime? picked = await showDatePicker(
         context: context,
@@ -182,8 +182,7 @@ class _HomePageState extends State<Homepage> {
         ),
       ),
       child: Padding(
-        padding:
-            const EdgeInsets.only(bottom: 50), // Adjust the top value as needed
+        padding: const EdgeInsets.only(bottom: 50), // Adjust the top value as needed
         child: Center(
           child: Container(
             width: 330,
@@ -220,7 +219,6 @@ class _HomePageState extends State<Homepage> {
                           ),
                         ),
                         const SizedBox(height: 20),
-
                         Padding(
                           padding: const EdgeInsets.all(10.0),
                           child: Align(
@@ -245,7 +243,8 @@ class _HomePageState extends State<Homepage> {
                                   child: userTemp!.imageFoto != ""
                                       ? ClipOval(
                                           child: Image.memory(
-                                              Uint8List.fromList(base64.decode(userTemp!.imageFoto)),
+                                              Uint8List.fromList(
+                                                  base64.decode(userTemp!.imageFoto)),
                                               fit: BoxFit.cover,
                                               width: 100,
                                               height: 100),
@@ -260,7 +259,6 @@ class _HomePageState extends State<Homepage> {
                             ),
                           ),
                         ),
-
                         const SizedBox(height: 20),
                         Padding(
                           padding: const EdgeInsets.only(right: 30, left: 30),
@@ -275,9 +273,8 @@ class _HomePageState extends State<Homepage> {
                             ),
                           ),
                         ),
-                        
                         const SizedBox(height: 10),
-                        Container(
+                        SizedBox(
                             height: 340,
                             width: 260,
                             child: SingleChildScrollView(
@@ -298,7 +295,6 @@ class _HomePageState extends State<Homepage> {
                                     ),
                                   ),
                                   const SizedBox(height: 10),
-
                                   TextFormField(
                                       controller: controllerName,
                                       enabled: false,
@@ -306,12 +302,9 @@ class _HomePageState extends State<Homepage> {
                                         prefixIcon: const Icon(Icons.person),
                                         labelText: userTemp!.username,
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
+                                          borderRadius: BorderRadius.circular(50),
                                         ),
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                vertical: 17),
+                                        contentPadding: const EdgeInsets.symmetric(vertical: 17),
                                       ),
                                       validator: (value) {
                                         if (value == '') {
@@ -322,7 +315,6 @@ class _HomePageState extends State<Homepage> {
                                         }
                                         return null;
                                       }),
-
                                   const SizedBox(height: 24),
                                   const Padding(
                                     padding: EdgeInsets.only(left: 0.0),
@@ -338,7 +330,6 @@ class _HomePageState extends State<Homepage> {
                                     ),
                                   ),
                                   const SizedBox(height: 10),
-
                                   TextFormField(
                                       controller: controllerEmail,
                                       enabled: false,
@@ -346,12 +337,9 @@ class _HomePageState extends State<Homepage> {
                                         prefixIcon: const Icon(Icons.mail),
                                         labelText: userTemp!.email,
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
+                                          borderRadius: BorderRadius.circular(50),
                                         ),
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                vertical: 17),
+                                        contentPadding: const EdgeInsets.symmetric(vertical: 17),
                                       ),
                                       validator: (value) {
                                         if (value == '') {
@@ -362,7 +350,6 @@ class _HomePageState extends State<Homepage> {
                                         }
                                         return null;
                                       }),
-                                  
                                   const SizedBox(height: 24),
                                   const Padding(
                                     padding: EdgeInsets.only(left: 0.0),
@@ -378,7 +365,6 @@ class _HomePageState extends State<Homepage> {
                                     ),
                                   ),
                                   const SizedBox(height: 10),
-
                                   TextFormField(
                                       controller: controllerPassword,
                                       enabled: false,
@@ -386,17 +372,13 @@ class _HomePageState extends State<Homepage> {
                                         prefixIcon: const Icon(Icons.lock),
                                         labelText: userTemp!.password,
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
+                                          borderRadius: BorderRadius.circular(50),
                                         ),
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                vertical: 17),
+                                        contentPadding: const EdgeInsets.symmetric(vertical: 17),
                                         suffixIcon: IconButton(
                                           onPressed: () {
                                             setState(() {
-                                              isPasswordVisible =
-                                                  !isPasswordVisible;
+                                              isPasswordVisible = !isPasswordVisible;
                                             });
                                           },
                                           icon: const Icon(
@@ -425,7 +407,6 @@ class _HomePageState extends State<Homepage> {
                                         }
                                         return null;
                                       }),
-
                                   const SizedBox(height: 24),
                                   const Padding(
                                     padding: EdgeInsets.only(left: 0.0),
@@ -441,7 +422,6 @@ class _HomePageState extends State<Homepage> {
                                     ),
                                   ),
                                   const SizedBox(height: 10),
-
                                   TextFormField(
                                       keyboardType: TextInputType.number,
                                       controller: controllerNomorTelepon,
@@ -450,12 +430,9 @@ class _HomePageState extends State<Homepage> {
                                         prefixIcon: const Icon(Icons.phone),
                                         labelText: userTemp!.nomorTelepon,
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
+                                          borderRadius: BorderRadius.circular(50),
                                         ),
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                vertical: 17),
+                                        contentPadding: const EdgeInsets.symmetric(vertical: 17),
                                       ),
                                       validator: (value) {
                                         if (value == '') {
@@ -466,7 +443,6 @@ class _HomePageState extends State<Homepage> {
                                         }
                                         return null;
                                       }),
-
                                   const SizedBox(height: 24),
                                   const Padding(
                                     padding: EdgeInsets.only(left: 0.0),
@@ -482,31 +458,24 @@ class _HomePageState extends State<Homepage> {
                                     ),
                                   ),
                                   const SizedBox(height: 10),
-
                                   TextFormField(
                                       controller: controllerTanggalLahir,
                                       onTap: selectDate,
                                       enabled: false,
                                       decoration: InputDecoration(
-                                        prefixIcon:
-                                            const Icon(Icons.date_range),
+                                        prefixIcon: const Icon(Icons.date_range),
                                         labelText: userTemp!.tanggalLahir,
                                         border: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
+                                          borderRadius: BorderRadius.circular(50),
                                         ),
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                                vertical: 17),
+                                        contentPadding: const EdgeInsets.symmetric(vertical: 17),
                                       ),
                                       validator: (value) {
                                         if (value == '') {
                                           return 'Please enter your date of birth';
                                         }
                                         return null;
-                                      }
-                                    ),
-
+                                      }),
                                   const SizedBox(height: 24),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -522,7 +491,6 @@ class _HomePageState extends State<Homepage> {
                                           elevation: 6,
                                         ),
                                         onPressed: () {
-
                                           pushUpdateProfile(context, userTemp!);
                                         },
                                         child: const Text(
@@ -530,7 +498,6 @@ class _HomePageState extends State<Homepage> {
                                           style: TextStyle(fontSize: 18),
                                         ),
                                       ),
-
                                       ElevatedButton(
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.red,
@@ -549,14 +516,11 @@ class _HomePageState extends State<Homepage> {
                                           style: TextStyle(fontSize: 18),
                                         ),
                                       ),
-
                                     ],
                                   )
-
                                 ],
                               ),
-                            )
-                          ),
+                            )),
                       ],
                     ),
                   ),
@@ -577,6 +541,19 @@ class _HomePageState extends State<Homepage> {
         image: AssetImage("resources/images/bali.jpg"),
         fit: BoxFit.cover,
       ),
+
+      child: Padding(
+        padding: const EdgeInsets.only(bottom: 50), // Adjust the top value as needed
+        child: Center(
+          child: Container(
+            width: 330,
+            height: 610,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.white.withOpacity(0.8),
+            ),
+            // Add your content here
+            child: const Text('Grid Screen'),
     ),
     child: Padding(
       padding: const EdgeInsets.only(bottom: 50),
@@ -618,7 +595,6 @@ class _HomePageState extends State<Homepage> {
                   ],
                 ),
               ),
-
               const SizedBox(height: 20),
               Card(
                 elevation: 4, // Customize card elevation as needed
@@ -647,7 +623,6 @@ class _HomePageState extends State<Homepage> {
                   ],
                 ),
               ),
-
               const SizedBox(height: 20),
               Card(
                 elevation: 4, // Customize card elevation as needed
@@ -721,13 +696,13 @@ class _HomePageState extends State<Homepage> {
                             width: 1,
                           ),
                         ),
-                        child: Row(
+                        child: const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Container(
+                            SizedBox(
                               width: 160.0,
                               height: 100.0,
-                              child: const Column(
+                              child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   SizedBox(height: 14.0),
@@ -741,13 +716,12 @@ class _HomePageState extends State<Homepage> {
                                 ],
                               ),
                             ),
-                            const Padding(
+                            Padding(
                               padding: EdgeInsets.only(left: 20.0),
                               child: Center(
                                 child: CircleAvatar(
                                   radius: 30,
-                                  backgroundImage:
-                                      AssetImage("resources/images/bali.jpg"),
+                                  backgroundImage: AssetImage("resources/images/bali.jpg"),
                                 ),
                               ),
                             ),
@@ -755,7 +729,6 @@ class _HomePageState extends State<Homepage> {
                         ),
                       ),
                     )),
-
                 const SizedBox(height: 25),
                 const Padding(
                   padding: EdgeInsets.only(left: 30.0),
@@ -770,7 +743,6 @@ class _HomePageState extends State<Homepage> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 16),
                 InkWell(
                   onTap: () {
@@ -820,7 +792,6 @@ class _HomePageState extends State<Homepage> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 12),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -845,7 +816,6 @@ class _HomePageState extends State<Homepage> {
                           padding: EdgeInsets.only(left: 20.0),
                           child: Icon(Icons.info),
                         ),
-
                         Padding(
                           padding: EdgeInsets.only(left: 8.0),
                           child: Text(
@@ -864,7 +834,6 @@ class _HomePageState extends State<Homepage> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 2),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -907,7 +876,6 @@ class _HomePageState extends State<Homepage> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 2),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -950,7 +918,6 @@ class _HomePageState extends State<Homepage> {
                     ),
                   ),
                 ),
-
                 const SizedBox(height: 2),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
@@ -1001,7 +968,6 @@ class _HomePageState extends State<Homepage> {
                     ),
                   ),
                 ),
-
               ],
             ),
           ),
