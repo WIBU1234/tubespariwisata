@@ -19,6 +19,7 @@ import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 // IMPORT FORCE PAGE
 import 'package:tubespariwisata/hardware/camera.dart';
+import 'package:tubespariwisata/page/homepage/card_detail_page.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -568,87 +569,128 @@ class _HomePageState extends State<Homepage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Card(
-                elevation: 4,
-                child: Column(
-                  children: [
-                    ClipRect(
-                      child: SizedBox(
-                        width: 300, // Fixed image width
-                        height: 90, // Fixed image height
-                        child: Image.asset(
-                          "resources/images/aceh.jpg",
-                          fit: BoxFit.cover,
-                        ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CardDetailPage(
+                        imagePath: "resources/images/aceh.jpg",
+                        cardText: "Masjid Baihturrahman - Aceh",
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Masjid Baihturrahman - Aceh",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                  );
+                },
+                child: Card(
+                  elevation: 4,
+                  child: Column(
+                    children: [
+                      ClipRect(
+                        child: SizedBox(
+                          width: 300, // Fixed image width
+                          height: 90, // Fixed image height
+                          child: Image.asset(
+                            "resources/images/aceh.jpg",
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Masjid Baihturrahman - Aceh",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
-              Card(
-                elevation: 4, // Customize card elevation as needed
-                child: Column(
-                  children: [
-                    ClipRect(
-                      child: SizedBox(
-                        width: 300, // Fixed image width
-                        height: 90, // Fixed image height
-                        child: Image.asset(
-                          "resources/images/yogyakarta.webp",
-                          fit: BoxFit.cover,
-                        ),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CardDetailPage(
+                        imagePath: "resources/images/yogyakarta.webp",
+                        cardText: "Candi Borobudur - Magelang",
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Candi Borobudur - Magelang",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                  );
+                },
+                
+                child: Card(
+                  elevation: 4, // Customize card elevation as needed
+                  child: Column(
+                    children: [
+                      ClipRect(
+                        child: SizedBox(
+                          width: 300, // Fixed image width
+                          height: 90, // Fixed image height
+                          child: Image.asset(
+                            "resources/images/yogyakarta.webp",
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Candi Borobudur - Magelang",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
-              Card(
-                elevation: 4, // Customize card elevation as needed
-                child: Column(
-                  children: [
-                    ClipRect(
-                      child: SizedBox(
-                        width: 300, // Fixed image width
-                        height: 90, // Fixed image height
-                        child: Image.asset(
-                          "resources/images/kulonProgo.jpeg",
-                          fit: BoxFit.cover,
-                        ),
+              GestureDetector(
+                onTap: () {
+                  // Navigate to the card detail page for Card 1
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CardDetailPage(
+                        imagePath: "resources/images/kulonProgo.jpeg",
+                        cardText: "Embung Tirta - Kulonprogo",
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "Embung Tirta - Kulonprogo",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                  );
+                },
+                child: Card(
+                  elevation: 4, // Customize card elevation as needed
+                  child: Column(
+                    children: [
+                      ClipRect(
+                        child: SizedBox(
+                          width: 300, // Fixed image width
+                          height: 90, // Fixed image height
+                          child: Image.asset(
+                            "resources/images/kulonProgo.jpeg",
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Embung Tirta - Kulonprogo",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],
