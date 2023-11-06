@@ -571,31 +571,119 @@ class _HomePageState extends State<Homepage> {
 
   // GRID ITEM CONTAINER
   Widget _buildSearchContainer() {
-    return Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("resources/images/bali.jpg"),
-          fit: BoxFit.cover,
-        ),
+  return Container(
+    decoration: const BoxDecoration(
+      image: DecorationImage(
+        image: AssetImage("resources/images/bali.jpg"),
+        fit: BoxFit.cover,
       ),
-      child: Padding(
-        padding:
-            const EdgeInsets.only(bottom: 50), // Adjust the top value as needed
-        child: Center(
-          child: Container(
-            width: 330,
-            height: 610,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.white.withOpacity(0.8),
-            ),
-            // Add your content here
-            child: const Text('Grid Screen'),
+    ),
+    child: Padding(
+      padding: const EdgeInsets.only(bottom: 50),
+      child: Center(
+        child: Container(
+          width: 330,
+          height: 610,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white.withOpacity(0.8),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Card(
+                elevation: 4,
+                child: Column(
+                  children: [
+                    ClipRect(
+                      child: SizedBox(
+                        width: 300, // Fixed image width
+                        height: 90, // Fixed image height
+                        child: Image.asset(
+                          "resources/images/aceh.jpg",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Masjid Baihturrahman - Aceh",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 20),
+              Card(
+                elevation: 4, // Customize card elevation as needed
+                child: Column(
+                  children: [
+                    ClipRect(
+                      child: SizedBox(
+                        width: 300, // Fixed image width
+                        height: 90, // Fixed image height
+                        child: Image.asset(
+                          "resources/images/yogyakarta.webp",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Candi Borobudur - Magelang",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 20),
+              Card(
+                elevation: 4, // Customize card elevation as needed
+                child: Column(
+                  children: [
+                    ClipRect(
+                      child: SizedBox(
+                        width: 300, // Fixed image width
+                        height: 90, // Fixed image height
+                        child: Image.asset(
+                          "resources/images/kulonProgo.jpeg",
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "Embung Tirta - Kulonprogo",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
+
 
   // SETTINGS CONTAINER
   Widget _buildSettingsContainer() {
