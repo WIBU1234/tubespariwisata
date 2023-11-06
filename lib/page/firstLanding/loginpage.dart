@@ -151,7 +151,7 @@ class _LoginPageState extends State<Loginpage> {
                             ),
                           );
                           saveUserID(userTemp.id);
-                        pushHomePage(context, userTemp);
+                        pushHomePage(context);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(

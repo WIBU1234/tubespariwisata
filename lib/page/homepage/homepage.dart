@@ -6,7 +6,6 @@ import 'package:camera/camera.dart';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:sensors/sensors.dart';
-
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
@@ -101,7 +100,7 @@ class _HomePageState extends State<Homepage> {
                       },
                       child: Container(
                         width: 250,
-                        height: 400,
+                        height: 320,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           color: Colors.white.withOpacity(0.5),
@@ -116,7 +115,7 @@ class _HomePageState extends State<Homepage> {
 
                             const SizedBox(height: 30),
                             const Text(
-                              "Suprise Me",
+                              "Suprise Me !!",
                               style: TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.bold,
@@ -134,7 +133,6 @@ class _HomePageState extends State<Homepage> {
                                 ),
                               ),
                             ),
-
 
                           ],
                         ),
@@ -686,6 +684,56 @@ class _HomePageState extends State<Homepage> {
                 ),
 
                 const SizedBox(height: 16),
+                InkWell(
+                  onTap: () {
+                    // Arahkan ke halaman scan
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => ScanPage()),
+                    // );
+                    pushScanQr(context);
+                  },
+                  child: Container(
+                    width: 250,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[400],
+                      borderRadius: BorderRadius.circular(60.0),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.5),
+                          spreadRadius: 0,
+                          blurRadius: 10,
+                          offset: const Offset(0, 4),
+                        ),
+                      ],
+                    ),
+                    child: const Row(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 20.0),
+                          child: Icon(Icons.qr_code_scanner_outlined),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 8.0),
+                          child: Text(
+                            'Scan QR',
+                            style: TextStyle(
+                              fontSize: 18,
+                              // fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(left: 80.0),
+                          child: Icon(Icons.arrow_forward_ios_sharp),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                const SizedBox(height: 12),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Container(

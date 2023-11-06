@@ -20,7 +20,7 @@ void pushLogin(BuildContext context) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => const Loginpage()));
 }
 
-void pushHomePage(BuildContext context, User user) {
+void pushHomePage(BuildContext context) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => const Homepage()));
 }
 
@@ -33,5 +33,12 @@ void pushCameraPage(BuildContext context, User user) {
 }
 
 void pushScanQr(BuildContext context) {
-  Navigator.push(context, MaterialPageRoute(builder: (_) => const ScanPage()));
+  Navigator.push(context, MaterialPageRoute(builder: (_) => const BarcodeScannerPageView()));
+}
+
+// CONSTANT
+class LabelTextConstant{
+  static const String homePageAppBarTitle = "Modul QR, Camera, Scanner";
+  static const String scanQrPlaceHolderLabel = "Scanf something & click to copy to clipboard";
+  static const String txtonCopyingClipBoard = "QR code disaling ke clipboard";
 }

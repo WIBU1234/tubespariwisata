@@ -1,58 +1,106 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:flutter/services.dart';
+import 'package:tubespariwisata/hardware/scannerError.dart';
+import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
 
-class ScanPage extends StatefulWidget {
-  const ScanPage({Key? superKey}): super(key: superKey);
+class BarcodeScannerPageView extends StatefulWidget{
+  const BarcodeScannerPageView({Key? key}) : super(key: key);
 
   @override
-  State<ScanPage> createState() => _ScanPageState();
+  State<BarcodeScannerPageView> createState() => _BarcodeScannerPageViewState();
 }
 
-class _ScanPageState extends State<ScanPage> {
-  String qrCodeResult = "Hasil belum ada";
+class _BarcodeScannerPageViewState extends State<BarcodeScannerPageView>
+  with SingleTickerProviderStateMixin {
+    BarcodeCapture? barcodeCapture;
 
-  Future<void> scanQRCode() async {
-    try {
-      String qrResult = await FlutterBarcodeScanner.scanBarcode(
-        '#ff6666',
-        'Batal',
-        true,
-        ScanMode.QR,
-      );
-      setState(() {
-        qrCodeResult = qrResult;
-      });
-    } catch (e) {
-      setState(() {
-        qrCodeResult = 'Gagal memindai, coba lagi';
-      });
-    }
-  }
+    @override
+    Widget build(BuildContext context){
+      return Scaffold(
+        backgroundColor: Colors.black,
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Scan QR Code'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+        body: PageView(
           children: [
-            ElevatedButton(
-              onPressed: scanQRCode,
-              child: const Text('Scan QR Code'),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'Hasil: $qrCodeResult',
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 20),
-            ),
+            cameraView(),
+            Container(),
           ],
         ),
-      ),
-    );
+      );
+    }
+
+    Widget cameraView() {
+      return Builder(
+        builder: (context) {
+          return Stack(
+            children: [
+              MobileScanner(
+                startDelay: true,
+                controller: MobileScannerController(torchEnabled: false),
+                fit: BoxFit.contain,
+                errorBuilder: (context, error, child){
+                  return ScannerErrorWidget(error: error);
+                },
+                onDetect: (capture) => setBarcodeCapture(capture),
+              ),
+
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  height: 100,
+                  color: Colors.black.withOpacity(0.4),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Center(
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width - 120,
+                          height: 50,
+                          child: FittedBox(
+                            child: GestureDetector(
+                              onTap: () => getURLResult(),
+                              child: barcodeCaptureTextResult(context),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          );
+        },
+      );
+    }
+
+    Text barcodeCaptureTextResult(BuildContext context){
+      return Text(
+        barcodeCapture?.barcodes.first.rawValue ?? LabelTextConstant.scanQrPlaceHolderLabel,
+        overflow: TextOverflow.fade,
+        style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Colors.white),
+      );
+    }
+
+    void setBarcodeCapture(BarcodeCapture capture){
+      setState(() {
+        barcodeCapture = capture;
+      });
+    }
+
+    void getURLResult() {
+      final qrCode = barcodeCapture?.barcodes.first.rawValue;
+
+      if(qrCode != null){
+        copyToClipboard(qrCode);
+      }
+    }
+
+    void copyToClipboard(String text){
+      Clipboard.setData(ClipboardData(text: text));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text(LabelTextConstant.txtonCopyingClipBoard)),
+      );
+    }
   }
-}

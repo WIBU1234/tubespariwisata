@@ -286,8 +286,7 @@ class _UpdatePageState extends State<UpdatePage> {
                               'imageFoto' : userTemp!.imageFoto,
                             };
                             editUserData(userId!, newData);
-                            removeUserID(); saveUserID(userTemp!.id!);
-                            pushHomePage(context, userTemp!);
+                            pushHomePage(context);
                             }
                           }
                         },

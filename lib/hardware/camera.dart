@@ -61,7 +61,7 @@ class _CameraPageState extends State<CameraPage> {
       };
 
       editUserData(widget.user.id!, newData);
-      pushHomePage(context, widget.user);
+      pushHomePage(context);
       
     } on CameraException catch (e) {
       debugPrint('Error occured while taking picture: $e');
