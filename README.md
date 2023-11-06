@@ -2,7 +2,7 @@ Kelas A // Kelompok 1 :
 
 200710613 I Kadek Nikki Lababa // Memikirkan ide pengimplementasian hardware
 
-210711185 Klasik Solafide Kabor Mambri Taidi //  
+210711185 Klasik Solafide Kabor Mambri Taidi //merge code, update HomePage  
 
 210711186 Carolus Seto Arianto // Implementasi kamera foto profile, memperbaiki tampilan UI seluruh homepage, fitur scan & fitur shake
 
