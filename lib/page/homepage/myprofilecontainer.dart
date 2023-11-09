@@ -137,7 +137,7 @@ class _ProfileState extends State<Profile> {
                                 },
                                 child: Center(
                                   // child: widget.picture != null
-                                  child: userTemp!.imageFoto != ""
+                                  child: userTemp!.imageFoto != "NOTHAVE"
                                       ? ClipOval(
                                           child: Image.memory(
                                               Uint8List.fromList(
