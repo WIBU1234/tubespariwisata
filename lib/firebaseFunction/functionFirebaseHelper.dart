@@ -38,7 +38,7 @@ Future createUser({
 
     await docUser.set(json);
   } catch (e) {
-    print('Error creating user: $e');
+    // print('Error creating user: $e');
   }
 }
 
