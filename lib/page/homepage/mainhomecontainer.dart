@@ -22,13 +22,6 @@ class _MainHomeState extends State<MainHome> {
   String? userId;
   User? userTemp;
   bool isMenuVisible = false;
-  int selectedIndex = 0;
-
-  void navigateToScreen(int index) {
-    setState(() {
-      selectedIndex = index;
-    });
-  }
 
   @override
   void initState() {
@@ -42,6 +35,7 @@ class _MainHomeState extends State<MainHome> {
         });
       }
     });
+
   }
 
   void fetchData() async {

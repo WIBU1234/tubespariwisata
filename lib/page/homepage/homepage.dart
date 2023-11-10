@@ -82,6 +82,7 @@ class _HomePageState extends State<Homepage> {
   // GRID ITEM CONTAINER
   Widget _buildSearchContainer() {
     return const MainGrid();
+    // return MyHomePage();
   }
 
   // SETTINGS CONTAINER
