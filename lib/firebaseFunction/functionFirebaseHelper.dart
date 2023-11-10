@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tubespariwisata/entity/user.dart';
+import 'package:tubespariwisata/entity/destinasi.dart';
 
 // USER DATA MANAGEMENT OR MANIPULATION
 User createEmptyUser() {
@@ -96,4 +97,37 @@ void editUserData(String idUser, Map<String, dynamic> newData) {
       doc.reference.update(newData);
     });
   });
+}
+
+// DESTINATION DATA MANAGEMENT OR MANIPULATION
+Future createDestination({
+  required String destinationName,
+  required String destinationAddress,
+  required String destinationDescription,
+  required double destinationLatitude,
+  required double destinationLongitude,
+  required String destinationImage,
+  required String destinationCategory,
+  required int destinationRating,
+}) async {
+  try {
+    final docDestination =
+        FirebaseFirestore.instance.collection('destinasi').doc();
+
+    final destination = Destinasi(
+        id: docDestination.id,
+        destinationName: destinationName,
+        destinationAddress: destinationAddress,
+        destinationDescription: destinationDescription,
+        destinationLatitude: destinationLatitude,
+        destinationLongitude: destinationLongitude,
+        destinationImage: destinationImage,
+        destinationCategory: destinationCategory,
+        destinationRating: destinationRating);
+    final json = destination.toJson();
+
+    await docDestination.set(json);
+  } catch (e) {
+    // print('Error creating destination: $e');
+  }
 }

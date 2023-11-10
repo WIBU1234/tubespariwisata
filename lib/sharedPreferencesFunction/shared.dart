@@ -20,7 +20,7 @@ Future removeUserID() async {
   await prefs.remove('userID');
 }
 
-// SAFE BY USER
+// SAFE BY OBJECT USER
 Future<User?> saveUserForObject(User user) async {
   final prefs = await SharedPreferences.getInstance();  
   await prefs.setString('user', jsonEncode(user));
