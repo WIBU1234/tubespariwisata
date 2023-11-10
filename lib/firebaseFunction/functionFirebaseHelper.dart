@@ -131,3 +131,7 @@ Future createDestination({
     // print('Error creating destination: $e');
   }
 }
+
+Stream<List<Destinasi>> getDestinasiAll() =>
+    FirebaseFirestore.instance.collection('destinasi').snapshots().map((snapshots) =>
+        snapshots.docs.map((doc) => Destinasi.fromJson(doc.data())).toList());

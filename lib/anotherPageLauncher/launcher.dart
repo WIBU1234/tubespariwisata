@@ -9,6 +9,7 @@ import 'package:tubespariwisata/page/homepage/homepage.dart';
 import 'package:tubespariwisata/page/homepage/updateProfile.dart';
 
 import 'package:tubespariwisata/adminLaunch/pageAdmin/addDestination.dart';
+import 'package:tubespariwisata/adminLaunch/container/addDestionation/createDestination.dart';
 
 // LAUNCHER HARDWARE
 import 'package:tubespariwisata/hardware/camera.dart';
@@ -42,6 +43,10 @@ void pushScanQr(BuildContext context) {
 // ADMIN FUNCTION
 void pushAdminHomePage(BuildContext context) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => const AddMain()));
+}
+
+void addDestination(BuildContext context) {
+  Navigator.push(context, MaterialPageRoute(builder: (_) => const CreatePage()));
 }
 
 // CONSTANT

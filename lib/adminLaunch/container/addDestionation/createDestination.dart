@@ -1,58 +1,68 @@
 // FLUTTER MATERIAL
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 // FLUTTER FUNCTION PAGE
 import 'dart:ui';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:flutter/services.dart';
+import 'dart:convert';
 // FLUTTER PAGE LAUNCHER
-import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
+// import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 // FIREBASE FUNCTION
 import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 // MODEL IMPORTER
-import 'package:tubespariwisata/entity/user.dart';
-import 'package:tubespariwisata/entity/destinasi.dart';
+// import 'package:tubespariwisata/entity/destinasi.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? superKey}): super(key: superKey);
+class CreatePage extends StatefulWidget {
+  const CreatePage({Key? superKey}): super(key: superKey);
 
   @override
-  State<RegisterPage> createState() => _InputPageState();
+  State<CreatePage> createState() => _CreatePageState();
 }
 
-class _InputPageState extends State<RegisterPage> {
+class _CreatePageState extends State<CreatePage> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController controllerName = TextEditingController();
-  TextEditingController controllerEmail = TextEditingController();
-  TextEditingController controllerPassword = TextEditingController();
-  TextEditingController controllerNomorTelepon = TextEditingController();
-  TextEditingController controllerTanggalLahir = TextEditingController();
-  bool isPasswordVisible = true;
-  List<User> userList = [];
-
+  TextEditingController controllerAddress = TextEditingController();
+  TextEditingController controllerDescription = TextEditingController();
+  TextEditingController controllerLatitude = TextEditingController();
+  TextEditingController controllerLongitude = TextEditingController();
+  TextEditingController controllerImage = TextEditingController();
+  TextEditingController controllerCategory = TextEditingController();
+  TextEditingController controllerRating = TextEditingController();
+  File? image;
+  String? base64string;
+  
   @override
   void initState() {
-    super.initState();
+    if (image != null) {
+      converting(image!);
+    } else {
+      print('Error: Image is null');
+    }
 
-    getUser().listen((users) {
-      setState(() {
-        userList = users;
-      });
-    });
+    super.initState();
   }
 
-  Future<void> _selectDate() async {
-    DateTime? picked = await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(1900),
-      lastDate: DateTime(3000),
-    );
+  Future pickImage() async {
+    try {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
-    if (picked != null) {
+      if (image == null) return;
+
+      final imageTemp = File(image.path);
       setState(() {
-        controllerTanggalLahir.text =
-            DateFormat('yyyy-MM-dd').format(picked).toString().split(" ")[0];
+        this.image = imageTemp;
+        converting(imageTemp);
       });
+    } on PlatformException catch (e) {
+      debugPrint('Failed to pick image : $e');
     }
+  }
+
+  Future converting(File image) async {
+    Uint8List imagebytes = await image.readAsBytes();
+    base64string = base64.encode(imagebytes);
   }
 
   @override
@@ -85,7 +95,8 @@ class _InputPageState extends State<RegisterPage> {
                   ),
                 ],
               ),
-              margin: const EdgeInsets.symmetric(horizontal: 25),
+
+              margin: const EdgeInsets.all(40),
               child: SingleChildScrollView(
                 child: Form(
                   key: _formKey,
@@ -98,111 +109,146 @@ class _InputPageState extends State<RegisterPage> {
                         width: 150,
                         height: 150,
                       ),
-                      const Text(
-                        'Registration',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
+                      const Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          'Add Destination',
+                          style: TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
 
                       const SizedBox(height: 10),
-                      const Text(
-                        'Please enter input your data below',
-                        style: TextStyle(
-                          fontSize: 16, 
-                          color: Colors.grey),
-                      ),
-
-                      const SizedBox(height: 24),
-                      TextFormField(
-                        controller: controllerName,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.person),
-                          labelText: 'Name',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 17),
-                        ),
-                        validator: (value) {
-                          if(value == ''){
-                            return 'Please enter your name';
-                          }
-                          if(value == 'admin') {
-                            return 'Username admin is not permitted!';
-                          }
-                          return null;
-                        }
-                      ),
-
-                      const SizedBox(height: 24),
-                      TextFormField(
-                        controller: controllerEmail,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.mail),
-                          labelText: 'Email',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 17),
-                        ),
-                        validator: (value) {
-                          if(value == ''){
-                            return 'Please enter your email';
-                          }
-                          if(value == 'admin') {
-                            return 'Email admin is not permitted!';
-                          }
-                          return null;
-                        }
-                      ),
-                      
-                      const SizedBox(height: 24),
-                      TextFormField(
-                        controller: controllerPassword,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.lock),
-                          labelText: 'Password',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 17),
-                          suffixIcon: IconButton(
-                            onPressed: () {
-                              setState(() {
-                                isPasswordVisible = !isPasswordVisible;
-                              });
-                            },
-                            icon: Icon(
-                              isPasswordVisible
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
-                              color: isPasswordVisible
-                                  ? Colors.grey
-                                  : Colors.blue,
+                      Center(
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: const Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              'Enter input data below',
+                              style: TextStyle(
+                                fontSize: 16, 
+                                color: Colors.grey,
+                              ),
                             ),
                           ),
                         ),
-                        obscureText: isPasswordVisible,
+                      ),
+
+                      const SizedBox(height: 20),
+                      Container(
+                        width: 160,
+                        height: 160,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey[200],
+                        ),
+                        child: image != null
+                            ? Image.file(
+                                image!,
+                                width: 160,
+                                height: 160,
+                                fit: BoxFit.cover,
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  image = null;
+                                  pickImage();
+                                },
+                                child: const Icon(
+                                  Icons.add_a_photo,
+                                  size: 60,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                      ),
+
+                      const SizedBox(height: 16),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.yellow,
+                          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          elevation: 6,
+                        ),
+                        onPressed: () async {
+                          image = null;
+                          pickImage();
+                          controllerImage = base64string as TextEditingController;
+                        },
+                        child: const Text(
+                          'Add Photo', style: TextStyle(fontSize: 18, color: Colors.black),
+                        ),
+                      ),
+
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        controller: controllerName,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.location_city),
+                          labelText: 'Destination Name',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 17),
+                        ),
                         validator: (value) {
                           if(value == ''){
-                            return 'Please enter your password';
-                          }
-                          if(value?.length == 5 || value?.length == 4 || value?.length == 3 || value?.length == 2 || value?.length == 1) {
-                            return 'Password is too short!';
+                            return 'Destination Name must be filled';
                           }
                           return null;
                         }
                       ),
 
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        controller: controllerAddress,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.location_on),
+                          labelText: 'Destination Address',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 17),
+                        ),
+                        validator: (value) {
+                          if(value == ''){
+                            return 'Destination Address must be filled';
+                          }
+                          return null;
+                        }
+                      ),
+
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        controller: controllerDescription,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.description),
+                          labelText: 'Destination Description',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 17),
+                        ),
+                        validator: (value) {
+                          if(value == ''){
+                            return 'Destination Description must be filled';
+                          }
+                          return null;
+                        }
+                      ),
+
+                      const SizedBox(height: 20),
                       TextFormField(
                         keyboardType: TextInputType.number,
-                        controller: controllerNomorTelepon,
+                        controller: controllerLatitude,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.phone),
-                          labelText: 'Phone Number',
+                          prefixIcon: const Icon(Icons.format_list_numbered_outlined),
+                          labelText: 'Destination Latitude',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),
@@ -210,22 +256,19 @@ class _InputPageState extends State<RegisterPage> {
                         ),
                         validator: (value) {
                           if(value == ''){
-                            return 'Please enter your phone number';
-                          }
-                          if(value == '444') {
-                            return 'This number is prohibited';
+                            return 'Destination Latitude must be filled';
                           }
                           return null;
                         }
                       ),
 
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 20),
                       TextFormField(
-                        controller: controllerTanggalLahir,
-                        onTap: _selectDate,
+                        keyboardType: TextInputType.number,
+                        controller: controllerLongitude,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.date_range),
-                          labelText: 'Date of Birth',
+                          prefixIcon: const Icon(Icons.format_list_numbered_outlined),
+                          labelText: 'Destination Longitude',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),
@@ -233,7 +276,46 @@ class _InputPageState extends State<RegisterPage> {
                         ),
                         validator: (value) {
                           if(value == ''){
-                            return 'Please enter your date of birth';
+                            return 'Destination Longitude must be filled';
+                          }
+                          return null;
+                        }
+                      ),
+
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        controller: controllerCategory,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.catching_pokemon),
+                          labelText: 'Destination Category',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 17),
+                        ),
+                        validator: (value) {
+                          if(value == ''){
+                            return 'Destination Category must be filled';
+                          }
+                          return null;
+                        }
+                      ),
+
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        keyboardType: TextInputType.number,
+                        controller: controllerRating,
+                        decoration: InputDecoration(
+                          prefixIcon: const Icon(Icons.star),
+                          labelText: 'Destination Rating',
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 17),
+                        ),
+                        validator: (value) {
+                          if(value == ''){
+                            return 'Destination Rating must be filled';
                           }
                           return null;
                         }
@@ -253,31 +335,28 @@ class _InputPageState extends State<RegisterPage> {
                           if (!_formKey.currentState!.validate()) {
                             // Handle validation errors
                           } else {
-                            if (isUserInList(userList, controllerEmail.text)) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Email is already registered'),
-                                ),
-                              );
-                            } else {
-                              createUser(
-                                username: controllerName.text,
-                                email: controllerEmail.text,
-                                password: controllerPassword.text,
-                                nomorTelepon: controllerNomorTelepon.text,
-                                tanggalLahir: controllerTanggalLahir.text,
-                                token: '0',
-                              );
-                              pushLogin(context);
-                            }
+                            createDestination(
+                              destinationName: controllerName.text,
+                              destinationAddress: controllerAddress.text,
+                              destinationDescription: controllerDescription.text,
+                              destinationLatitude: double.parse(controllerLatitude.text),
+                              destinationLongitude: double.parse(controllerLongitude.text),
+                              destinationImage: base64string!,
+                              destinationCategory: controllerCategory.text,
+                              destinationRating: int.parse(controllerRating.text)
+                            );
                           }
+
+                          Navigator.pop(context);
                         },
                         child: const Text(
-                          'Register', style: TextStyle(fontSize: 18),
+                          'Add Destionation', style: TextStyle(fontSize: 18),
                         ),
                       ),
+
                     ],
                   ),
+
                 ),
               ),
             ),

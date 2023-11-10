@@ -25,9 +25,12 @@ class _ProfileState extends State<Profile> {
 
   @override
   void initState() {
-    fetchData();
+    fetchImidiately();
     super.initState();
+  }
 
+  void fetchImidiately() {
+    fetchData();
   }
 
   void fetchData() async {

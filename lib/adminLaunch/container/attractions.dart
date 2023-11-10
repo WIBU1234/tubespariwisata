@@ -1,11 +1,8 @@
 // IMPORT LIB FROM FLUTTER
-// import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:sensors/sensors.dart';
 // IMPORT LIB FROM FUNCTION
-import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
-import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
-// import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
+// import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
+import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 
 class AttractionContainer extends StatefulWidget {
   const AttractionContainer({Key? key}) : super(key: key);
@@ -67,7 +64,7 @@ class _AttractionContainerState extends State<AttractionContainer> {
                           elevation: 6,
                         ),
                         onPressed: () {
-
+                          addDestination(context);
                         },
                         child: const Text(
                           'Create',
