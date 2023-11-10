@@ -1,14 +1,14 @@
 // IMPORT LIB FROM FLUTTER
-import 'dart:math';
+// import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:qr_flutter/qr_flutter.dart';
-import 'package:tubespariwisata/data/wisata.dart';
+// import 'package:qr_flutter/qr_flutter.dart';
+// import 'package:tubespariwisata/data/wisata.dart';
 import 'package:sensors/sensors.dart';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
 import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
-import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
+// import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 
 class MainHome extends StatefulWidget {
   const MainHome({Key? key}) : super(key: key);
@@ -22,6 +22,13 @@ class _MainHomeState extends State<MainHome> {
   String? userId;
   User? userTemp;
   bool isMenuVisible = false;
+  int selectedIndex = 0;
+
+  void navigateToScreen(int index) {
+    setState(() {
+      selectedIndex = index;
+    });
+  }
 
   @override
   void initState() {
@@ -35,7 +42,6 @@ class _MainHomeState extends State<MainHome> {
         });
       }
     });
-
   }
 
   void fetchData() async {
@@ -185,7 +191,7 @@ class _MainHomeState extends State<MainHome> {
                     ],
                   ),
 
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
                   Container(
                     width: 280,
                     height: 80,
@@ -298,7 +304,7 @@ class _MainHomeState extends State<MainHome> {
 
                   const SizedBox(height: 8),
                   Padding(
-                    padding: const EdgeInsets.only(right: 10, left: 10),
+                    padding: const EdgeInsets.only(right: 0, left: 0),
                     child: Container(
                       decoration: const BoxDecoration(
                         border: Border(
@@ -311,8 +317,145 @@ class _MainHomeState extends State<MainHome> {
                     ),
                   ),
 
+                  const SizedBox(height: 18),
+                  Container(
+                    width: 280,
+                    height: 300,
 
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.7,
+                      padding: const EdgeInsets.all(1.0),
+                      mainAxisSpacing: 20.0,
+                      crossAxisSpacing: 20.0,
 
+                      children: [
+                        for (var i = 0; i < 10; i++) 
+                        Padding(
+                          padding: const EdgeInsets.only(left: 0, right: 0),
+                          child: Container(
+
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(Radius.circular(20)),
+                              color: Colors.white.withOpacity(1.0),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  spreadRadius: 1,
+                                  blurRadius: 10,
+                                  offset: Offset(0, 4),
+                                ),
+                              ],
+                            ),
+
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: 150,
+                                  height: 120,
+                                  decoration: const BoxDecoration(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                    image: DecorationImage(
+                                      image: AssetImage("resources/images/bali.jpg"),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+
+                                const SizedBox(height: 8),
+                                const Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 4.0),
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Bali Temple Tickets",
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+
+                                    Padding(
+                                      padding: EdgeInsets.only(left: 4.0),
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Rp. 50.000",
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                const SizedBox(height: 8),
+                                Container(
+                                  width: 80,
+                                  height: 14,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.grey[350],
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        spreadRadius: 2,
+                                        blurRadius: 14,
+                                        offset: Offset(0, 9),
+                                      ),
+                                    ],
+                                  ),
+
+                                  child: const Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      SizedBox(width: 6),
+                                      SizedBox(
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.keyboard_arrow_down_outlined,
+                                            size: 14,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+
+                                      SizedBox(width: 2),
+                                      Text(
+                                          "See Tickets",
+                                          style: TextStyle(
+                                            fontSize: 8,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.black,
+                                          ),
+                                      ),
+
+                                    ],
+                                  ),
+
+                                ),
+
+                              ],
+                            ),
+
+                          ),
+                        ),
+                        
+                      ],
+                    ),
+                  ),
                 ],
 
                 // child: isMenuVisible

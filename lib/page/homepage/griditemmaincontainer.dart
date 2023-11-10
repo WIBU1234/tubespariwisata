@@ -6,6 +6,7 @@ import 'package:tubespariwisata/entity/user.dart';
 import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 // IMPORT FORCE PAGE
 import 'package:tubespariwisata/page/homepage/card_detail_page.dart';
+import 'package:tubespariwisata/page/homepage/settingscontainer.dart';
 
 class MainGrid extends StatefulWidget {
   const MainGrid({Key? key}) : super(key: key);
@@ -15,6 +16,7 @@ class MainGrid extends StatefulWidget {
 }
 
 class _MainGridState extends State<MainGrid> {
+  var _selectedTab = _SelectedTab.attractions;
   bool isPasswordVisible = true;
   String? userId;
   User? userTemp;
@@ -41,9 +43,52 @@ class _MainGridState extends State<MainGrid> {
     }
   }
 
+  Widget _getSelectedScreen() {
+    switch (_selectedTab) {
+      case _SelectedTab.attractions:
+        return _buildHomeContainer();
+      case _SelectedTab.tours:
+        return _buildPersonContainer();
+      case _SelectedTab.culture:
+        return _buildSearchContainer();
+      case _SelectedTab.culinary:
+        return _buildSettingsContainer();
+    }
+  }
+
+  // HOME CONTAINER
+  Widget _buildHomeContainer() {
+    return const SettingPage();
+  }
+
+  // PROFILE CONTAINER
+  Widget _buildPersonContainer() {
+    return const SettingPage();
+  }
+
+  // GRID ITEM CONTAINER
+  Widget _buildSearchContainer() {
+    return const SettingPage();
+  }
+
+  // SETTINGS CONTAINER
+  Widget _buildSettingsContainer() {
+    return const SettingPage();
+  }
+
+  void _handleIndexChanged(int i) {
+    setState(() {
+      _selectedTab = _SelectedTab.values[i];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+
     return Container(
+
+
+
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage("resources/images/bali.jpg"),
@@ -194,3 +239,5 @@ class _MainGridState extends State<MainGrid> {
     );
   }
 }
+
+enum _SelectedTab { attractions, tours, culture, culinary }
