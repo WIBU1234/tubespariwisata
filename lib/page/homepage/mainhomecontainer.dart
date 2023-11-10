@@ -1,12 +1,16 @@
 // IMPORT LIB FROM FLUTTER
 // import 'dart:math';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 // import 'package:qr_flutter/qr_flutter.dart';
 // import 'package:tubespariwisata/data/wisata.dart';
 import 'package:sensors/sensors.dart';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
+import 'package:tubespariwisata/entity/destinasi.dart';
 import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 // import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 
@@ -22,6 +26,7 @@ class _MainHomeState extends State<MainHome> {
   String? userId;
   User? userTemp;
   bool isMenuVisible = false;
+  List<Widget> destinationContainers = [];
 
   @override
   void initState() {
@@ -52,6 +57,128 @@ class _MainHomeState extends State<MainHome> {
       });
     }
   }
+
+  void buildDestination(List<Destinasi> destinasiList) {
+  List<Widget> destinationContainers = [];
+  for (var i = 0; i < destinasiList.length; i++) {
+    Destinasi destinasi = destinasiList[i];
+
+    destinationContainers.add(
+      Padding(
+        padding: const EdgeInsets.only(left: 0, right: 0),
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            color: Colors.white.withOpacity(1.0),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black12,
+                spreadRadius: 1,
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: Column(
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey[350],
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                  image: DecorationImage(
+                    image: MemoryImage(Uint8List.fromList(base64.decode(destinasi.destinationImage.toString()))),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                width: 150,
+                height: 120,
+              ),
+              const SizedBox(height: 8),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 4.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        destinasi.destinationName.toString(),
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 4.0),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        "dasda",
+                        style: TextStyle(
+                          fontSize: 10,
+                          fontWeight: FontWeight.normal,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Container(
+                width: 80,
+                height: 14,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.grey[350],
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      spreadRadius: 2,
+                      blurRadius: 14,
+                      offset: Offset(0, 9),
+                    ),
+                  ],
+                ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    SizedBox(width: 6),
+                    SizedBox(
+                      child: Center(
+                        child: Icon(
+                          Icons.keyboard_arrow_down_outlined,
+                          size: 14,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 2),
+                    Text(
+                      "See Tickets",
+                      style: TextStyle(
+                        fontSize: 8,
+                        fontWeight: FontWeight.normal,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -322,129 +449,142 @@ class _MainHomeState extends State<MainHome> {
                       padding: const EdgeInsets.all(1.0),
                       mainAxisSpacing: 20.0,
                       crossAxisSpacing: 20.0,
+                      // children: destinationContainers,
 
                       children: [
-                        for (var i = 0; i < 10; i++) 
-                        Padding(
-                          padding: const EdgeInsets.only(left: 0, right: 0),
-                          child: Container(
-
-                            decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.all(Radius.circular(20)),
-                              color: Colors.white.withOpacity(1.0),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  spreadRadius: 1,
-                                  blurRadius: 10,
-                                  offset: Offset(0, 4),
-                                ),
-                              ],
-                            ),
-
-                            child: Column(
-                              children: [
-                                Container(
-                                  width: 150,
-                                  height: 120,
-                                  decoration: const BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20),
-                                    ),
-                                    image: DecorationImage(
-                                      image: AssetImage("resources/images/bali.jpg"),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-
-                                const SizedBox(height: 8),
-                                const Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 4.0),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          "Bali Temple Tickets",
-                                          style: TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-
-                                    Padding(
-                                      padding: EdgeInsets.only(left: 4.0),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          "Rp. 50.000",
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-
-                                const SizedBox(height: 8),
-                                Container(
-                                  width: 80,
-                                  height: 14,
+                        StreamBuilder<List<Destinasi>>(
+                          stream: getDestinasiAll(),                          
+                          builder: (context, snapshot) {
+                            if(!snapshot.hasData) {
+                              return const Center(child: CircularProgressIndicator());
+                            }
+                            List<Destinasi> destinasiList = snapshot.data!;
+                            
+                            for(Destinasi destinasi in destinasiList){
+                              return Padding(
+                                padding: const EdgeInsets.only(left: 0, right: 0),
+                                child: Container(
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.grey[350],
+                                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                    color: Colors.white.withOpacity(1.0),
                                     boxShadow: const [
                                       BoxShadow(
                                         color: Colors.black12,
-                                        spreadRadius: 2,
-                                        blurRadius: 14,
-                                        offset: Offset(0, 9),
+                                        spreadRadius: 1,
+                                        blurRadius: 10,
+                                        offset: Offset(0, 4),
                                       ),
                                     ],
                                   ),
-
-                                  child: const Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                          
+                                  child: Column(
                                     children: [
-                                      SizedBox(width: 6),
-                                      SizedBox(
-                                        child: Center(
-                                          child: Icon(
-                                            Icons.keyboard_arrow_down_outlined,
-                                            size: 14,
-                                            color: Colors.black,
+                                      Container(
+                                        width: 150,
+                                        height: 120,
+                                        decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(20),
+                                            topRight: Radius.circular(20),
+                                          ),
+                                          image: DecorationImage(
+                                            image: AssetImage("resources/images/bali.jpg"),
+                                            fit: BoxFit.cover,
                                           ),
                                         ),
                                       ),
-
-                                      SizedBox(width: 2),
-                                      Text(
-                                          "See Tickets",
-                                          style: TextStyle(
-                                            fontSize: 8,
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.black,
+                          
+                                      const SizedBox(height: 8),
+                                      const Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 4.0),
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                "Bali Temple Tickets",
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
                                           ),
+                          
+                                          Padding(
+                                            padding: EdgeInsets.only(left: 4.0),
+                                            child: Align(
+                                              alignment: Alignment.centerLeft,
+                                              child: Text(
+                                                "Rp. 50.000",
+                                                style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-
+                          
+                                      const SizedBox(height: 8),
+                                      Container(
+                                        width: 80,
+                                        height: 14,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                          color: Colors.grey[350],
+                                          boxShadow: const [
+                                            BoxShadow(
+                                              color: Colors.black12,
+                                              spreadRadius: 2,
+                                              blurRadius: 14,
+                                              offset: Offset(0, 9),
+                                            ),
+                                          ],
+                                        ),
+                          
+                                        child: const Row(
+                                          mainAxisAlignment: MainAxisAlignment.start,
+                                          children: [
+                                            SizedBox(width: 6),
+                                            SizedBox(
+                                              child: Center(
+                                                child: Icon(
+                                                  Icons.keyboard_arrow_down_outlined,
+                                                  size: 14,
+                                                  color: Colors.black,
+                                                ),
+                                              ),
+                                            ),
+                          
+                                            SizedBox(width: 2),
+                                            Text(
+                                                "See Tickets",
+                                                style: TextStyle(
+                                                  fontSize: 8,
+                                                  fontWeight: FontWeight.normal,
+                                                  color: Colors.black,
+                                                ),
+                                            ),
+                          
+                                          ],
+                                        ),
+                          
+                                      ),
+                          
                                     ],
                                   ),
-
+                          
                                 ),
+                              );
+                            }
 
-                              ],
-                            ),
-
-                          ),
+                            return const Center(child: Text('No data available'));
+                          }
                         ),
                         
                       ],
