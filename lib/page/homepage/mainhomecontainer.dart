@@ -26,12 +26,12 @@ class _MainHomeState extends State<MainHome> {
   String? userId;
   User? userTemp;
   bool isMenuVisible = false;
-  List<Widget> destinationContainers = [];
+  List<Destinasi> destinationList = [];
 
   @override
   void initState() {
     fetchData();
-    super.initState();
+
 
     accelerometerEvents.listen((event) {
       if (event.x.abs() > 20 || event.y.abs() > 20 || event.z.abs() > 20) {
@@ -41,6 +41,13 @@ class _MainHomeState extends State<MainHome> {
       }
     });
 
+    getDestinasiAll().listen((destinasi) {
+      setState(() {
+        destinationList = destinasi;
+      });
+    });
+
+    super.initState();
   }
 
   void fetchData() async {
@@ -321,149 +328,137 @@ class _MainHomeState extends State<MainHome> {
                     width: 280,
                     height: 300,
 
-
-
                     child: GridView.count(
                       crossAxisCount: 2,
                       childAspectRatio: 0.7,
                       padding: const EdgeInsets.all(1.0),
                       mainAxisSpacing: 20.0,
                       crossAxisSpacing: 20.0,
-                      // children: destinationContainers,
 
                       children: [
-                        StreamBuilder<List<Destinasi>>(
-                          stream: getDestinasiAll(),                          
-                          builder: (context, snapshot) {
-                            if(!snapshot.hasData) {
-                              return const Center(child: CircularProgressIndicator());
-                            }
-                            List<Destinasi> destinasiList = snapshot.data!;
-                            
-                              return Padding(
-                                padding: const EdgeInsets.only(left: 0, right: 0),
-                                child: Container(
+                        for(var destinasi in destinationList)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 0, right: 0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(Radius.circular(20)),
+                              color: Colors.white.withOpacity(1.0),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: Colors.black12,
+                                  spreadRadius: 1,
+                                  blurRadius: 10,
+                                  offset: Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                    
+                            child: Column(
+                              children: [
+                                Container(
+                                  width: 150,
+                                  height: 120,
                                   decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.all(Radius.circular(20)),
-                                    color: Colors.white.withOpacity(1.0),
+                                    borderRadius: const BorderRadius.only(
+                                      topLeft: Radius.circular(20),
+                                      topRight: Radius.circular(20),
+                                    ),
+                                    image: DecorationImage(
+                                      image: MemoryImage(base64.decode(destinasi.destinationImage)),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                    
+                                const SizedBox(height: 8),
+                                Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 4.0),
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          destinasi.destinationName,
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                    
+                                    const Padding(
+                                      padding: EdgeInsets.only(left: 4.0),
+                                      child: Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          "Rp. 50.000",
+                                          style: TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                    
+                                const SizedBox(height: 8),
+                                Container(
+                                  width: 80,
+                                  height: 14,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.grey[350],
                                     boxShadow: const [
                                       BoxShadow(
                                         color: Colors.black12,
-                                        spreadRadius: 1,
-                                        blurRadius: 10,
-                                        offset: Offset(0, 4),
+                                        spreadRadius: 2,
+                                        blurRadius: 14,
+                                        offset: Offset(0, 9),
                                       ),
                                     ],
                                   ),
-                          
-                                  child: Column(
+                    
+                                  child: const Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      Container(
-                                        width: 150,
-                                        height: 120,
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(20),
-                                            topRight: Radius.circular(20),
-                                          ),
-                                          image: DecorationImage(
-                                            image: AssetImage("resources/images/bali.jpg"),
-                                            fit: BoxFit.cover,
+                                      SizedBox(width: 6),
+                                      SizedBox(
+                                        child: Center(
+                                          child: Icon(
+                                            Icons.keyboard_arrow_down_outlined,
+                                            size: 14,
+                                            color: Colors.black,
                                           ),
                                         ),
                                       ),
-                          
-                                      const SizedBox(height: 8),
-                                      const Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding: EdgeInsets.only(left: 4.0),
-                                            child: Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(
-                                                "Bali Temple Tickets",
-                                                style: TextStyle(
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ),
+                    
+                                      SizedBox(width: 2),
+                                      Text(
+                                          "See Tickets",
+                                          style: TextStyle(
+                                            fontSize: 8,
+                                            fontWeight: FontWeight.normal,
+                                            color: Colors.black,
                                           ),
-                          
-                                          Padding(
-                                            padding: EdgeInsets.only(left: 4.0),
-                                            child: Align(
-                                              alignment: Alignment.centerLeft,
-                                              child: Text(
-                                                "Rp. 50.000",
-                                                style: TextStyle(
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
                                       ),
-                          
-                                      const SizedBox(height: 8),
-                                      Container(
-                                        width: 80,
-                                        height: 14,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: Colors.grey[350],
-                                          boxShadow: const [
-                                            BoxShadow(
-                                              color: Colors.black12,
-                                              spreadRadius: 2,
-                                              blurRadius: 14,
-                                              offset: Offset(0, 9),
-                                            ),
-                                          ],
-                                        ),
-                          
-                                        child: const Row(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          children: [
-                                            SizedBox(width: 6),
-                                            SizedBox(
-                                              child: Center(
-                                                child: Icon(
-                                                  Icons.keyboard_arrow_down_outlined,
-                                                  size: 14,
-                                                  color: Colors.black,
-                                                ),
-                                              ),
-                                            ),
-                          
-                                            SizedBox(width: 2),
-                                            Text(
-                                                "See Tickets",
-                                                style: TextStyle(
-                                                  fontSize: 8,
-                                                  fontWeight: FontWeight.normal,
-                                                  color: Colors.black,
-                                                ),
-                                            ),
-                          
-                                          ],
-                                        ),
-                          
-                                      ),
-                          
+                    
                                     ],
                                   ),
-                          
+                    
                                 ),
-                              );
-                          }
+                    
+                              ],
+                            ),
+                    
+                          ),
                         ),
-                        
                       ],
+
                     ),
                   ),
                 ],
