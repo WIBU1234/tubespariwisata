@@ -141,22 +141,118 @@ class _AllPageState extends State<AllPage> {
                         ),
                       ),  
 
-                      Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Container(
-                          width: 340,
-                          height: 80,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(
-                              color: Colors.black.withOpacity(0.2),
-                              width: 1,
+                      Column(
+                        children: [
+                          for(int i=0; i<3; i++)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 16, right: 16, top: 6),
+                            child: Container(
+                              width: 340,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(
+                                  color: Colors.black.withOpacity(0.2),
+                                  width: 1,
+                                ),
+                              ),
+
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 10, bottom: 10, right: 5, left: 5),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "Premium High Class Quality Ticket",
+                                        style: TextStyle(
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          width: 86,
+                                          height: 34,
+                                          decoration: BoxDecoration(
+                                            borderRadius: const BorderRadius.all(Radius.circular(6)),
+                                            border: Border.all(
+                                              color: Colors.black,
+                                              width: 1,
+                                            ),
+                                          ),
+                                          child: const Center(
+                                            child: Text(
+                                              "Available",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                        const SizedBox(width: 2),
+                                        Container(
+                                          width: 90,
+                                          height: 34,
+                                          decoration: BoxDecoration(
+                                            borderRadius: const BorderRadius.all(Radius.circular(6)),
+                                            border: Border.all(
+                                              color: Colors.black,
+                                              width: 1,
+                                            ),
+                                          ),
+                                          child: const Center(
+                                            child: Text(
+                                              "Buy Ticket",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                        const SizedBox(width: 2),
+                                        Container(
+                                          width: 86,
+                                          height: 34,
+                                          decoration: BoxDecoration(
+                                            borderRadius: const BorderRadius.all(Radius.circular(6)),
+                                            border: Border.all(
+                                              color: Colors.black,
+                                              width: 1,
+                                            ),
+                                          ),
+                                          child: const Center(
+                                            child: Text(
+                                              "Rp.150.000",
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+
+
                             ),
                           ),
-                        ),
+                        ],
                       ),
-
-
                     ],
                   ),
                 ),
