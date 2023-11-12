@@ -1,15 +1,13 @@
 // IMPORT LIB FROM FLUTTER
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-// import 'package:qr_flutter/qr_flutter.dart';
 import 'package:sensors/sensors.dart';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
 import 'package:tubespariwisata/entity/destinasi.dart';
 import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
-// import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
+import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 
 class MainHome extends StatefulWidget {
   const MainHome({Key? key}) : super(key: key);
@@ -28,7 +26,6 @@ class _MainHomeState extends State<MainHome> {
   @override
   void initState() {
     fetchData();
-
 
     accelerometerEvents.listen((event) {
       if (event.x.abs() > 20 || event.y.abs() > 20 || event.z.abs() > 20) {
@@ -404,49 +401,50 @@ class _MainHomeState extends State<MainHome> {
                                 ),
                     
                                 const SizedBox(height: 8),
-                                Container(
-                                  width: 80,
-                                  height: 14,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.grey[350],
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Colors.black12,
-                                        spreadRadius: 2,
-                                        blurRadius: 14,
-                                        offset: Offset(0, 9),
-                                      ),
-                                    ],
-                                  ),
-                    
-                                  child: const Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      SizedBox(width: 6),
-                                      SizedBox(
-                                        child: Center(
-                                          child: Icon(
-                                            Icons.keyboard_arrow_down_outlined,
-                                            size: 14,
-                                            color: Colors.black,
-                                          ),
+                                GestureDetector(
+                                  onTap: (){
+                                    ticketPage(context, destinasi);
+                                  },
+                                  child: Container(
+                                    width: 80,
+                                    height: 14,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.grey[350],
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Colors.black12,
+                                          spreadRadius: 2,
+                                          blurRadius: 14,
+                                          offset: Offset(0, 9),
                                         ),
-                                      ),
-                    
-                                      SizedBox(width: 2),
-                                      Text(
-                                          "See Tickets",
-                                          style: TextStyle(
-                                            fontSize: 8,
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.black,
+                                      ],
+                                    ),         
+                                    child: const Row(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        SizedBox(width: 6),
+                                        SizedBox(
+                                          child: Center(
+                                            child: Icon(
+                                              Icons.keyboard_arrow_down_outlined,
+                                              size: 14,
+                                              color: Colors.black,
+                                            ),
                                           ),
-                                      ),
-                    
-                                    ],
+                                        ),              
+                                        SizedBox(width: 2),
+                                        Text(
+                                            "See Tickets",
+                                            style: TextStyle(
+                                              fontSize: 8,
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.black,
+                                            ),
+                                        ),
+                                      ],
+                                    ),                
                                   ),
-                    
                                 ),
                     
                               ],
