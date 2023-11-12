@@ -1,11 +1,8 @@
 // IMPORT LIB FROM FLUTTER
-// import 'dart:math';
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:qr_flutter/qr_flutter.dart';
-// import 'package:tubespariwisata/data/wisata.dart';
 import 'package:sensors/sensors.dart';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
