@@ -22,6 +22,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   String? userId;
   User? userTemp;
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -43,6 +44,7 @@ class _ProfileState extends State<Profile> {
       searchUserByShared(userID).then((value) {
         setState(() {
           userTemp = value;
+          isLoading = false;
         });
       });
     }
@@ -81,7 +83,10 @@ class _ProfileState extends State<Profile> {
           fit: BoxFit.cover,
         ),
       ),
-      child: Padding(
+
+      child: isLoading
+            ? CircularProgressIndicator() // Show loading indicator while fetching data
+            : Padding(
         padding: const EdgeInsets.only(bottom: 50), // Adjust the top value as needed
         child: Center(
           child: Container(

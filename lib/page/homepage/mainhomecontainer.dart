@@ -58,128 +58,6 @@ class _MainHomeState extends State<MainHome> {
     }
   }
 
-  void buildDestination(List<Destinasi> destinasiList) {
-  List<Widget> destinationContainers = [];
-  for (var i = 0; i < destinasiList.length; i++) {
-    Destinasi destinasi = destinasiList[i];
-
-    destinationContainers.add(
-      Padding(
-        padding: const EdgeInsets.only(left: 0, right: 0),
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-            color: Colors.white.withOpacity(1.0),
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.black12,
-                spreadRadius: 1,
-                blurRadius: 10,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[350],
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  ),
-                  image: DecorationImage(
-                    image: MemoryImage(Uint8List.fromList(base64.decode(destinasi.destinationImage.toString()))),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                width: 150,
-                height: 120,
-              ),
-              const SizedBox(height: 8),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 4.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        destinasi.destinationName.toString(),
-                        style: const TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 4.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "dasda",
-                        style: TextStyle(
-                          fontSize: 10,
-                          fontWeight: FontWeight.normal,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              Container(
-                width: 80,
-                height: 14,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.grey[350],
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.black12,
-                      spreadRadius: 2,
-                      blurRadius: 14,
-                      offset: Offset(0, 9),
-                    ),
-                  ],
-                ),
-                child: const Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(width: 6),
-                    SizedBox(
-                      child: Center(
-                        child: Icon(
-                          Icons.keyboard_arrow_down_outlined,
-                          size: 14,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                    SizedBox(width: 2),
-                    Text(
-                      "See Tickets",
-                      style: TextStyle(
-                        fontSize: 8,
-                        fontWeight: FontWeight.normal,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -443,6 +321,8 @@ class _MainHomeState extends State<MainHome> {
                     width: 280,
                     height: 300,
 
+
+
                     child: GridView.count(
                       crossAxisCount: 2,
                       childAspectRatio: 0.7,
@@ -460,7 +340,6 @@ class _MainHomeState extends State<MainHome> {
                             }
                             List<Destinasi> destinasiList = snapshot.data!;
                             
-                            for(Destinasi destinasi in destinasiList){
                               return Padding(
                                 padding: const EdgeInsets.only(left: 0, right: 0),
                                 child: Container(
@@ -581,9 +460,6 @@ class _MainHomeState extends State<MainHome> {
                           
                                 ),
                               );
-                            }
-
-                            return const Center(child: Text('No data available'));
                           }
                         ),
                         
