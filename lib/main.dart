@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 // FIRST PAGE LAUNCHER
 import 'package:tubespariwisata/page/firstLanding/loginpage.dart';
 import 'package:tubespariwisata/page/homepage/homepage.dart';
+import 'package:tubespariwisata/adminLaunch/pageAdmin/addDestination.dart';
 // FUNCTION LAUNCHER
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 
@@ -11,7 +12,7 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  runApp(MainApp());
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -32,9 +33,15 @@ class MainApp extends StatelessWidget {
           );
         } else {
           if (snapshot.hasData && snapshot.data != null && snapshot.data!.isNotEmpty) {
-            return const MaterialApp(
-              home: Homepage(),
-            );
+            if (snapshot.data!.toLowerCase().contains("admin")) {
+              return const MaterialApp(
+                home: AddMain(),
+              );
+            } else {
+              return const MaterialApp(
+                home: Homepage(),
+              );
+            }
           } else {
             return const MaterialApp(
               home: Loginpage(),

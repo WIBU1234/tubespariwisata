@@ -1,26 +1,25 @@
-// IMPORT LIB FROM FLUTTER
+// FLUTTER LIB IMPORTER
 import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
-import 'package:sensors/sensors.dart';
-// IMPORT LIB FROM FUNCTION
-import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
+// PAGE IMPORTER
 import 'package:tubespariwisata/entity/user.dart';
-import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
+// FUNCTION IMPORTER
+// import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
+// import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
+// LAUNCHER IMPORTER
 // import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
-// IMPORT FORCE PAGE
-import 'package:tubespariwisata/page/homepage/myprofilecontainer.dart';
-import 'package:tubespariwisata/page/homepage/mainhomecontainer.dart';
-import 'package:tubespariwisata/page/homepage/griditemmaincontainer.dart';
+// LAUNCHER FORCE PAGE
+import 'package:tubespariwisata/adminLaunch/container/attractions.dart';
 import 'package:tubespariwisata/page/homepage/settingscontainer.dart';
 
-class Homepage extends StatefulWidget {
-  const Homepage({Key? key}) : super(key: key);
+class AddMain extends StatefulWidget {
+  const AddMain({Key? superKey}): super(key: superKey);
 
   @override
-  State<Homepage> createState() => _HomePageState();
+  State<AddMain> createState() => _AddMainState();
 }
 
-class _HomePageState extends State<Homepage> {
+class _AddMainState extends State<AddMain> {
   var _selectedTab = _SelectedTab.home;
   bool isPasswordVisible = true;
   String? userId;
@@ -29,37 +28,13 @@ class _HomePageState extends State<Homepage> {
 
   @override
   void initState() {
-    fetchData();
     super.initState();
-
-    accelerometerEvents.listen((event) {
-      if (event.x.abs() > 20 || event.y.abs() > 20 || event.z.abs() > 20) {
-        setState(() {
-          isMenuVisible = !isMenuVisible;
-        });
-      }
-    });
-  }
-
-  void fetchData() async {
-    String? userID = await getUserID();
-    if (userID != null) {
-      setState(() {
-        userId = userID;
-      });
-
-      searchUserByShared(userID).then((value) {
-        setState(() {
-          userTemp = value;
-        });
-      });
-    }
   }
 
   Widget _getSelectedScreen() {
     switch (_selectedTab) {
       case _SelectedTab.home:
-        return _buildHomeContainer();
+        return _buildAttractionsContainer();
       case _SelectedTab.person:
         return _buildPersonContainer();
       case _SelectedTab.search:
@@ -70,19 +45,18 @@ class _HomePageState extends State<Homepage> {
   }
 
   // HOME CONTAINER
-  Widget _buildHomeContainer() {
-    return const MainHome();
+  Widget _buildAttractionsContainer() {
+    return const AttractionContainer();
   }
 
   // PROFILE CONTAINER
   Widget _buildPersonContainer() {
-    return const Profile();
+    return const AttractionContainer();
   }
 
   // GRID ITEM CONTAINER
   Widget _buildSearchContainer() {
-    return const MainGrid();
-    // return MyHomePage();
+    return const AttractionContainer();
   }
 
   // SETTINGS CONTAINER
@@ -113,15 +87,15 @@ class _HomePageState extends State<Homepage> {
           onTap: _handleIndexChanged,
           items: [
             DotNavigationBarItem(
-              icon: const Icon(Icons.home),
+              icon: const Icon(Icons.add),
               selectedColor: const Color(0xff73544C),
             ),
             DotNavigationBarItem(
-              icon: const Icon(Icons.person),
+              icon: const Icon(Icons.list),
               selectedColor: const Color(0xff73544C),
             ),
             DotNavigationBarItem(
-              icon: const Icon(Icons.menu),
+              icon: const Icon(Icons.search),
               selectedColor: const Color(0xff73544C),
             ),
             DotNavigationBarItem(

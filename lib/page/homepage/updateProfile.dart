@@ -32,7 +32,7 @@ class _UpdatePageState extends State<UpdatePage> {
   @override
   void initState() {
     super.initState();
-    fetchData();
+    fetchDataWithDelay();
 
     getUser().listen((users) {
       setState(() {
@@ -41,7 +41,8 @@ class _UpdatePageState extends State<UpdatePage> {
     });
   }
 
-  void fetchData() async {
+  void fetchDataWithDelay() async {
+    await Future.delayed(Duration(seconds: 5));
     String? userID = await getUserID();
     if (userID != null) {
       setState(() {

@@ -60,7 +60,7 @@ class _LoginPageState extends State<Loginpage> {
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.4),
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                     blurRadius: 6,
                   ),
                 ],
@@ -141,17 +141,19 @@ class _LoginPageState extends State<Loginpage> {
                         elevation: 6,
                       ),
                       onPressed: () {
-                        userTemp = searchUserByLogin(userList,
-                            usernameController.text, passwordController.text);
-
+                        userTemp = searchUserByLogin(userList, usernameController.text, passwordController.text);
                         if (userTemp.id.isNotEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text('Welcome, ${userTemp.id}!'),
+                              content: Text('Welcome, ${userTemp.id} !'),
                             ),
                           );
                           saveUserID(userTemp.id);
-                        pushHomePage(context);
+                          if (userTemp.username.toLowerCase().contains("admin")) {
+                            pushAdminHomePage(context);
+                          } else {
+                            pushHomePage(context);
+                          }
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
