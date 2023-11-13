@@ -10,7 +10,7 @@ import 'package:tubespariwisata/page/homepage/homepage.dart';
 import 'package:tubespariwisata/page/homepage/updateProfile.dart';
 
 import 'package:tubespariwisata/adminLaunch/pageAdmin/addDestination.dart';
-import 'package:tubespariwisata/adminLaunch/container/addDestionation/createDestination.dart';
+import 'package:tubespariwisata/adminLaunch/container/addDestination/createDestination.dart';
 
 // LAUNCHER PAGE TO PAY
 import 'package:tubespariwisata/page/homepage/detailPageElement/ticketProcessPage.dart';

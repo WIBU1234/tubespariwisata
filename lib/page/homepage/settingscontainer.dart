@@ -5,6 +5,7 @@ import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
 import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
+import 'package:tubespariwisata/page/homepage/purchasehistory.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -23,7 +24,6 @@ class _SettingPageState extends State<SettingPage> {
   void initState() {
     fetchData();
     super.initState();
-
   }
 
   void fetchData() async {
@@ -60,7 +60,6 @@ class _SettingPageState extends State<SettingPage> {
               borderRadius: BorderRadius.circular(20),
               color: Colors.white.withOpacity(0.8),
             ),
-
             child: Column(
               children: [
                 const SizedBox(height: 20),
@@ -102,7 +101,8 @@ class _SettingPageState extends State<SettingPage> {
                               child: Center(
                                 child: CircleAvatar(
                                   radius: 30,
-                                  backgroundImage: AssetImage("resources/images/bali.jpg"),
+                                  backgroundImage:
+                                      AssetImage("resources/images/bali.jpg"),
                                 ),
                               ),
                             ),
@@ -110,6 +110,19 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                       ),
                     )),
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => PurchaseHistoryPage()),
+                    );
+                  },
+                  child: const Padding(
+                    padding: EdgeInsets.only(left: 90.0),
+                    child: Icon(Icons.arrow_forward_ios_sharp),
+                  ),
+                ),
                 const SizedBox(height: 25),
                 const Padding(
                   padding: EdgeInsets.only(left: 30.0),

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
+import 'package:barcode_widget/barcode_widget.dart';
 
 class CardDetailPage extends StatelessWidget {
   final String imagePath;
   final String cardText;
+  final String uuid = Uuid().v4();
+  final String mapsLink = "https://maps.app.goo.gl/BRdnvTywiiLnbpEAA";
 
   CardDetailPage({required this.imagePath, required this.cardText});
 
@@ -12,7 +16,8 @@ class CardDetailPage extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("resources/images/bali.jpg"), // Set your background image here
+            image: AssetImage(
+                "resources/images/bali.jpg"), // Set your background image here
             fit: BoxFit.cover,
           ),
         ),
@@ -46,23 +51,42 @@ class CardDetailPage extends StatelessWidget {
                   ),
                   SizedBox(height: 20),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16), 
+                    margin: EdgeInsets.symmetric(horizontal: 16),
                     child: Text(
                       'Candi borobudur merupakan candi yang terletak di Magelang. Candi ini didirikan pada tahun 800M pada dinasti Syailendra',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
                       ),
-                      textAlign: TextAlign.justify, 
+                      textAlign: TextAlign.justify,
                     ),
                   ),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 16),
+                    child: Column(
+                      children: [
+                        Text('ID: $uuid'),
+                        SizedBox(height: 20),
+                        BarcodeWidget(
+                          barcode: Barcode.qrCode(),
+                          data: mapsLink,
+                          width: 200,
+                          height: 100,
+                          style: TextStyle(
+                            fontWeight: FontWeight.normal,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
 
-                  SizedBox(height: 20),
-                  Image.asset(
-                    'resources/images/qrcode.png', // Replace with the barcode image path
-                    width: 150,
-                    height: 150, // Adjust the barcode image height as needed
-                  ),
+                  // SizedBox(height: 20),
+                  // Image.asset(
+                  //   'resources/images/qrcode.png', // Replace with the barcode image path
+                  //   width: 150,
+                  //   height: 150, // Adjust the barcode image height as needed
+                  // ),
                 ],
               ),
             ),
