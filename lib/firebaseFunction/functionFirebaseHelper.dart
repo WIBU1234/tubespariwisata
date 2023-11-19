@@ -132,6 +132,36 @@ Future createDestination({
   }
 }
 
-Stream<List<Destinasi>> getDestinasiAll() =>
-    FirebaseFirestore.instance.collection('destinasi').snapshots().map((snapshots) =>
+Stream<List<Destinasi>> getDestinasiAll() => FirebaseFirestore.instance
+    .collection('destinasi')
+    .snapshots()
+    .map((snapshots) =>
         snapshots.docs.map((doc) => Destinasi.fromJson(doc.data())).toList());
+
+
+
+// Future createPurchase({
+//   required String orderId,
+//   required String productName,
+//   required double price,
+//   required DateTime purchaseDate,
+// }) async {
+//   try {
+//     final docUser = FirebaseFirestore.instance.collection('purchase').doc();
+
+//     final user = User(
+//         id: docUser.id,
+//         username: username,
+//         email: email,
+//         password: password,
+//         nomorTelepon: nomorTelepon,
+//         tanggalLahir: tanggalLahir,
+//         imageFoto: "NOTHAVE",
+//         token: '0');
+//     final json = user.toJson();
+
+//     await docUser.set(json);
+//   } catch (e) {
+//     // print('Error creating user: $e');
+//   }
+// }

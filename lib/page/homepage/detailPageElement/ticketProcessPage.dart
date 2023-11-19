@@ -232,7 +232,7 @@ class _AllPageState extends State<AllPage> {
                                           ),
                                           child: const Center(
                                             child: Text(
-                                              "Rp.150.000",
+                                              "Rp150.000",
                                               style: TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 16,

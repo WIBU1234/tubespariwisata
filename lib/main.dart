@@ -13,30 +13,41 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
   runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
-@override
+  @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(
       builder: (context, orientation, deviceType) {
         Device.orientation == Orientation.portrait
             ? Container(
                 width: 100.w,
+
+                height: 20.h,
+              )
+            : Container(
+                width: 100.w,
+                height: 12.h,
+
                 height: 20.5.h,
               )
             : Container(
                 width: 100.w,
                 height: 12.5.h,
+
               );
         Device.screenType == ScreenType.tablet
             ? Container(
                 width: 100.w,
+
+                height: 20.h,
+
                 height: 20.5.h,
+
               )
             : Container(
                 width: 100.w,
@@ -54,7 +65,13 @@ class MainApp extends StatelessWidget {
                 ),
               );
             } else {
+
+              if (snapshot.hasData &&
+                  snapshot.data != null &&
+                  snapshot.data!.isNotEmpty) {
+
               if (snapshot.hasData && snapshot.data != null && snapshot.data!.isNotEmpty) {
+
                 if (snapshot.data!.toLowerCase().contains("admin")) {
                   return const MaterialApp(
                     home: AddMain(),
