@@ -1,0 +1,46 @@
+name: tubespariwisata
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.1.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  cloud_firestore: ^4.4.5
+  intl: ^0.17.0
+  camera: ^0.10.5+2
+  dot_navigation_bar: ^1.0.2
+  shared_preferences: ^2.1.0
+  sensors: ^2.0.3
+  mobile_scanner: ^3.2.0
+  qr_flutter: ^4.1.0
+  flutter_map: ^6.0.1
+  latlong2: ^0.9.0
+  image_picker: ^1.0.4
+
+  pdf: ^3.6.4
+  printing: ^5.9.0
+  barcode_widget: ^2.0.4
+  uuid: ^3.0.6
+  responsive_sizer: ^3.2.0
+  firebase_core: ^2.22.0
+
+<<<<<<< HEAD
+=======
+  responsive_sizer: ^3.2.0
+
+
+>>>>>>> 801248c7493c73044469c5bdbc132a5ff1635360
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+  - resources/images/
