@@ -67,7 +67,7 @@ class _SettingPageState extends State<SettingPage> {
                     child: Center(
                       child: Container(
                         width: 300,
-                        height: 120,
+                        height: 140,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(
@@ -75,36 +75,91 @@ class _SettingPageState extends State<SettingPage> {
                             width: 1,
                           ),
                         ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        child: Column(
                           children: [
-                            SizedBox(
-                              width: 160.0,
-                              height: 100.0,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  SizedBox(height: 14.0),
-                                  Text(
-                                    "Username",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
+                            
+                            const Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                SizedBox(
+                                  width: 160.0,
+                                  height: 100.0,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      SizedBox(height: 14.0),
+                                      Text(
+                                        "Username",
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+
+                                      Row(
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.all(0),
+                                            child: Icon(Icons.location_on_sharp),
+                                          ),
+
+                                          Text(
+                                            "Yogyakarta, Indonesia",
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 0.0),
+                                  child: Center(
+                                    child: CircleAvatar(
+                                      radius: 30,
+                                      backgroundImage:
+                                          AssetImage("resources/images/bali.jpg"),
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 20.0),
-                              child: Center(
-                                child: CircleAvatar(
-                                  radius: 30,
-                                  backgroundImage:
-                                      AssetImage("resources/images/bali.jpg"),
+
+                            Center(
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 0.0),
+                                child: Container(
+                                  width: 120,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(60.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.5),
+                                        spreadRadius: 0,
+                                        blurRadius: 10,
+                                        offset: const Offset(0, 4),
+                                      ),
+                                    ],
+                                  ),
+                                  child: const Center(
+                                    child: Text(
+                                      "View My Profile",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w300,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
+
                           ],
                         ),
                       ),
