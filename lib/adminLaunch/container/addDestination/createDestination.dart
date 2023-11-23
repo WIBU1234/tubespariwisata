@@ -5,7 +5,7 @@ import 'dart:ui';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+// import 'package:responsive_sizer/responsive_sizer.dart';
 import 'dart:convert';
 // FLUTTER PAGE LAUNCHER
 // import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';

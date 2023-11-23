@@ -5,7 +5,7 @@ import 'package:tubespariwisata/entity/destinasi.dart';
 // USER DATA MANAGEMENT OR MANIPULATION
 User createEmptyUser() {
   return User(
-      id: "",
+      id: 0,
       username: "",
       email: "",
       password: "",
@@ -27,7 +27,7 @@ Future createUser({
     final docUser = FirebaseFirestore.instance.collection('user').doc();
 
     final user = User(
-        id: docUser.id,
+        id: int.parse(docUser.id),
         username: username,
         email: email,
         password: password,
@@ -137,8 +137,6 @@ Stream<List<Destinasi>> getDestinasiAll() => FirebaseFirestore.instance
     .snapshots()
     .map((snapshots) =>
         snapshots.docs.map((doc) => Destinasi.fromJson(doc.data())).toList());
-
-
 
 // Future createPurchase({
 //   required String orderId,

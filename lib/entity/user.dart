@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 class User {
-  final String? id;
+  final int? id;
   final String username;
   final String email;
   final String password;
@@ -16,27 +18,53 @@ class User {
       required this.nomorTelepon,
       required this.tanggalLahir,
       required this.imageFoto,
-      required this.token});
+      required this.token
+      });
 
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'username': username,
-        'email': email,
-        'password': password,
-        'nomorTelepon': nomorTelepon,
-        'tanggalLahir': tanggalLahir,
-        'token': token,
-        'imageFoto': imageFoto,
-      };
-
-  static User fromJson(Map<String, dynamic> json) => User(
-        id: json['id'],
-        username: json['username'],
-        email: json['email'],
-        password: json['password'],
-        nomorTelepon: json['nomorTelepon'],
-        tanggalLahir: json['tanggalLahir'],
-        token: json['token'],
-        imageFoto: json['imageFoto'],
+  // UPDATE PLACEMENT
+  factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
+  factory User.fromJson(Map<String, dynamic> json) => User(
+        id: json["id"] ?? 0,
+        username: json["username"],
+        email: json["email"],
+        password: json["password"],
+        nomorTelepon: json["nomorTelepon"],
+        tanggalLahir: json["tanggalLahir"],
+        token: json["token"],
+        imageFoto: json["imageFoto"],
       );
+
+  String toRawJson() => json.encode(toJson());
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "username": username,
+    "email": email,
+    "password": password,
+    "nomorTelepon": nomorTelepon,
+    "tanggalLahir": tanggalLahir,
+    "token": token,
+    "imageFoto": imageFoto,
+  };
+
+  // Map<String, dynamic> toJson() => {
+  //       'id': id,
+  //       'username': username,
+  //       'email': email,
+  //       'password': password,
+  //       'nomorTelepon': nomorTelepon,
+  //       'tanggalLahir': tanggalLahir,
+  //       'token': token,
+  //       'imageFoto': imageFoto,
+  //     };
+
+  // static User fromJson(Map<String, dynamic> json) => User(
+  //       id: json['id'],
+  //       username: json['username'],
+  //       email: json['email'],
+  //       password: json['password'],
+  //       nomorTelepon: json['nomorTelepon'],
+  //       tanggalLahir: json['tanggalLahir'],
+  //       token: json['token'],
+  //       imageFoto: json['imageFoto'],
+  //     );
 }

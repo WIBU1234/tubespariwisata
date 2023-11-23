@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Destinasi {
   final String? id;
   final String destinationName;
@@ -21,27 +23,54 @@ class Destinasi {
       required this.destinationRating}
   );
 
-  Map<String, dynamic> toJson() => {
-    'id': id,
-    'destinationName': destinationName,
-    'destinationAddress': destinationAddress,
-    'destinationDescription': destinationDescription,
-    'destinationLatitude': destinationLatitude,
-    'destinationLongitude': destinationLongitude,
-    'destinationImage': destinationImage,
-    'destinationCategory': destinationCategory,
-    'destinationRating': destinationRating,
-  };
+  // Map<String, dynamic> toJson() => {
+  //   'id': id,
+  //   'destinationName': destinationName,
+  //   'destinationAddress': destinationAddress,
+  //   'destinationDescription': destinationDescription,
+  //   'destinationLatitude': destinationLatitude,
+  //   'destinationLongitude': destinationLongitude,
+  //   'destinationImage': destinationImage,
+  //   'destinationCategory': destinationCategory,
+  //   'destinationRating': destinationRating,
+  // };
 
-  static Destinasi fromJson(Map<String, dynamic> json) => Destinasi(
-      id: json['id'],
-      destinationName: json['destinationName'],
-      destinationAddress: json['destinationAddress'],
-      destinationDescription: json['destinationDescription'],
-      destinationLatitude: json['destinationLatitude'],
-      destinationLongitude: json['destinationLongitude'],
-      destinationImage: json['destinationImage'],
-      destinationCategory: json['destinationCategory'],
-      destinationRating: json['destinationRating'],
+  // static Destinasi fromJson(Map<String, dynamic> json) => Destinasi(
+  //     id: json['id'],
+  //     destinationName: json['destinationName'],
+  //     destinationAddress: json['destinationAddress'],
+  //     destinationDescription: json['destinationDescription'],
+  //     destinationLatitude: json['destinationLatitude'],
+  //     destinationLongitude: json['destinationLongitude'],
+  //     destinationImage: json['destinationImage'],
+  //     destinationCategory: json['destinationCategory'],
+  //     destinationRating: json['destinationRating'],
+  // );
+
+  // UPDATE PLACEMENT
+  factory Destinasi.fromRawJson(String str) => Destinasi.fromJson(json.decode(str));
+  factory Destinasi.fromJson(Map<String, dynamic> json) => Destinasi(
+    id: json["id"],
+    destinationName: json["destinationName"],
+    destinationAddress: json["destinationAddress"],
+    destinationDescription: json["destinationDescription"],
+    destinationLatitude: json["destinationLatitude"],
+    destinationLongitude: json["destinationLongitude"],
+    destinationImage: json["destinationImage"],
+    destinationCategory: json["destinationCategory"],
+    destinationRating: json["destinationRating"],
   );
+
+  String toRawJson() => json.encode(toJson());
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "destinationName": destinationName,
+    "destinationAddress": destinationAddress,
+    "destinationDescription": destinationDescription,
+    "destinationLatitude": destinationLatitude,
+    "destinationLongitude": destinationLongitude,
+    "destinationImage": destinationImage,
+    "destinationCategory": destinationCategory,
+    "destinationRating": destinationRating,
+  };
 }

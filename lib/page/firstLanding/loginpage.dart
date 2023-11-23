@@ -5,7 +5,8 @@ import 'dart:ui';
 // PAGE IMPORTER
 import 'package:tubespariwisata/entity/user.dart';
 // FUNCTION IMPORTER
-import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
+// import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 // LAUNCHER IMPORTER
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
@@ -28,10 +29,12 @@ class _LoginPageState extends State<Loginpage> {
   void initState() {
     super.initState();
 
-    getUser().listen((users) {
+    ApiFunctionHelper.getUser().listen((users) {
       setState(() {
         userList = users;
       });
+    }, onError: (error) {
+      print("ERROR JANCUKK");      
     });
   }
 
@@ -141,7 +144,7 @@ class _LoginPageState extends State<Loginpage> {
                         elevation: 6,
                       ),
                       onPressed: () {
-                        userTemp = searchUserByLogin(userList, usernameController.text, passwordController.text);
+                        userTemp = ApiFunctionHelper.searchUserByLogin(userList, usernameController.text, passwordController.text);
                         if (userTemp.id.isNotEmpty) {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
