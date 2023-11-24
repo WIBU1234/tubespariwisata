@@ -33,13 +33,11 @@ class _InputPageState extends State<RegisterPage> {
   void initState() {
     super.initState();
 
-    ApiFunctionHelper.getUser().listen((users) {
-      setState(() {
-        userList = users;
-      });
-    }, onError: (error) {
-      print("ERROR JANCUKK");      
-    });
+    setForce();
+  }
+
+  void setForce() async {
+    userList = await ApiFunctionHelper.getUser();
   }
 
   Future<void> _selectDate() async {
@@ -252,10 +250,11 @@ class _InputPageState extends State<RegisterPage> {
                           ),
                           elevation: 6,
                         ),
-                        onPressed: () async {
+                        onPressed: () {
                           if (!_formKey.currentState!.validate()) {
                             // Handle validation errors
                           } else {
+                            setForce();
                             if (ApiFunctionHelper.isUserInList(userList, controllerEmail.text)) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(

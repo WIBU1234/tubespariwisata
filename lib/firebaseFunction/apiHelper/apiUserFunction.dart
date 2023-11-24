@@ -42,7 +42,7 @@ class ApiFunctionHelper {
     }
   }
 
-  static Stream<List<User>> getUser() async* {
+  static Future<List<User>> getUser() async {
     try {
       var response = await get(Uri.http(url, endpoint));
 
@@ -50,7 +50,7 @@ class ApiFunctionHelper {
 
       Iterable list = json.decode(response.body)['data'];
 
-      yield list.map((user) => User.fromJson(user)).toList();
+      return list.map((user) => User.fromJson(user)).toList();
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -87,7 +87,6 @@ class ApiFunctionHelper {
 
   static User searchUserByLogin(List<User> user, String username, String password) {
   for (var user in user) {
-    print(user);
     if (user.email == username && user.password == password) {
       return user;
     }

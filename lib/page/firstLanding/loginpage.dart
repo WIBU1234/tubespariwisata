@@ -39,14 +39,8 @@ class _LoginPageState extends State<Loginpage> {
     super.initState();
   }
 
-  void setForce(){
-    ApiFunctionHelper.getUser().listen((users) {
-      setState(() {
-        userList = users;
-      });
-    }, onError: (error) {
-      print("ERROR JANCUKK");      
-    });
+  void setForce() async {
+    userList = await ApiFunctionHelper.getUser();
   }
 
   @override

@@ -5,15 +5,12 @@ import 'dart:ui';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
-// import 'package:responsive_sizer/responsive_sizer.dart';
 import 'dart:convert';
 // FLUTTER PAGE LAUNCHER
-// import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 // FIREBASE FUNCTION
 import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 import 'package:tubespariwisata/invoice/model/product.dart';
 import 'package:tubespariwisata/pdf/pdf_view.dart';
-
 import 'package:uuid/uuid.dart';
 // MODEL IMPORTER
 // import 'package:tubespariwisata/entity/destinasi.dart';
@@ -48,7 +45,7 @@ class _CreatePageState extends State<CreatePage> {
     if (image != null) {
       converting(image!);
     } else {
-      print('Error: Image is null');
+      // print('Error: Image is null');
     }
 
     super.initState();
@@ -406,7 +403,7 @@ class _CreatePageState extends State<CreatePage> {
         },
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.amber,
-          textStyle: TextStyle(
+          textStyle: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 15,
           ),

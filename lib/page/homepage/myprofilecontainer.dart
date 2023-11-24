@@ -5,11 +5,9 @@ import 'package:intl/intl.dart';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
-import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 import 'package:camera/camera.dart';
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
 // FORCE LAUNCH
 import 'package:tubespariwisata/hardware/camera.dart';
@@ -86,10 +84,10 @@ class _ProfileState extends State<Profile> {
         ),
       ),
       child: isLoading
-          ? CircularProgressIndicator() // Show loading indicator while fetching data
+          ? const CircularProgressIndicator()
           : Padding(
               padding: const EdgeInsets.only(
-                  bottom: 50), // Adjust the top value as needed
+                  bottom: 50),
               child: Center(
                 child: Container(
                   width: 330,

@@ -6,7 +6,6 @@ import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 // OTHER
 import 'dart:convert';
 import 'dart:typed_data';
@@ -61,8 +60,9 @@ class _CameraPageState extends State<CameraPage> {
       };
 
       // editUserData(widget.user.id!, newData);
-      pushHomePage(context);
       
+      popper(context);
+
     } on CameraException catch (e) {
       debugPrint('Error occured while taking picture: $e');
       return null;
