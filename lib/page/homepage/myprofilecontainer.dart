@@ -10,6 +10,7 @@ import 'package:camera/camera.dart';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
 // FORCE LAUNCH
 import 'package:tubespariwisata/hardware/camera.dart';
 
@@ -42,7 +43,7 @@ class _ProfileState extends State<Profile> {
         userId = userID;
       });
 
-      searchUserByShared(userID).then((value) {
+      ApiFunctionHelper.searchUserByShared(int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
           isLoading = false;

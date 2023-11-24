@@ -6,6 +6,8 @@ import 'package:tubespariwisata/entity/destinasi.dart';
 // LAUNCHER VIEW
 import 'package:tubespariwisata/page/firstLanding/registerpage.dart';
 import 'package:tubespariwisata/page/firstLanding/loginpage.dart';
+import 'package:tubespariwisata/page/firstLanding/password/forgotPassword.dart';
+import 'package:tubespariwisata/page/firstLanding/password/newPassword.dart';
 import 'package:tubespariwisata/page/homepage/homepage.dart';
 import 'package:tubespariwisata/page/homepage/updateProfile.dart';
 
@@ -30,6 +32,14 @@ void pushLogin(BuildContext context) {
 
 void pushHomePage(BuildContext context) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => const Homepage()));
+}
+
+void pushForgotPassword(BuildContext context) {
+  Navigator.push(context, MaterialPageRoute(builder: (_) => const Forgotpage()));
+}
+
+void pushForgotPasswordNew(BuildContext context, User user) {
+  Navigator.push(context, MaterialPageRoute(builder: (_) => NewPasswordPage(user: user)));
 }
 
 void pushUpdateProfile(BuildContext context, User user) {
@@ -62,4 +72,9 @@ class LabelTextConstant{
   static const String homePageAppBarTitle = "Modul QR, Camera, Scanner";
   static const String scanQrPlaceHolderLabel = "Scanf something & click to copy to clipboard";
   static const String txtonCopyingClipBoard = "QR code disaling ke clipboard";
+}
+
+// POPPER
+void popper(BuildContext context) {
+  Navigator.pop(context);
 }

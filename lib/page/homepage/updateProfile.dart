@@ -278,16 +278,16 @@ class _UpdatePageState extends State<UpdatePage> {
                                 ),
                               );
                             } else {
-                            Map<String, dynamic> newData = {
-                              'username': controllerName.text,
-                              'email': controllerEmail.text,
-                              'password': controllerPassword.text,
-                              'nomorTelepon': controllerNomorTelepon.text,
-                              'tanggalLahir': controllerTanggalLahir.text,
-                              'imageFoto' : userTemp!.imageFoto,
-                            };
-                            editUserData(userId!, newData);
-                            pushHomePage(context);
+                            // Map<String, dynamic> newData = {
+                            //   'username': controllerName.text,
+                            //   'email': controllerEmail.text,
+                            //   'password': controllerPassword.text,
+                            //   'nomorTelepon': controllerNomorTelepon.text,
+                            //   'tanggalLahir': controllerTanggalLahir.text,
+                            //   'imageFoto' : userTemp!.imageFoto,
+                            // };
+                            // editUserData(userId!, newData);
+                            popper(context);
                             }
                           }
                         },

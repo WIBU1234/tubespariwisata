@@ -8,6 +8,7 @@ import 'package:tubespariwisata/entity/user.dart';
 import 'package:tubespariwisata/entity/destinasi.dart';
 import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
 
 class MainHome extends StatefulWidget {
   const MainHome({Key? key}) : super(key: key);
@@ -46,12 +47,13 @@ class _MainHomeState extends State<MainHome> {
 
   void fetchData() async {
     String? userID = await getUserID();
+  
     if (userID != null) {
       setState(() {
         userId = userID;
       });
 
-      searchUserByShared(userID).then((value) {
+      ApiFunctionHelper.searchUserByShared(int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
         });

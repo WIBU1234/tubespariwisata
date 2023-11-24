@@ -60,7 +60,7 @@ class _CameraPageState extends State<CameraPage> {
         'imageFoto': base64string,
       };
 
-      editUserData(widget.user.id!, newData);
+      // editUserData(widget.user.id!, newData);
       pushHomePage(context);
       
     } on CameraException catch (e) {

@@ -4,22 +4,24 @@ class User {
   final int? id;
   final String username;
   final String email;
-  final String password;
+  String password;
   final String nomorTelepon;
   final String tanggalLahir;
   final String imageFoto;
   final String token;
 
-  User(
-      {this.id,
-      required this.username,
-      required this.email,
-      required this.password,
-      required this.nomorTelepon,
-      required this.tanggalLahir,
-      required this.imageFoto,
-      required this.token
-      });
+  User({
+    this.id,
+    required this.username,
+    required this.email,
+    required this.password,
+    required this.nomorTelepon,
+    required this.tanggalLahir,
+    required this.imageFoto,
+    required this.token,
+  });
+
+  int? get getId => id;
 
   // UPDATE PLACEMENT
   factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
@@ -36,15 +38,15 @@ class User {
 
   String toRawJson() => json.encode(toJson());
   Map<String, dynamic> toJson() => {
-    "id": id,
-    "username": username,
-    "email": email,
-    "password": password,
-    "nomorTelepon": nomorTelepon,
-    "tanggalLahir": tanggalLahir,
-    "token": token,
-    "imageFoto": imageFoto,
-  };
+        "id": id,
+        "username": username,
+        "email": email,
+        "password": password,
+        "nomorTelepon": nomorTelepon,
+        "tanggalLahir": tanggalLahir,
+        "token": token,
+        "imageFoto": imageFoto,
+      };
 
   // Map<String, dynamic> toJson() => {
   //       'id': id,

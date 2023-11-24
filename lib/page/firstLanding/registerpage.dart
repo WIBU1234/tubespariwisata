@@ -279,7 +279,7 @@ class _InputPageState extends State<RegisterPage> {
                                 tanggalLahir: controllerTanggalLahir.text,
                                 token: '0',
                               );
-                              pushLogin(context);
+                              popper(context);
                             }
                           }
                         },

@@ -2,6 +2,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:intl/intl.dart';
 // PAGE IMPORTER
 import 'package:tubespariwisata/entity/user.dart';
 // FUNCTION IMPORTER
@@ -11,16 +12,17 @@ import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 // LAUNCHER IMPORTER
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 
-class Loginpage extends StatefulWidget {
-  const Loginpage({Key? superKey}): super(key: superKey);
+class Forgotpage extends StatefulWidget {
+  const Forgotpage({Key? superKey}): super(key: superKey);
 
   @override
-  State<Loginpage> createState() => _LoginPageState();
+  State<Forgotpage> createState() => _ForgotPageState();
 }
 
-class _LoginPageState extends State<Loginpage> {
+class _ForgotPageState extends State<Forgotpage> {
   TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController controllerTanggalLahir = TextEditingController();
   bool isPasswordVisible = true;
   List<User> userList = [];
   User userTemp = User(
@@ -35,11 +37,8 @@ class _LoginPageState extends State<Loginpage> {
 
   @override
   void initState() {
-    setForce();
     super.initState();
-  }
 
-  void setForce(){
     ApiFunctionHelper.getUser().listen((users) {
       setState(() {
         userList = users;
@@ -47,6 +46,22 @@ class _LoginPageState extends State<Loginpage> {
     }, onError: (error) {
       print("ERROR JANCUKK");      
     });
+  }
+
+  Future<void> selectDate() async {
+    DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(3000),
+    );
+
+    if (picked != null) {
+      setState(() {
+        controllerTanggalLahir.text =
+            DateFormat('yyyy-MM-dd').format(picked).toString().split(" ")[0];
+      });
+    }
   }
 
   @override
@@ -86,11 +101,6 @@ class _LoginPageState extends State<Loginpage> {
                   children: [
                     Image.asset('resources/images/logo.png',
                         width: 150, height: 150),
-                    const Text(
-                      'Welcome!',
-                      style:
-                          TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                    ),
 
                     const SizedBox(height: 10),
                     const Text(
@@ -114,33 +124,22 @@ class _LoginPageState extends State<Loginpage> {
 
                     const SizedBox(height: 24),
                     TextFormField(
-                      controller: passwordController,
+                      controller: controllerTanggalLahir,
+                      onTap: selectDate,
                       decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.lock),
-                        labelText: 'Password',
+                        prefixIcon: const Icon(Icons.date_range),
+                        labelText: 'Date of Birth',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(50),
                         ),
-                        contentPadding:
-                            const EdgeInsets.symmetric(vertical: 17),
-                        suffixIcon: IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isPasswordVisible = !isPasswordVisible;
-                            });
-                          },
-                          icon: Icon(
-                            isPasswordVisible
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                            color:
-                                isPasswordVisible ? Colors.grey : Colors.blue,
-                          ),
-                        ),
+                        contentPadding: const EdgeInsets.symmetric(vertical: 17),
                       ),
-                      obscureText: isPasswordVisible,
-                      validator: (value) =>
-                          value == '' ? 'Please enter your username' : null,
+                      validator: (value) {
+                        if(value == ''){
+                          return 'Please enter your date of birth';
+                        }
+                        return null;
+                      }
                     ),
 
                     const SizedBox(height: 30),
@@ -155,43 +154,40 @@ class _LoginPageState extends State<Loginpage> {
                         elevation: 6,
                       ),
                       onPressed: () {
-                        setForce();
-                        userTemp = ApiFunctionHelper.searchUserByLogin(userList, usernameController.text, passwordController.text);
+                        userTemp = ApiFunctionHelper.searchUserForForgot(userList, usernameController.text, controllerTanggalLahir.text);
                         if (userTemp.id != -240) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Welcome, ${userTemp.id} !'),
+                            const SnackBar(
+                              content: Text('Berhasil masuk ke halaman recovery'),
                             ),
                           );
                           saveUserID(userTemp.id.toString());
-                          if (userTemp.username.toLowerCase().contains("admin")) {
-                            pushAdminHomePage(context);
-                          } else {
-                            pushHomePage(context);
-                          }
+                          pushForgotPasswordNew(context, userTemp);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text(
-                                  'Login failed. Please check your credentials.'),
+                                  'Username atau Tanggal Lahir salah !'),
                             ),
                           );
                         }
                       },
                       child: const Text(
-                        'Login',
+                        'Verify',
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
-                    const SizedBox(height: 20),
+
+                    const SizedBox(height: 22),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        const SizedBox(width: 8),
                         Text.rich(
                           TextSpan(
                             children: [
                               TextSpan(
-                                text: 'Sign Up',
+                                text: 'Back To Login',
                                 style: const TextStyle(
                                   color: Colors.blue,
                                   decoration: TextDecoration.underline,
@@ -205,24 +201,24 @@ class _LoginPageState extends State<Loginpage> {
                           ),
                         ),
 
-                        const SizedBox(width: 8),
-                        Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Forgot Password?',
-                                style: const TextStyle(
-                                  color: Colors.blue,
-                                  decoration: TextDecoration.underline,
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    pushForgotPassword(context);
-                                  },
-                              ),
-                            ],
-                          ),
-                        ),
+                        // const SizedBox(width: 8),
+                        // Text.rich(
+                        //   TextSpan(
+                        //     children: [
+                        //       TextSpan(
+                        //         text: 'Forgot Password?',
+                        //         style: const TextStyle(
+                        //           color: Colors.blue,
+                        //           decoration: TextDecoration.underline,
+                        //         ),
+                        //         recognizer: TapGestureRecognizer()
+                        //           ..onTap = () {
+                        //             // pushForgotPassword(context);
+                        //           },
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
                       ],
                     ),
                   ],

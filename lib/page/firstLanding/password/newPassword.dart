@@ -7,22 +7,23 @@ import 'package:tubespariwisata/entity/user.dart';
 // FUNCTION IMPORTER
 // import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
-import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 // LAUNCHER IMPORTER
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 
-class Loginpage extends StatefulWidget {
-  const Loginpage({Key? superKey}): super(key: superKey);
+class NewPasswordPage extends StatefulWidget {
+  const NewPasswordPage({Key? superKey, required this.user}): super(key: superKey);
+
+  final User user;
 
   @override
-  State<Loginpage> createState() => _LoginPageState();
+  State<NewPasswordPage> createState() => _NewPasswordPageState();
 }
 
-class _LoginPageState extends State<Loginpage> {
-  TextEditingController usernameController = TextEditingController();
+class _NewPasswordPageState extends State<NewPasswordPage> {
   TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordNewController = TextEditingController();
   bool isPasswordVisible = true;
-  List<User> userList = [];
+  bool isPasswordNewVisible = true;
   User userTemp = User(
     id: 0,
     username: "",
@@ -35,17 +36,13 @@ class _LoginPageState extends State<Loginpage> {
 
   @override
   void initState() {
-    setForce();
+    setTheVariable();
     super.initState();
   }
 
-  void setForce(){
-    ApiFunctionHelper.getUser().listen((users) {
-      setState(() {
-        userList = users;
-      });
-    }, onError: (error) {
-      print("ERROR JANCUKK");      
+  void setTheVariable(){
+    setState(() {
+      userTemp = widget.user;
     });
   }
 
@@ -86,33 +83,16 @@ class _LoginPageState extends State<Loginpage> {
                   children: [
                     Image.asset('resources/images/logo.png',
                         width: 150, height: 150),
-                    const Text(
-                      'Welcome!',
-                      style:
-                          TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                    ),
 
                     const SizedBox(height: 10),
-                    const Text(
-                      'Please enter your credentials to log in',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                    const Center(
+                      child: Text(
+                        'Please enter correct username and date of birth to reset your password',
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
                     ),
 
                     const SizedBox(height: 20),
-                    TextFormField(
-                      controller: usernameController,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.person),
-                        labelText: 'Username',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                      ),
-                      validator: (value) =>
-                          value == '' ? 'Please enter your username' : null,
-                    ),
-
-                    const SizedBox(height: 24),
                     TextFormField(
                       controller: passwordController,
                       decoration: InputDecoration(
@@ -140,7 +120,38 @@ class _LoginPageState extends State<Loginpage> {
                       ),
                       obscureText: isPasswordVisible,
                       validator: (value) =>
-                          value == '' ? 'Please enter your username' : null,
+                          value == '' ? 'Please enter your new password' : null,
+                    ),
+
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      controller: passwordNewController,
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.lock),
+                        labelText: 'Confirm Password',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(50),
+                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 17),
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isPasswordNewVisible = !isPasswordNewVisible;
+                            });
+                          },
+                          icon: Icon(
+                            isPasswordNewVisible
+                                ? Icons.visibility_off
+                                : Icons.visibility,
+                            color:
+                                isPasswordNewVisible ? Colors.grey : Colors.blue,
+                          ),
+                        ),
+                      ),
+                      obscureText: isPasswordNewVisible,
+                      validator: (value) =>
+                          value == '' ? 'Please confirm your new password' : null,
                     ),
 
                     const SizedBox(height: 30),
@@ -155,43 +166,39 @@ class _LoginPageState extends State<Loginpage> {
                         elevation: 6,
                       ),
                       onPressed: () {
-                        setForce();
-                        userTemp = ApiFunctionHelper.searchUserByLogin(userList, usernameController.text, passwordController.text);
-                        if (userTemp.id != -240) {
+                        if(passwordController.text == passwordNewController.text) {
+                          userTemp.password = passwordController.text;
+                          ApiFunctionHelper.updatePassword(userTemp);
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Welcome, ${userTemp.id} !'),
+                            const SnackBar(
+                              content: Text('Berhasil mengubah password'),
                             ),
                           );
-                          saveUserID(userTemp.id.toString());
-                          if (userTemp.username.toLowerCase().contains("admin")) {
-                            pushAdminHomePage(context);
-                          } else {
-                            pushHomePage(context);
-                          }
+                          pushLogin(context);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
-                              content: Text(
-                                  'Login failed. Please check your credentials.'),
+                              content: Text('Password tidak sama'),
                             ),
                           );
                         }
                       },
                       child: const Text(
-                        'Login',
+                        'Verify',
                         style: TextStyle(fontSize: 18),
                       ),
                     ),
-                    const SizedBox(height: 20),
+
+                    const SizedBox(height: 22),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        const SizedBox(width: 8),
                         Text.rich(
                           TextSpan(
                             children: [
                               TextSpan(
-                                text: 'Sign Up',
+                                text: 'Back To Login',
                                 style: const TextStyle(
                                   color: Colors.blue,
                                   decoration: TextDecoration.underline,
@@ -199,25 +206,6 @@ class _LoginPageState extends State<Loginpage> {
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     pushRegister(context);
-                                  },
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        const SizedBox(width: 8),
-                        Text.rich(
-                          TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Forgot Password?',
-                                style: const TextStyle(
-                                  color: Colors.blue,
-                                  decoration: TextDecoration.underline,
-                                ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    pushForgotPassword(context);
                                   },
                               ),
                             ],
