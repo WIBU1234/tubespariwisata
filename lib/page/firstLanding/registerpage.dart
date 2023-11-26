@@ -136,9 +136,6 @@ class _InputPageState extends State<RegisterPage> {
                           if(value == ''){
                             return 'Please enter your name';
                           }
-                          if(value == 'admin') {
-                            return 'Username admin is not permitted!';
-                          }
                           return null;
                         }
                       ),
@@ -157,9 +154,6 @@ class _InputPageState extends State<RegisterPage> {
                         validator: (value) {
                           if(value == ''){
                             return 'Please enter your email';
-                          }
-                          if(value == 'admin') {
-                            return 'Email admin is not permitted!';
                           }
                           return null;
                         }

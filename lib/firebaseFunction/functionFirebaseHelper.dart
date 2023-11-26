@@ -100,37 +100,37 @@ User searchUserByLogin(List<User> user, String username, String password) {
 // }
 
 // DESTINATION DATA MANAGEMENT OR MANIPULATION
-Future createDestination({
-  required String destinationName,
-  required String destinationAddress,
-  required String destinationDescription,
-  required double destinationLatitude,
-  required double destinationLongitude,
-  required String destinationImage,
-  required String destinationCategory,
-  required int destinationRating,
-}) async {
-  try {
-    final docDestination =
-        FirebaseFirestore.instance.collection('destinasi').doc();
+// Future createDestination({
+//   required String destinationName,
+//   required String destinationAddress,
+//   required String destinationDescription,
+//   required double destinationLatitude,
+//   required double destinationLongitude,
+//   required String destinationImage,
+//   required String destinationCategory,
+//   required int destinationRating,
+// }) async {
+//   try {
+//     final docDestination =
+//         FirebaseFirestore.instance.collection('destinasi').doc();
 
-    final destination = Destinasi(
-        id: docDestination.id,
-        destinationName: destinationName,
-        destinationAddress: destinationAddress,
-        destinationDescription: destinationDescription,
-        destinationLatitude: destinationLatitude,
-        destinationLongitude: destinationLongitude,
-        destinationImage: destinationImage,
-        destinationCategory: destinationCategory,
-        destinationRating: destinationRating);
-    final json = destination.toJson();
+//     final destination = Destinasi(
+//         id: docDestination.id,
+//         destinationName: destinationName,
+//         destinationAddress: destinationAddress,
+//         destinationDescription: destinationDescription,
+//         destinationLatitude: destinationLatitude,
+//         destinationLongitude: destinationLongitude,
+//         destinationImage: destinationImage,
+//         destinationCategory: destinationCategory,
+//         destinationRating: destinationRating);
+//     final json = destination.toJson();
 
-    await docDestination.set(json);
-  } catch (e) {
-    // print('Error creating destination: $e');
-  }
-}
+//     await docDestination.set(json);
+//   } catch (e) {
+//     // print('Error creating destination: $e');
+//   }
+// }
 
 Stream<List<Destinasi>> getDestinasiAll() => FirebaseFirestore.instance
     .collection('destinasi')

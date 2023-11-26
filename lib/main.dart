@@ -68,7 +68,7 @@ class MainApp extends StatelessWidget {
                   );
                 }
               } else {
-                return MaterialApp(
+                return const MaterialApp(
                   home: Loginpage(),
                 );
               }

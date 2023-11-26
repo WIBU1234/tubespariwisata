@@ -5,6 +5,8 @@ import 'dart:ui';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
+import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
 import 'dart:convert';
 // FLUTTER PAGE LAUNCHER
 // FIREBASE FUNCTION
@@ -336,15 +338,26 @@ class _CreatePageState extends State<CreatePage> {
                           if (!_formKey.currentState!.validate()) {
                             // Handle validation errors
                           } else {
-                            createDestination(
-                                destinationName: controllerName.text,
-                                destinationAddress: controllerAddress.text,
-                                destinationDescription: controllerDescription.text,
-                                destinationLatitude: double.parse(controllerLatitude.text),
-                                destinationLongitude: double.parse(controllerLongitude.text),
-                                destinationImage: base64string!,
-                                destinationCategory: controllerCategory.text,
-                                destinationRating: int.parse(controllerRating.text));
+                            // createDestination(
+                            //     destinationName: controllerName.text,
+                            //     destinationAddress: controllerAddress.text,
+                            //     destinationDescription: controllerDescription.text,
+                            //     destinationLatitude: double.parse(controllerLatitude.text),
+                            //     destinationLongitude: double.parse(controllerLongitude.text),
+                            //     destinationImage: base64string!,
+                            //     destinationCategory: controllerCategory.text,
+                            //     destinationRating: int.parse(controllerRating.text)
+                            // );
+                            ApiDestinasiHelper.createDestinasi(
+                              destinationName: controllerName.text,
+                              alamatDestinasi: controllerAddress.text,
+                              deskripsiDestinasi: controllerDescription.text,
+                              latitude: double.parse(controllerLatitude.text),
+                              longitude: double.parse(controllerLongitude.text),
+                              imageFoto: base64string!,
+                              destinationCategory: controllerCategory.text,
+                              rating: int.parse(controllerRating.text),
+                            );
                           }
                         },
                         child: const Text(

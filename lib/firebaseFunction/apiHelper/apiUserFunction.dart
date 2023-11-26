@@ -1,6 +1,4 @@
 // ENTITY
-import 'dart:async';
-
 import 'package:tubespariwisata/entity/user.dart';
 // TOOLS
 import 'dart:convert';
@@ -52,12 +50,7 @@ class ApiFunctionHelper {
 
       Iterable list = json.decode(response.body)['data'];
 
-      var controller = StreamController<List<User>>();
-      controller.add(list.map((user) => User.fromJson(user)).toList());
-
-      controller.close();
-
-      yield* controller.stream;
+      yield list.map((user) => User.fromJson(user)).toList();
     } catch (e) {
       throw Exception(e.toString());
     }

@@ -1,15 +1,15 @@
 import 'dart:convert';
 
 class Destinasi {
-  final String? id;
-  final String destinationName;
-  final String destinationAddress;
-  final String destinationDescription;
-  final double destinationLatitude;
-  final double destinationLongitude;
-  final String destinationImage;
-  final String destinationCategory;
-  final int destinationRating;
+  int? id;
+  String destinationName;
+  String destinationAddress;
+  String destinationDescription;
+  double destinationLatitude;
+  double destinationLongitude;
+  String destinationImage;
+  String destinationCategory;
+  int destinationRating;
 
   Destinasi(
       {this.id,
@@ -50,7 +50,7 @@ class Destinasi {
   // UPDATE PLACEMENT
   factory Destinasi.fromRawJson(String str) => Destinasi.fromJson(json.decode(str));
   factory Destinasi.fromJson(Map<String, dynamic> json) => Destinasi(
-    id: json["id"],
+    id: json["id"] ?? 0,
     destinationName: json["destinationName"],
     destinationAddress: json["destinationAddress"],
     destinationDescription: json["destinationDescription"],
