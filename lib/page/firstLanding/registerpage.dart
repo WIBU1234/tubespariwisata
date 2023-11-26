@@ -36,8 +36,14 @@ class _InputPageState extends State<RegisterPage> {
     setForce();
   }
 
-  void setForce() async {
-    userList = await ApiFunctionHelper.getUser();
+  void setForce(){
+    ApiFunctionHelper.getUser().listen((users) {
+      setState(() {
+        userList = users;
+      });
+    }, onError: (error) {
+      // print("ERROR JANCUKK");      
+    });
   }
 
   Future<void> _selectDate() async {

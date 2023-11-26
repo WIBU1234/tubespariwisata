@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 class User {
-  final int? id;
-  final String username;
-  final String email;
+  int? id;
+  String username;
+  String email;
   String password;
-  final String nomorTelepon;
-  final String tanggalLahir;
-  final String imageFoto;
-  final String token;
+  String nomorTelepon;
+  String tanggalLahir;
+  String imageFoto;
+  String token;
 
   User({
     this.id,
@@ -22,6 +22,18 @@ class User {
   });
 
   int? get getId => id;
+
+  // CREATE EMPTY
+  factory User.empty() => User(
+        id: null,
+        username: "",
+        email: "",
+        password: "",
+        nomorTelepon: "",
+        tanggalLahir: "",
+        imageFoto: "",
+        token: "",
+      );
 
   // UPDATE PLACEMENT
   factory User.fromRawJson(String str) => User.fromJson(json.decode(str));

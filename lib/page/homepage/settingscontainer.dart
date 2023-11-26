@@ -391,7 +391,7 @@ class _SettingPageState extends State<SettingPage> {
                           onTap: () {
                             setState(() {
                               removeUserID();
-                              popper(context);
+                              pushLogin(context);
                             });
                           },
                           child: const Padding(

@@ -41,8 +41,14 @@ class _ForgotPageState extends State<Forgotpage> {
     super.initState();
   }
 
-  void setForce() async {
-    userList = await ApiFunctionHelper.getUser();
+  void setForce(){
+    ApiFunctionHelper.getUser().listen((users) {
+      setState(() {
+        userList = users;
+      });
+    }, onError: (error) {
+      // print("ERROR JANCUKK");      
+    });
   }
 
   Future<void> selectDate() async {

@@ -1,4 +1,6 @@
 // ENTITY
+import 'dart:async';
+
 import 'package:tubespariwisata/entity/user.dart';
 // TOOLS
 import 'dart:convert';
@@ -6,7 +8,7 @@ import 'package:http/http.dart';
 
 class ApiFunctionHelper {
   // API URL
-  static const String url = "192.168.36.1";
+  static const String url = "192.168.227.1";
   static const String endpoint = 'tubesPariwisata/public/api/user';
 
   static Future<Response> createUser({
@@ -42,7 +44,7 @@ class ApiFunctionHelper {
     }
   }
 
-  static Future<List<User>> getUser() async {
+  static Stream<List<User>> getUser() async* {
     try {
       var response = await get(Uri.http(url, endpoint));
 
@@ -50,7 +52,12 @@ class ApiFunctionHelper {
 
       Iterable list = json.decode(response.body)['data'];
 
-      return list.map((user) => User.fromJson(user)).toList();
+      var controller = StreamController<List<User>>();
+      controller.add(list.map((user) => User.fromJson(user)).toList());
+
+      controller.close();
+
+      yield* controller.stream;
     } catch (e) {
       throw Exception(e.toString());
     }
@@ -141,6 +148,20 @@ class ApiFunctionHelper {
 
   static Future<Response> updatePassword(User user) async {
     try {
+      var response = await put(Uri.http(url, '$endpoint/${user.id}'),
+          headers: {"Content-Type": "application/json"},
+          body: user.toRawJson());
+
+      if (response.statusCode != 200) throw Exception(response.reasonPhrase);
+
+      return response;
+    } catch (e) {
+      return Future.error(e.toString());
+    }
+  }
+
+  static Future<Response> insertUpdateImage(User user) async {
+    try{
       var response = await put(Uri.http(url, '$endpoint/${user.id}'),
           headers: {"Content-Type": "application/json"},
           body: user.toRawJson());

@@ -339,16 +339,12 @@ class _CreatePageState extends State<CreatePage> {
                             createDestination(
                                 destinationName: controllerName.text,
                                 destinationAddress: controllerAddress.text,
-                                destinationDescription:
-                                    controllerDescription.text,
-                                destinationLatitude:
-                                    double.parse(controllerLatitude.text),
-                                destinationLongitude:
-                                    double.parse(controllerLongitude.text),
+                                destinationDescription: controllerDescription.text,
+                                destinationLatitude: double.parse(controllerLatitude.text),
+                                destinationLongitude: double.parse(controllerLongitude.text),
                                 destinationImage: base64string!,
                                 destinationCategory: controllerCategory.text,
-                                destinationRating:
-                                    int.parse(controllerRating.text));
+                                destinationRating: int.parse(controllerRating.text));
                           }
                         },
                         child: const Text(

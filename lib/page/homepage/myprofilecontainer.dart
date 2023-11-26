@@ -141,18 +141,14 @@ class _ProfileState extends State<Profile> {
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (_) => CameraPage(
-                                                        cameras: value,
-                                                        user: userTemp!))));
+                                                    builder: (_) => CameraPage(cameras: value, user: userTemp!))));
                                       },
                                       child: Center(
                                         // child: widget.picture != null
                                         child: userTemp!.imageFoto != "NOTHAVE"
                                             ? ClipOval(
                                                 child: Image.memory(
-                                                    Uint8List.fromList(
-                                                        base64.decode(userTemp!
-                                                            .imageFoto)),
+                                                    Uint8List.fromList(base64.decode(userTemp!.imageFoto)),
                                                     fit: BoxFit.cover,
                                                     width: 100,
                                                     height: 100),

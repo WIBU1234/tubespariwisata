@@ -23,15 +23,7 @@ class _LoginPageState extends State<Loginpage> {
   TextEditingController passwordController = TextEditingController();
   bool isPasswordVisible = true;
   List<User> userList = [];
-  User userTemp = User(
-    id: 0,
-    username: "",
-    email: "",
-    password: "",
-    nomorTelepon: "",
-    tanggalLahir: "",
-    imageFoto: "",
-    token: "");
+  User userTemp = User.empty();
 
   @override
   void initState() {
@@ -40,7 +32,13 @@ class _LoginPageState extends State<Loginpage> {
   }
 
   void setForce() async {
-    userList = await ApiFunctionHelper.getUser();
+    ApiFunctionHelper.getUser().listen((users) {
+      setState(() {
+        userList = users;
+      });
+    }, onError: (error) {
+
+    });
   }
 
   @override
