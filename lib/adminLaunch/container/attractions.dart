@@ -150,47 +150,59 @@ class _AttractionContainerState extends State<AttractionContainer> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                                     children: [
-                                      Container(
-                                        width: 22,
-                                        height: 22,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: Colors.grey[350],
-                                          boxShadow: const [
-                                            BoxShadow(
-                                              color: Colors.black12,
-                                              spreadRadius: 2,
-                                              blurRadius: 14,
-                                              offset: Offset(0, 9),
-                                            ),
-                                          ],
-                                        ),
-                                        child: const Icon(
-                                          Icons.update,
-                                          size: 16,
-                                          color: Colors.black,
+                                      GestureDetector(
+                                        onTap: () async {
+                                          updateDestinasi(context, destinasi);
+                                          setForce();
+                                        },
+                                        child: Container(
+                                          width: 22,
+                                          height: 22,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                            color: Colors.grey[350],
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Colors.black12,
+                                                spreadRadius: 2,
+                                                blurRadius: 14,
+                                                offset: Offset(0, 9),
+                                              ),
+                                            ],
+                                          ),
+                                          child: const Icon(
+                                            Icons.update,
+                                            size: 16,
+                                            color: Colors.black,
+                                          ),
                                         ),
                                       ),
 
-                                      Container(
-                                        width: 22,
-                                        height: 22,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(10),
-                                          color: Colors.grey[350],
-                                          boxShadow: const [
-                                            BoxShadow(
-                                              color: Colors.black12,
-                                              spreadRadius: 2,
-                                              blurRadius: 14,
-                                              offset: Offset(0, 9),
-                                            ),
-                                          ],
-                                        ),
-                                        child: const Icon(
-                                          Icons.delete,
-                                          size: 16,
-                                          color: Colors.black,
+                                      GestureDetector(
+                                        onTap: () async {
+                                          await ApiDestinasiHelper.deleteDestinasi(destinasi.id!);
+                                          setForce();
+                                        },
+                                        child: Container(
+                                          width: 22,
+                                          height: 22,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(10),
+                                            color: Colors.grey[350],
+                                            boxShadow: const [
+                                              BoxShadow(
+                                                color: Colors.black12,
+                                                spreadRadius: 2,
+                                                blurRadius: 14,
+                                                offset: Offset(0, 9),
+                                              ),
+                                            ],
+                                          ),
+                                          child: const Icon(
+                                            Icons.delete,
+                                            size: 16,
+                                            color: Colors.black,
+                                          ),
                                         ),
                                       ),
 
@@ -243,17 +255,6 @@ class _AttractionContainerState extends State<AttractionContainer> {
                           elevation: 6,
                         ),
                         onPressed: () {
-                          print("FUCKING STUPIDD");
-                          setState(()  {
-                            ApiDestinasiHelper.getDestinasi().listen((destinasis) {
-                              setState(() {
-                                destinasiList = destinasis;
-                              });
-                            }, onError: (error) {
-
-                            });
-                          });
-
                           setForce();
                           ApiDestinasiHelper.printAll(destinasiList);
                         },

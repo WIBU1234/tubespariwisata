@@ -13,6 +13,7 @@ import 'package:tubespariwisata/page/homepage/updateProfile.dart';
 
 import 'package:tubespariwisata/adminLaunch/pageAdmin/addDestination.dart';
 import 'package:tubespariwisata/adminLaunch/container/addDestination/createDestination.dart';
+import 'package:tubespariwisata/adminLaunch/container/addDestination/updateDestination.dart';
 
 // LAUNCHER PAGE TO PAY
 import 'package:tubespariwisata/page/homepage/detailPageElement/ticketProcessPage.dart';
@@ -65,6 +66,10 @@ void pushAdminHomePage(BuildContext context) {
 
 void addDestination(BuildContext context) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => const CreatePage()));
+}
+
+void updateDestinasi(BuildContext context, Destinasi destinasi) {
+  Navigator.push(context, MaterialPageRoute(builder: (_) => UpdatePageDestination(destinasi: destinasi)));
 }
 
 // CONSTANT
