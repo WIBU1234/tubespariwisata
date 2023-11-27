@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
+import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 // import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
 import 'dart:convert';
@@ -393,6 +394,7 @@ class _CreatePageState extends State<CreatePage> {
                               destinationCategory: controllerCategory.text,
                               rating: int.parse(controllerRating.text),
                             );
+                            popper(context);
                           }
                         },
                         child: const Text(
