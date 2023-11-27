@@ -6,7 +6,7 @@ import 'package:http/http.dart';
 
 class ApiFunctionHelper {
   // API URL
-  static const String url = "192.168.227.1";
+  static const String url = "192.168.115.1";
   static const String endpoint = 'tubesPariwisata/public/api/user';
 
   static Future<Response> createUser({
@@ -51,6 +51,20 @@ class ApiFunctionHelper {
       Iterable list = json.decode(response.body)['data'];
 
       yield list.map((user) => User.fromJson(user)).toList();
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<List<User>> fetchAll() async {
+    try {
+      var response = await get(Uri.http(url, endpoint));
+
+      if (response.statusCode != 200) throw Exception(response.reasonPhrase);
+
+      Iterable list = json.decode(response.body)['data'];
+
+      return list.map((user) => User.fromJson(user)).toList();
     } catch (e) {
       throw Exception(e.toString());
     }

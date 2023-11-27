@@ -151,6 +151,16 @@ class _LoginPageState extends State<Loginpage> {
                           saveUserID("admin");
                           pushAdminHomePage(context);
                         }else{
+                          setState(()  {
+                            ApiFunctionHelper.getUser().listen((users) {
+                              setState(() {
+                                userList = users;
+                              });
+                            }, onError: (error) {
+
+                            });
+                          });
+
                           setForce();
                           userTemp = ApiFunctionHelper.searchUserByLogin(userList, usernameController.text, passwordController.text);
                           if (userTemp.id != -240) {
