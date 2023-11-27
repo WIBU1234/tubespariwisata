@@ -6,8 +6,8 @@ import 'package:http/http.dart';
 
 class ApiFunctionHelper {
   // API URL
-  static const String url = "192.168.227.1";
-  static const String endpoint = 'tubesPariwisata/public/api/user';
+  static const String url = "10.0.2.2:8000";
+  static const String endpoint = '/api/user';
 
   static Future<Response> createUser({
     required String username,

@@ -54,8 +54,8 @@ class Destinasi {
     destinationName: json["destinationName"],
     destinationAddress: json["destinationAddress"],
     destinationDescription: json["destinationDescription"],
-    destinationLatitude: json["destinationLatitude"],
-    destinationLongitude: json["destinationLongitude"],
+    destinationLatitude: (json["destinationLatitude"] as num).toDouble(),
+    destinationLongitude: (json["destinationLongitude"] as num).toDouble(),
     destinationImage: json["destinationImage"],
     destinationCategory: json["destinationCategory"],
     destinationRating: json["destinationRating"],
@@ -73,4 +73,14 @@ class Destinasi {
     "destinationCategory": destinationCategory,
     "destinationRating": destinationRating,
   };
+
+  // static List<Destinasi> fromJsonList(List<dynamic> jsonList) {
+  //   return jsonList.map((json) => Destinasi.fromJson(json)).toList();
+  // }
+
+  static List<Destinasi> fromJsonList(Map<String, dynamic> jsonList) {
+    // Assuming your API returns a JSON object with a key 'data' containing the list
+    List<dynamic> destinationsData = jsonList['data'] ?? [];
+    return destinationsData.map((json) => Destinasi.fromJson(json)).toList();
+  }
 }

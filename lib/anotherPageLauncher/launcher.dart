@@ -11,8 +11,10 @@ import 'package:tubespariwisata/page/firstLanding/password/newPassword.dart';
 import 'package:tubespariwisata/page/homepage/homepage.dart';
 import 'package:tubespariwisata/page/homepage/updateProfile.dart';
 
+import 'package:tubespariwisata/adminLaunch/container/attractions.dart';
 import 'package:tubespariwisata/adminLaunch/pageAdmin/addDestination.dart';
 import 'package:tubespariwisata/adminLaunch/container/addDestination/createDestination.dart';
+import 'package:tubespariwisata/adminLaunch/container/addDestination/updateDestination.dart';
 
 // LAUNCHER PAGE TO PAY
 import 'package:tubespariwisata/page/homepage/detailPageElement/ticketProcessPage.dart';
@@ -44,6 +46,14 @@ void pushForgotPasswordNew(BuildContext context, User user) {
 
 void pushUpdateProfile(BuildContext context, User user) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => const UpdatePage()));
+}
+
+void pushDestination(BuildContext context) {
+  Navigator.push(context, MaterialPageRoute(builder: (_) => const AddMain()));
+}
+
+void pushUpdateDestination(BuildContext context, String destinationId) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateDestinationPage(destinationId: destinationId)));
 }
 
 void pushCameraPage(BuildContext context, User user) {

@@ -1,31 +1,28 @@
-// FLUTTER MATERIAL
-import 'package:flutter/material.dart';
-// FLUTTER FUNCTION PAGE
+// update_destination.dart
 import 'dart:ui';
-import 'package:image_picker/image_picker.dart';
 import 'dart:io';
-import 'package:flutter/services.dart';
-import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
-import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
 import 'dart:convert';
-// FLUTTER PAGE LAUNCHER
-// FIREBASE FUNCTION
-import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
-import 'package:tubespariwisata/invoice/model/product.dart';
-import 'package:tubespariwisata/pdf/pdf_view.dart';
-import 'package:uuid/uuid.dart';
-// MODEL IMPORTER
-// import 'package:tubespariwisata/entity/destinasi.dart';
 
-class CreatePage extends StatefulWidget {
-  const CreatePage({Key? superKey}) : super(key: superKey);
+import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
+
+import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:tubespariwisata/entity/destinasi.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
+import 'package:uuid/uuid.dart';
+
+class UpdateDestinationPage extends StatefulWidget {
+  final String destinationId;
+
+  const UpdateDestinationPage({Key? key, required this.destinationId}) : super(key: key);
 
   @override
-  State<CreatePage> createState() => _CreatePageState();
+  _UpdateDestinationPageState createState() => _UpdateDestinationPageState();
 }
 
-class _CreatePageState extends State<CreatePage> {
-  final _formKey = GlobalKey<FormState>();
+class _UpdateDestinationPageState extends State<UpdateDestinationPage> {
+final _formKey = GlobalKey<FormState>();
   TextEditingController controllerName = TextEditingController();
   TextEditingController controllerAddress = TextEditingController();
   TextEditingController controllerDescription = TextEditingController();
@@ -37,10 +34,6 @@ class _CreatePageState extends State<CreatePage> {
   String id = const Uuid().v1();
   File? image;
   String? base64string;
-
-  List<Product> products = [
-    Product("Action", 50000),
-  ];
 
   @override
   void initState() {
@@ -75,6 +68,8 @@ class _CreatePageState extends State<CreatePage> {
 
   @override
   Widget build(BuildContext context) {
+    String currentDestinationId = widget.destinationId;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -119,7 +114,7 @@ class _CreatePageState extends State<CreatePage> {
                       const Align(
                         alignment: Alignment.center,
                         child: Text(
-                          'Add Destination',
+                          'Update Destination',
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
@@ -133,7 +128,7 @@ class _CreatePageState extends State<CreatePage> {
                           child: const Align(
                             alignment: Alignment.center,
                             child: Text(
-                              'Enter input data below',
+                              'Enter new data below',
                               style: TextStyle(
                                 fontSize: 16,
                                 color: Colors.grey,
@@ -337,37 +332,26 @@ class _CreatePageState extends State<CreatePage> {
                           if (!_formKey.currentState!.validate()) {
                             // Handle validation errors
                           } else {
-                            // createDestination(
-                            //     destinationName: controllerName.text,
-                            //     destinationAddress: controllerAddress.text,
-                            //     destinationDescription: controllerDescription.text,
-                            //     destinationLatitude: double.parse(controllerLatitude.text),
-                            //     destinationLongitude: double.parse(controllerLongitude.text),
-                            //     destinationImage: base64string!,
-                            //     destinationCategory: controllerCategory.text,
-                            //     destinationRating: int.parse(controllerRating.text)
-                            // );
-                            ApiDestinasiHelper.createDestinasi(
+                            ApiDestinasiHelper.updateDestination(
+                              id: currentDestinationId,
                               destinationName: controllerName.text,
                               alamatDestinasi: controllerAddress.text,
                               deskripsiDestinasi: controllerDescription.text,
                               latitude: double.parse(controllerLatitude.text),
                               longitude: double.parse(controllerLongitude.text),
-                              // imageFoto: base64string!,
                               imageFoto: base64string ?? '',
                               destinationCategory: controllerCategory.text,
                               rating: int.parse(controllerRating.text),
                             );
-                            pushDestination(context);
                           }
+                          pushDestination(context);
                         },
                         child: const Text(
-                          'Add Destination',
+                          'Update Destination',
                           style: TextStyle(fontSize: 18),
                         ),
                       ),
                       const SizedBox(height: 28),
-                      buttonCreatePDF(context),
                     ],
                   ),
                 ),
@@ -375,50 +359,6 @@ class _CreatePageState extends State<CreatePage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Container buttonCreatePDF(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 28),
-      child: ElevatedButton(
-        onPressed: () {
-          if (image == null ||
-              controllerName.text.isEmpty ||
-              controllerAddress.text.isEmpty ||
-              controllerDescription.text.isEmpty) {
-            showDialog(
-              context: context,
-              builder: (context) => AlertDialog(
-                title: const Text('Warning'),
-                content: const Text("Please fill in all the field"),
-                actions: [
-                  TextButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: const Text('Ok'),
-                  )
-                ],
-              ),
-            );
-            return;
-          } else {
-            createPdf(controllerName, controllerDescription, controllerAddress,
-                id, image!, context, products);
-            setState(() {
-              const uuid = Uuid();
-              id = uuid.v1();
-            });
-          }
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.amber,
-          textStyle: const TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          ),
-        ),
-        child: const Text('Create PDF'),
       ),
     );
   }
