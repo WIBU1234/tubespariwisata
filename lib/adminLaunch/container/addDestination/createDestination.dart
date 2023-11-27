@@ -5,15 +5,16 @@ import 'dart:ui';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
+// import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
 import 'dart:convert';
 // FLUTTER PAGE LAUNCHER
 // FIREBASE FUNCTION
-import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
+// import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 import 'package:tubespariwisata/invoice/model/product.dart';
 import 'package:tubespariwisata/pdf/pdf_view.dart';
 import 'package:uuid/uuid.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 // MODEL IMPORTER
 // import 'package:tubespariwisata/entity/destinasi.dart';
 
@@ -55,15 +56,26 @@ class _CreatePageState extends State<CreatePage> {
 
   Future pickImage() async {
     try {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
 
-      if (image == null) return;
+      if (pickedImage == null) return;
 
-      final imageTemp = File(image.path);
-      setState(() {
-        this.image = imageTemp;
-        converting(imageTemp);
-      });
+      final Uint8List? compressedImage = await FlutterImageCompress.compressWithFile(
+        pickedImage.path,
+        minWidth: 10,
+        minHeight: 10,
+        quality: 20,
+      );
+
+      if (compressedImage != null) {
+        final imageTemp = File(pickedImage.path)..writeAsBytesSync(compressedImage);
+
+        setState(() {
+          this.image = imageTemp;
+          base64string = compressedImage.toString();
+          converting(imageTemp);
+        });
+      }
     } on PlatformException catch (e) {
       debugPrint('Failed to pick image : $e');
     }
@@ -73,6 +85,27 @@ class _CreatePageState extends State<CreatePage> {
     Uint8List imagebytes = await image.readAsBytes();
     base64string = base64.encode(imagebytes);
   }
+
+  // Future pickImage() async {
+  //   try {
+  //     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+  //     if (image == null) return;
+
+  //     final imageTemp = File(image.path);
+  //     setState(() {
+  //       this.image = imageTemp;
+  //       converting(imageTemp);
+  //     });
+  //   } on PlatformException catch (e) {
+  //     debugPrint('Failed to pick image : $e');
+  //   }
+  // }
+
+  // Future converting(File image) async {
+  //   Uint8List imagebytes = await image.readAsBytes();
+  //   base64string = base64.encode(imagebytes);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -181,11 +214,13 @@ class _CreatePageState extends State<CreatePage> {
                           ),
                           elevation: 6,
                         ),
-                        onPressed: () async {
+                        onPressed: () {
                           image = null;
-                          pickImage();
-                          controllerImage =
-                              base64string as TextEditingController;
+                          
+                          setState(() {
+                            pickImage();
+                            controllerImage.text = base64string!;
+                          });
                         },
                         child: const Text(
                           'Add Photo',
