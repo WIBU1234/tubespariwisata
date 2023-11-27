@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tubespariwisata/entity/purchase.dart';
-import 'dart:io';
-import 'package:image_picker/image_picker.dart';
-import 'package:flutter/services.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:uuid/uuid.dart';
 
 class PurchaseDetail extends StatefulWidget {
   final Purchase purchase;

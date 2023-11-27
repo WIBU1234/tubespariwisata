@@ -5,11 +5,10 @@ import 'package:intl/intl.dart';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
-import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 import 'package:camera/camera.dart';
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
 // FORCE LAUNCH
 import 'package:tubespariwisata/hardware/camera.dart';
 
@@ -42,7 +41,7 @@ class _ProfileState extends State<Profile> {
         userId = userID;
       });
 
-      searchUserByShared(userID).then((value) {
+      ApiFunctionHelper.searchUserByShared(int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
           isLoading = false;
@@ -85,10 +84,10 @@ class _ProfileState extends State<Profile> {
         ),
       ),
       child: isLoading
-          ? CircularProgressIndicator() // Show loading indicator while fetching data
+          ? const CircularProgressIndicator()
           : Padding(
               padding: const EdgeInsets.only(
-                  bottom: 50), // Adjust the top value as needed
+                  bottom: 50),
               child: Center(
                 child: Container(
                   width: 330,
@@ -142,18 +141,14 @@ class _ProfileState extends State<Profile> {
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (_) => CameraPage(
-                                                        cameras: value,
-                                                        user: userTemp!))));
+                                                    builder: (_) => CameraPage(cameras: value, user: userTemp!))));
                                       },
                                       child: Center(
                                         // child: widget.picture != null
                                         child: userTemp!.imageFoto != "NOTHAVE"
                                             ? ClipOval(
                                                 child: Image.memory(
-                                                    Uint8List.fromList(
-                                                        base64.decode(userTemp!
-                                                            .imageFoto)),
+                                                    Uint8List.fromList(base64.decode(userTemp!.imageFoto)),
                                                     fit: BoxFit.cover,
                                                     width: 100,
                                                     height: 100),

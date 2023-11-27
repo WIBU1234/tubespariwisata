@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
+import 'package:tubespariwisata/entity/destinasi.dart';
 // import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
 import 'dart:convert';
@@ -19,14 +20,16 @@ import 'package:flutter_image_compress/flutter_image_compress.dart';
 // MODEL IMPORTER
 // import 'package:tubespariwisata/entity/destinasi.dart';
 
-class CreatePage extends StatefulWidget {
-  const CreatePage({Key? superKey}) : super(key: superKey);
+class UpdatePageDestination extends StatefulWidget {
+  const UpdatePageDestination({Key? superKey, required this.destinasi}) : super(key: superKey);
+
+  final Destinasi destinasi;
 
   @override
-  State<CreatePage> createState() => _CreatePageState();
+  State<UpdatePageDestination> createState() => _UpdatePageState();
 }
 
-class _CreatePageState extends State<CreatePage> {
+class _UpdatePageState extends State<UpdatePageDestination> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController controllerName = TextEditingController();
   TextEditingController controllerAddress = TextEditingController();
@@ -374,7 +377,8 @@ class _CreatePageState extends State<CreatePage> {
                           if (!_formKey.currentState!.validate()) {
                             // Handle validation errors
                           } else {
-                            ApiDestinasiHelper.createDestinasi(
+                            ApiDestinasiHelper.updateDestinasi(
+                              id: widget.destinasi.id!,
                               destinationName: controllerName.text,
                               alamatDestinasi: controllerAddress.text,
                               deskripsiDestinasi: controllerDescription.text,
@@ -382,8 +386,9 @@ class _CreatePageState extends State<CreatePage> {
                               longitude: double.parse(controllerLongitude.text),
                               imageFoto: base64string!,
                               destinationCategory: controllerCategory.text,
-                              rating: int.parse(controllerRating.text),
+                              rating: int.parse(controllerRating.text)
                             );
+
                             popper(context);
                           }
                         },

@@ -6,7 +6,9 @@ import 'dart:ui';
 // FLUTTER PAGE LAUNCHER
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 // FIREBASE FUNCTION
-import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
+// import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
+// API FUNCTION
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
 // MODEL IMPORTER
 import 'package:tubespariwisata/entity/user.dart';
 
@@ -31,10 +33,16 @@ class _InputPageState extends State<RegisterPage> {
   void initState() {
     super.initState();
 
-    getUser().listen((users) {
+    setForce();
+  }
+
+  void setForce(){
+    ApiFunctionHelper.getUser().listen((users) {
       setState(() {
         userList = users;
       });
+    }, onError: (error) {
+      // print("ERROR JANCUKK");      
     });
   }
 
@@ -128,9 +136,6 @@ class _InputPageState extends State<RegisterPage> {
                           if(value == ''){
                             return 'Please enter your name';
                           }
-                          if(value == 'admin') {
-                            return 'Username admin is not permitted!';
-                          }
                           return null;
                         }
                       ),
@@ -149,9 +154,6 @@ class _InputPageState extends State<RegisterPage> {
                         validator: (value) {
                           if(value == ''){
                             return 'Please enter your email';
-                          }
-                          if(value == 'admin') {
-                            return 'Email admin is not permitted!';
                           }
                           return null;
                         }
@@ -248,18 +250,27 @@ class _InputPageState extends State<RegisterPage> {
                           ),
                           elevation: 6,
                         ),
-                        onPressed: () async {
+                        onPressed: () {
                           if (!_formKey.currentState!.validate()) {
                             // Handle validation errors
                           } else {
-                            if (isUserInList(userList, controllerEmail.text)) {
+                            setForce();
+                            if (ApiFunctionHelper.isUserInList(userList, controllerEmail.text)) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
                                   content: Text('Email is already registered'),
                                 ),
                               );
                             } else {
-                              createUser(
+                              // createUser(
+                              //   username: controllerName.text,
+                              //   email: controllerEmail.text,
+                              //   password: controllerPassword.text,
+                              //   nomorTelepon: controllerNomorTelepon.text,
+                              //   tanggalLahir: controllerTanggalLahir.text,
+                              //   token: '0',
+                              // );
+                              ApiFunctionHelper.createUser(
                                 username: controllerName.text,
                                 email: controllerEmail.text,
                                 password: controllerPassword.text,
@@ -267,7 +278,7 @@ class _InputPageState extends State<RegisterPage> {
                                 tanggalLahir: controllerTanggalLahir.text,
                                 token: '0',
                               );
-                              pushLogin(context);
+                              popper(context);
                             }
                           }
                         },

@@ -5,7 +5,7 @@ import 'package:barcode_widget/barcode_widget.dart';
 class CardDetailPage extends StatelessWidget {
   final String imagePath;
   final String cardText;
-  final String uuid = Uuid().v4();
+  final String uuid = const Uuid().v4();
   final String mapsLink = "https://maps.app.goo.gl/BRdnvTywiiLnbpEAA";
 
   CardDetailPage({required this.imagePath, required this.cardText});
@@ -14,7 +14,7 @@ class CardDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
                 "resources/images/bali.jpg"), // Set your background image here
@@ -34,25 +34,25 @@ class CardDetailPage extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Image.asset(
                     imagePath,
                     fit: BoxFit.cover,
                     width: 300, // Adjust the width as needed
                     height: 200, // Adjust the height as needed
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Text(
                     cardText,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
+                    child: const Text(
                       'Candi borobudur merupakan candi yang terletak di Magelang. Candi ini didirikan pada tahun 800M pada dinasti Syailendra',
                       style: TextStyle(
                         fontSize: 16,
@@ -62,17 +62,17 @@ class CardDetailPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16),
+                    margin: const EdgeInsets.symmetric(horizontal: 16),
                     child: Column(
                       children: [
                         Text('ID: $uuid'),
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         BarcodeWidget(
                           barcode: Barcode.qrCode(),
                           data: mapsLink,
                           width: 200,
                           height: 100,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.normal,
                             fontSize: 15,
                           ),

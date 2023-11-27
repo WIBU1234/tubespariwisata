@@ -6,10 +6,11 @@ import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 // OTHER
 import 'dart:convert';
 import 'dart:typed_data';
+// FUNCTION
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage({Key? key, required this.cameras, required this.user}) : super(key: key);
@@ -24,6 +25,7 @@ class CameraPage extends StatefulWidget {
 class _CameraPageState extends State<CameraPage> {
   late CameraController _cameraController;
   bool _isRearCameraSelected = true;
+  User tempUser = User.empty();
 
   @override
   void dispose() {
@@ -60,13 +62,18 @@ class _CameraPageState extends State<CameraPage> {
         'imageFoto': base64string,
       };
 
-      editUserData(widget.user.id!, newData);
-      pushHomePage(context);
-      
+      tempUser = User.fromJson(newData);
+      insertUpdate(tempUser);
+      popper(context);
+
     } on CameraException catch (e) {
       debugPrint('Error occured while taking picture: $e');
       return null;
     }
+  }
+
+  void insertUpdate(User input){
+    ApiFunctionHelper.insertUpdateImage(input);
   }
 
   Future initCamera(CameraDescription cameraDescription) async {

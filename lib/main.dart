@@ -7,13 +7,15 @@ import 'package:tubespariwisata/page/homepage/homepage.dart';
 import 'package:tubespariwisata/adminLaunch/pageAdmin/addDestination.dart';
 // FUNCTION LAUNCHER
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
-
 import 'package:responsive_sizer/responsive_sizer.dart';
+// IMPORT API LAUNCHER
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(const MainApp());
+
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 class MainApp extends StatelessWidget {

@@ -5,7 +5,7 @@ import 'package:tubespariwisata/entity/destinasi.dart';
 // USER DATA MANAGEMENT OR MANIPULATION
 User createEmptyUser() {
   return User(
-      id: "",
+      id: 0,
       username: "",
       email: "",
       password: "",
@@ -27,7 +27,7 @@ Future createUser({
     final docUser = FirebaseFirestore.instance.collection('user').doc();
 
     final user = User(
-        id: docUser.id,
+        id: int.parse(docUser.id),
         username: username,
         email: email,
         password: password,
@@ -87,58 +87,56 @@ User searchUserByLogin(List<User> user, String username, String password) {
       imageFoto: "");
 }
 
-void editUserData(String idUser, Map<String, dynamic> newData) {
-  FirebaseFirestore.instance
-      .collection('user')
-      .where('id', isEqualTo: idUser)
-      .get()
-      .then((QuerySnapshot querySnapshot) {
-    querySnapshot.docs.forEach((doc) {
-      doc.reference.update(newData);
-    });
-  });
-}
+// void editUserData(int idUser, Map<String, dynamic> newData) {
+//   FirebaseFirestore.instance
+//       .collection('user')
+//       .where('id', isEqualTo: idUser.toString())
+//       .get()
+//       .then((QuerySnapshot querySnapshot) {
+//     querySnapshot.docs.forEach((doc) {
+//       doc.reference.update(newData);
+//     });
+//   });
+// }
 
 // DESTINATION DATA MANAGEMENT OR MANIPULATION
-Future createDestination({
-  required String destinationName,
-  required String destinationAddress,
-  required String destinationDescription,
-  required double destinationLatitude,
-  required double destinationLongitude,
-  required String destinationImage,
-  required String destinationCategory,
-  required int destinationRating,
-}) async {
-  try {
-    final docDestination =
-        FirebaseFirestore.instance.collection('destinasi').doc();
+// Future createDestination({
+//   required String destinationName,
+//   required String destinationAddress,
+//   required String destinationDescription,
+//   required double destinationLatitude,
+//   required double destinationLongitude,
+//   required String destinationImage,
+//   required String destinationCategory,
+//   required int destinationRating,
+// }) async {
+//   try {
+//     final docDestination =
+//         FirebaseFirestore.instance.collection('destinasi').doc();
 
-    final destination = Destinasi(
-        id: docDestination.id,
-        destinationName: destinationName,
-        destinationAddress: destinationAddress,
-        destinationDescription: destinationDescription,
-        destinationLatitude: destinationLatitude,
-        destinationLongitude: destinationLongitude,
-        destinationImage: destinationImage,
-        destinationCategory: destinationCategory,
-        destinationRating: destinationRating);
-    final json = destination.toJson();
+//     final destination = Destinasi(
+//         id: docDestination.id,
+//         destinationName: destinationName,
+//         destinationAddress: destinationAddress,
+//         destinationDescription: destinationDescription,
+//         destinationLatitude: destinationLatitude,
+//         destinationLongitude: destinationLongitude,
+//         destinationImage: destinationImage,
+//         destinationCategory: destinationCategory,
+//         destinationRating: destinationRating);
+//     final json = destination.toJson();
 
-    await docDestination.set(json);
-  } catch (e) {
-    // print('Error creating destination: $e');
-  }
-}
+//     await docDestination.set(json);
+//   } catch (e) {
+//     // print('Error creating destination: $e');
+//   }
+// }
 
 Stream<List<Destinasi>> getDestinasiAll() => FirebaseFirestore.instance
     .collection('destinasi')
     .snapshots()
     .map((snapshots) =>
         snapshots.docs.map((doc) => Destinasi.fromJson(doc.data())).toList());
-
-
 
 // Future createPurchase({
 //   required String orderId,

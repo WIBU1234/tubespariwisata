@@ -7,6 +7,7 @@ import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 // FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
 // MODEL IMPORTER
 import 'package:tubespariwisata/entity/user.dart';
 
@@ -34,22 +35,17 @@ class _UpdatePageState extends State<UpdatePage> {
     super.initState();
     fetchDataWithDelay();
 
-    getUser().listen((users) {
-      setState(() {
-        userList = users;
-      });
-    });
   }
 
   void fetchDataWithDelay() async {
-    await Future.delayed(Duration(seconds: 5));
+    await Future.delayed(const Duration(seconds: 5));
     String? userID = await getUserID();
     if (userID != null) {
       setState(() {
         userId = userID;
       });
 
-      searchUserByShared(userID).then((value) {
+      ApiFunctionHelper.searchUserByShared(int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
         });
@@ -271,24 +267,18 @@ class _UpdatePageState extends State<UpdatePage> {
                           if (!_formKey.currentState!.validate()) {
                             // Handle validation errors
                           } else {
-                            if (isUserInList(userList, controllerEmail.text)) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Email is already registered'),
-                                ),
-                              );
-                            } else {
-                            Map<String, dynamic> newData = {
-                              'username': controllerName.text,
-                              'email': controllerEmail.text,
-                              'password': controllerPassword.text,
-                              'nomorTelepon': controllerNomorTelepon.text,
-                              'tanggalLahir': controllerTanggalLahir.text,
-                              'imageFoto' : userTemp!.imageFoto,
-                            };
-                            editUserData(userId!, newData);
-                            pushHomePage(context);
-                            }
+                            User input = User(
+                              id: userTemp!.id,
+                              username: controllerName.text,
+                              email: controllerEmail.text,
+                              password: controllerPassword.text,
+                              nomorTelepon: controllerNomorTelepon.text,
+                              tanggalLahir: controllerTanggalLahir.text,
+                              imageFoto: userTemp!.imageFoto,
+                              token: userTemp!.token
+                            );
+                            ApiFunctionHelper.updatePassword(input);
+                            popper(context);
                           }
                         },
                         child: const Text(
