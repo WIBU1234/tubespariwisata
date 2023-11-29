@@ -5,7 +5,6 @@ import 'dart:ui';
 // PAGE IMPORTER
 import 'package:tubespariwisata/entity/user.dart';
 // FUNCTION IMPORTER
-// import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 // LAUNCHER IMPORTER

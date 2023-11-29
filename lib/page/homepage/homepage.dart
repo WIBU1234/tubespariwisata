@@ -5,8 +5,8 @@ import 'package:sensors/sensors.dart';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
-import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 // import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
 // IMPORT FORCE PAGE
 import 'package:tubespariwisata/page/homepage/myprofilecontainer.dart';
 import 'package:tubespariwisata/page/homepage/mainhomecontainer.dart';
@@ -48,7 +48,7 @@ class _HomePageState extends State<Homepage> {
         userId = userID;
       });
 
-      searchUserByShared(userID).then((value) {
+      ApiFunctionHelper.searchUserByShared(userID).then((value) {
         setState(() {
           userTemp = value;
         });

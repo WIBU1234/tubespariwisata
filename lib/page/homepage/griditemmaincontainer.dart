@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
-import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 // IMPORT FORCE PAGE
 import 'package:tubespariwisata/page/homepage/card_detail_page.dart';
 import 'package:tubespariwisata/page/homepage/settingscontainer.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
 
 class MainGrid extends StatefulWidget {
   const MainGrid({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class _MainGridState extends State<MainGrid> {
         userId = userID;
       });
 
-      searchUserByShared(userID).then((value) {
+      ApiFunctionHelper.searchUserByShared(userID).then((value) {
         setState(() {
           userTemp = value;
         });

@@ -278,7 +278,8 @@ class _UpdatePageState extends State<UpdatePage> {
                               token: userTemp!.token
                             );
                             ApiFunctionHelper.updatePassword(input);
-                            popper(context);
+                            popperToRoot(context);
+                            pushHomePage(context);
                           }
                         },
                         child: const Text(

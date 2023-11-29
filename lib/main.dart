@@ -1,6 +1,5 @@
 // FLUTTER LIB MATERIAL
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 // FIRST PAGE LAUNCHER
 import 'package:tubespariwisata/page/firstLanding/loginpage.dart';
 import 'package:tubespariwisata/page/homepage/homepage.dart';
@@ -13,7 +12,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
 
   runApp(const ProviderScope(child: MainApp()));
 }

@@ -6,8 +6,8 @@ import 'package:sensors/sensors.dart';
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
 import 'package:tubespariwisata/entity/destinasi.dart';
-import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
 
 class MainHome extends StatefulWidget {
@@ -36,7 +36,7 @@ class _MainHomeState extends State<MainHome> {
       }
     });
 
-    getDestinasiAll().listen((destinasi) {
+    ApiDestinasiHelper.getDestinasi().listen((destinasi) {
       setState(() {
         destinationList = destinasi;
       });

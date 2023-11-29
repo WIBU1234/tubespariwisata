@@ -80,6 +80,19 @@ class LabelTextConstant{
 }
 
 // POPPER
+// SINGLE
 void popper(BuildContext context) {
   Navigator.pop(context);
+}
+
+// N POP TIMES
+void popperN(BuildContext context, int value) {
+  for(var i = 0; i < value; i++){
+    Navigator.pop(context);
+  }
+}
+
+// TO END
+void popperToRoot(BuildContext context) {
+  Navigator.popUntil(context, (route) => route.isFirst);
 }
