@@ -123,6 +123,7 @@ class _InputPageState extends State<RegisterPage> {
 
                       const SizedBox(height: 24),
                       TextFormField(
+                        key: const Key('usernameField'),
                         controller: controllerName,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.person),
@@ -142,6 +143,7 @@ class _InputPageState extends State<RegisterPage> {
 
                       const SizedBox(height: 24),
                       TextFormField(
+                        key: const Key('emailField'),
                         controller: controllerEmail,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.mail),
@@ -161,6 +163,7 @@ class _InputPageState extends State<RegisterPage> {
                       
                       const SizedBox(height: 24),
                       TextFormField(
+                        key: const Key('passwordField'),
                         controller: controllerPassword,
                         decoration: InputDecoration(
                           prefixIcon: const Icon(Icons.lock),
@@ -199,6 +202,7 @@ class _InputPageState extends State<RegisterPage> {
 
                       const SizedBox(height: 24),
                       TextFormField(
+                        key: const Key('nomorTeleponField'),
                         keyboardType: TextInputType.number,
                         controller: controllerNomorTelepon,
                         decoration: InputDecoration(
@@ -222,6 +226,7 @@ class _InputPageState extends State<RegisterPage> {
 
                       const SizedBox(height: 24),
                       TextFormField(
+                        key: const Key('tanggalLahirField'),
                         controller: controllerTanggalLahir,
                         onTap: _selectDate,
                         decoration: InputDecoration(
@@ -242,6 +247,7 @@ class _InputPageState extends State<RegisterPage> {
 
                       const SizedBox(height: 28),
                       ElevatedButton(
+                        key: const Key('registerButton'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                           padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 16),

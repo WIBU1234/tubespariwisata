@@ -6,6 +6,7 @@ import 'dart:ui';
 import 'package:tubespariwisata/entity/user.dart';
 // FUNCTION IMPORTER
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 // LAUNCHER IMPORTER
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
@@ -91,6 +92,7 @@ class _LoginPageState extends State<Loginpage> {
 
                     const SizedBox(height: 20),
                     TextFormField(
+                      key: const Key('usernameField'),
                       controller: usernameController,
                       decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.person),
@@ -105,6 +107,7 @@ class _LoginPageState extends State<Loginpage> {
 
                     const SizedBox(height: 24),
                     TextFormField(
+                      key: const Key('passwordField'),
                       controller: passwordController,
                       decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.lock),
@@ -136,6 +139,7 @@ class _LoginPageState extends State<Loginpage> {
 
                     const SizedBox(height: 30),
                     ElevatedButton(
+                      key: const Key('loginButton'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
                         padding: const EdgeInsets.symmetric(
@@ -146,10 +150,19 @@ class _LoginPageState extends State<Loginpage> {
                         elevation: 6,
                       ),
                       onPressed: () {
+
                         if(usernameController.text == "admin" && passwordController.text == "admin") {
                           saveUserID("admin");
-                          pushAdminHomePage(context);
-                        }else{
+                          popper(context);
+                          
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Welcome Admin'),
+                            ),
+                          );
+
+                          pushAdminHomePage(context); 
+                        } else {
                           setState(()  {
                             ApiFunctionHelper.getUser().listen((users) {
                               setState(() {
@@ -162,23 +175,29 @@ class _LoginPageState extends State<Loginpage> {
 
                           setForce();
                           userTemp = ApiFunctionHelper.searchUserByLogin(userList, usernameController.text, passwordController.text);
-                          if (userTemp.id != -240) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text('Welcome, ${userTemp.id} !'),
-                              ),
-                            );
-                            saveUserID(userTemp.id.toString());
-                              pushHomePage(context);
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                    'Login failed. Please check your credentials.'),
-                              ),
-                            );
-                          }
+
+                          loginRegisHelper.login(username: usernameController.text, password: passwordController.text).then((user) {
+                            setState(() {
+                              
+                              if (userTemp.id != -240) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Welcome, ${user.id} !'),
+                                  ),
+                                );
+                                saveUserID(userTemp.id.toString());
+                                pushHomePage(context);
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('Login failed. Please check your credentials.'),
+                                  ),
+                                );
+                              }
+                            });
+                          });
                         }
+
                       },
                       child: const Text(
                         'Login',
