@@ -178,11 +178,11 @@ class _LoginPageState extends State<Loginpage> {
 
                           loginRegisHelper.login(username: usernameController.text, password: passwordController.text).then((user) {
                             setState(() {
-                              
+                              userTemp = user;
                               if (userTemp.id != -240) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('Welcome, ${user.id} !'),
+                                  const SnackBar(
+                                    content: Text('Success Login!'),
                                   ),
                                 );
                                 saveUserID(userTemp.id.toString());

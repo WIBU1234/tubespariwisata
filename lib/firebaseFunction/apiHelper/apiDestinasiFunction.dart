@@ -7,8 +7,11 @@ import 'package:http/http.dart';
 
 class ApiDestinasiHelper {
   // API URL
-  static const String url = "192.168.158.1";
-  static const String endpoint = 'tubesPariwisata/public/api/destinasi';
+  // static const String url = "192.168.62.1";
+  // static const String endpoint = '/tubesPariwisata/public/api/destinasi';
+
+  static const String url = "127.0.0.1:8000";
+  static const String endpoint = '/api/destinasi';
 
   static Future<Response> createDestinasi({
     required String destinationName,

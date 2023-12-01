@@ -65,8 +65,8 @@ class _AddMainState extends State<AddMain> {
 
   // SETTINGS CONTAINER
   Widget _buildSettingsContainer() {
-    return const AttractionContainer();
-    // return const SettingPage();
+    // return const AttractionContainer();
+    return const SettingPage();
   }
 
   void _handleIndexChanged(int i) {

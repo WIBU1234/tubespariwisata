@@ -100,6 +100,7 @@ class _HomePageState extends State<Homepage> {
   Widget build(BuildContext context) {
     
     return Scaffold(
+      key: const Key('homepage'),
       extendBody: true,
       body: _getSelectedScreen(),
       bottomNavigationBar: Padding(

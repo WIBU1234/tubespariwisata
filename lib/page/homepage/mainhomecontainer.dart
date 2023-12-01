@@ -75,7 +75,7 @@ class _MainHomeState extends State<MainHome> {
         child: Center(
           child: Container(
             width: 330,
-            height: 610,
+            height: MediaQuery.of(context).size.height * 0.8,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               color: Colors.white.withOpacity(0.8),

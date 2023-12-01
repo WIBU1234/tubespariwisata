@@ -23,24 +23,6 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveSizer(
       builder: (context, orientation, deviceType) {
-        Device.orientation == Orientation.portrait
-            ? Container(
-                width: 100.w,
-                height: 20.h,
-              )
-            : Container(
-                width: 100.w,
-                height: 12.h,
-              );
-        Device.screenType == ScreenType.tablet
-            ? Container(
-                width: 100.w,
-                height: 20.h,
-              )
-            : Container(
-                width: 100.w,
-                height: 12.5.h,
-              );
         return FutureBuilder<String?>(
           future: getUserID(),
           builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {
