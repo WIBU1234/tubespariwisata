@@ -70,7 +70,7 @@ class _HomePageState extends State<Homepage> {
 
   // HOME CONTAINER
   Widget _buildHomeContainer() {
-    return const MainHome();
+    return const MainGrid();
   }
 
   // PROFILE CONTAINER
@@ -80,7 +80,7 @@ class _HomePageState extends State<Homepage> {
 
   // GRID ITEM CONTAINER
   Widget _buildSearchContainer() {
-    return const MainGrid();
+    return const MainHome();
     // return MyHomePage();
   }
 
