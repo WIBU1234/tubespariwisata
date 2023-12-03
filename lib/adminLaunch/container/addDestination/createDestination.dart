@@ -73,7 +73,7 @@ class _CreatePageState extends State<CreatePage> {
         final imageTemp = File(pickedImage.path)..writeAsBytesSync(compressedImage);
 
         setState(() {
-          this.image = imageTemp;
+          image = imageTemp;
           base64string = compressedImage.toString();
           converting(imageTemp);
         });

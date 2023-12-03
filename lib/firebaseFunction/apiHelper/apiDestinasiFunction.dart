@@ -66,22 +66,19 @@ class ApiDestinasiHelper {
     required int rating,
   }) async {
     try {
-      Destinasi input = Destinasi(
-        destinationName: destinationName,
-        destinationAddress: alamatDestinasi,
-        destinationDescription: deskripsiDestinasi,
-        destinationLatitude: latitude,
-        destinationLongitude: longitude,
-        destinationImage: imageFoto,
-        destinationCategory: destinationCategory,
-        destinationRating: rating,
-      );
-
-      Logger().i(input.toRawJson());
-
-      print(imageFoto);
+      // Destinasi input = Destinasi(
+      //   destinationName: destinationName,
+      //   destinationAddress: alamatDestinasi,
+      //   destinationDescription: deskripsiDestinasi,
+      //   destinationLatitude: latitude,
+      //   destinationLongitude: longitude,
+      //   destinationImage: imageFoto,
+      //   destinationCategory: destinationCategory,
+      //   destinationRating: rating,
+      // );
 
       var data = {
+          "id": id,
           "destinationName": destinationName,
           "destinationAddress": alamatDestinasi,
           "destinationDescription": deskripsiDestinasi,
@@ -91,6 +88,10 @@ class ApiDestinasiHelper {
           "destinationCategory": destinationCategory,
           "destinationRating": rating,
       };
+
+      // Logger().i(input.toRawJson());
+
+      // print(imageFoto);
 
       var response = await put(Uri.http(url, endpoint + '/' + id.toString()),
           headers: {"Content-Type": "application/json", "Accept": "application/json"},      
