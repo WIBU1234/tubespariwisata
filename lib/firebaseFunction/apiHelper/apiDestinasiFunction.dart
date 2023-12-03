@@ -25,18 +25,6 @@ class ApiDestinasiHelper {
     required double destinationPrice,
   }) async {
     try {
-      Destinasi input = Destinasi(
-        destinationName: destinationName,
-        destinationAddress: alamatDestinasi,
-        destinationDescription: deskripsiDestinasi,
-        destinationLatitude: latitude,
-        destinationLongitude: longitude,
-        destinationImage: imageFoto,
-        destinationCategory: destinationCategory,
-        destinationRating: rating,
-        destinationPrice: destinationPrice,
-      );
-
       // Logger().i(input.toRawJson());
 
       // print(imageFoto);

@@ -181,11 +181,12 @@ class _LoginPageState extends State<Loginpage> {
                               userTemp = user;
                               if (userTemp.id != -240) {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Success Login!'),
+                                  SnackBar(
+                                    content: Text('Success Login! User ID: ${userTemp.id}'),
                                   ),
                                 );
                                 saveUserID(userTemp.id.toString());
+                                saveUserForObject(userTemp);
                                 pushHomePage(context);
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
@@ -224,6 +225,7 @@ class _LoginPageState extends State<Loginpage> {
                               ),
                             ],
                           ),
+                          key: const Key('signUpText'),
                         ),
 
                         const SizedBox(width: 8),

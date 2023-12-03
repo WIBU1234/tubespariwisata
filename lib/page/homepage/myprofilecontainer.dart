@@ -21,13 +21,22 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   String? userId;
-  User? userTemp;
+  User? userTemp, userTemp2;
   bool isLoading = true;
 
   @override
   void initState() {
     fetchImidiately();
     super.initState();
+  }
+
+  void fetchObject() {
+    getUserForObject().then((value) {
+      setState(() {
+        userTemp2 = value;
+        isLoading = false;
+      });
+    });
   }
 
   void fetchImidiately() {
@@ -41,9 +50,10 @@ class _ProfileState extends State<Profile> {
         userId = userID;
       });
 
-      loginRegisHelper.loginById(id: userID).then((value) {
+      loginRegisHelper.loginById(id: int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
+          isLoading = false;
         });
       });
     }
@@ -95,7 +105,7 @@ class _ProfileState extends State<Profile> {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white.withOpacity(0.8),
                   ),
-                  // Add your content here
+
                   child: Container(
                     child: Padding(
                       padding: const EdgeInsets.all(3.0),

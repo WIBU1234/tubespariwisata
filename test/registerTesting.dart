@@ -1,71 +1,37 @@
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:flutter/material.dart';
-// import 'package:mockito/mockito.dart';
-// import 'package:tubespariwisata/page/firstLanding/loginpage.dart';
-// import 'package:tubespariwisata/page/firstLanding/registerpage.dart';
+import 'dart:io';
 
-// class MockNavigatorObserver extends NavigatorObserver {
-//   final List<Route<dynamic>> pushedRoutes = [];
+import 'package:flutter_test/flutter_test.dart';
+import 'package:tubespariwisata/main.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
 
-//   @override
-//   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
-//     pushedRoutes.add(route);
-//     super.didPush(route, previousRoute);
-//   }
-// }
+//flutter run test/widgettest.dart
 
-// void main() {
+void main() {
+  setUpAll(()  {
+      HttpOverrides.global = null;
+    });
+    
+  testWidgets("Register login V1 : ", (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const ProviderScope(
+        child: MainApp(),
+      ),
+    );
+    await tester.pump();
 
-//   testWidgets('Can input register', (WidgetTester tester) async {
-//     await tester.pumpWidget(const MaterialApp(home: RegisterPage()));
+    var toRegister = find.byKey(const Key('signUpText'));
+    await tester.tap(toRegister);
+    await tester.pump(const Duration(seconds: 2));
 
-//     var usernameField = find.byKey(const Key('usernameField'));
-//     var emailField = find.byKey(const Key('emailField'));
-//     var passwordField = find.byKey(const Key('passwordField'));
-//     var nomorTeleponField = find.byKey(const Key('nomorTeleponField'));
-//     var tanggalLahirField = find.byKey(const Key('tanggalLahirField'));
+    var usernameField = find.byKey(const Key('usernameField'));
+    var emailField = find.byKey(const Key('emailField'));
+    var passwordField = find.byKey(const Key('passwordField'));
+    var nomorTeleponField = find.byKey(const Key('nomorTeleponField'));
+    var tanggalLahirField = find.byKey(const Key('tanggalLahirField'));
+    var registerButton = find.byKey(const Key('registerButton'));
+    await tester.tap(registerButton);
 
-//     await tester.enterText(usernameField, 'testUsername');
-//     await tester.enterText(emailField, 'testEmail');
-//     await tester.enterText(passwordField, 'testPassword');
-//     await tester.enterText(nomorTeleponField, 'testNomorTelepon');
-//     await tester.enterText(tanggalLahirField, 'testTanggalLahir');
 
-//     await tester.pump();
-
-//     expect(find.text('testUsername'), findsOneWidget);
-//     expect(find.text('testEmail'), findsOneWidget);
-//     expect(find.text('testPassword'), findsOneWidget);
-//     expect(find.text('testNomorTelepon'), findsOneWidget);
-//     expect(find.text('testTanggalLahir'), findsOneWidget);
-//   });
-
-//   //   testWidgets('Can input register an user', (WidgetTester tester) async {
-//   //   await tester.pumpWidget(const MaterialApp(home: RegisterPage()));
-
-//   //   var usernameField = find.byKey(const Key('usernameField'));
-//   //   var emailField = find.byKey(const Key('emailField'));
-//   //   var passwordField = find.byKey(const Key('passwordField'));
-//   //   var nomorTeleponField = find.byKey(const Key('nomorTeleponField'));
-//   //   var tanggalLahirField = find.byKey(const Key('tanggalLahirField'));
-
-//   //   await tester.enterText(usernameField, '');
-//   //   await tester.enterText(emailField, '');
-//   //   await tester.enterText(passwordField, 'testPassword');
-//   //   await tester.enterText(nomorTeleponField, 'testNomorTelepon');
-//   //   await tester.enterText(tanggalLahirField, '');
-
-//   //   await tester.pump();
-
-//   //   expect(find.text('testUsername'), findsOneWidget);
-//   //   expect(find.text('testEmail'), findsOneWidget);
-//   //   expect(find.text('testPassword'), findsOneWidget);
-//   //   expect(find.text('testNomorTelepon'), findsOneWidget);
-//   //   expect(find.text('testTanggalLahir'), findsOneWidget);
-
-//   //   var button = find.byKey(const Key('registerButton'));
-//   //   await tester.tap(button);
-
-//   //   await tester.pumpAndSettle();
-//   // });
-// }
+  });
+}

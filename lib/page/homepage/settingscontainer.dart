@@ -32,7 +32,7 @@ class _SettingPageState extends State<SettingPage> {
         userId = userID;
       });
 
-      loginRegisHelper.loginById(id: userID).then((value) {
+      loginRegisHelper.loginById(id: int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
         });

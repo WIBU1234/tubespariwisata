@@ -30,12 +30,15 @@ class loginRegisHelper {
     }
   }
 
-  static Future<User> loginById({required String id}) async {
+  static Future<User> loginById({required int id}) async {
     String endpointV2 = '/tubesPariwisata/public/api/loginById';
     // String endpointV2 = '/api/loginById'
 
+    String idUser = id.toString();
+
     try{
-      var apiResult = await client.get(Uri.http(url, endpointV2 + '/' + id));
+      var apiResult = await client.post(Uri.http(url, endpointV2),
+        body: {"id": idUser});
 
         if(apiResult.statusCode == 200) {
           return User.fromJson(json.decode(apiResult.body)['data']);

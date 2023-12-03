@@ -47,7 +47,7 @@ class _HomePageState extends State<Homepage> {
         userId = userID;
       });
 
-      loginRegisHelper.loginById(id: userID).then((value) {
+      loginRegisHelper.loginById(id: int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
         });

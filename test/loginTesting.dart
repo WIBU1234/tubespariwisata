@@ -11,8 +11,28 @@ void main() {
   setUpAll(()  {
       HttpOverrides.global = null;
     });
-  
-  testWidgets("Test login", (WidgetTester tester) async {
+    
+  testWidgets("Test login V1 : ", (WidgetTester tester) async {
+    await tester.pumpWidget(
+      const ProviderScope(
+        child: MainApp(),
+      ),
+    );
+    await tester.pump();
+
+    var usernameField = find.byKey(const Key('usernameField'));
+    var passwordField = find.byKey(const Key('passwordField'));
+    var buttonField = find.byKey(const Key('loginButton'));
+
+    await tester.enterText(usernameField, '123');
+    await tester.enterText(passwordField, '123');
+    await tester.tap(buttonField);
+    await tester.pumpAndSettle(const Duration(seconds: 2));
+
+    expect(find.byType(SnackBar), findsOneWidget);
+  });
+
+  testWidgets("Test login V2 : ", (WidgetTester tester) async {
     await tester.pumpWidget(
       const ProviderScope(
         child: MainApp(),
@@ -27,7 +47,7 @@ void main() {
     await tester.enterText(usernameField, '123');
     await tester.enterText(passwordField, '123123');
     await tester.tap(buttonField);
-    await tester.pumpAndSettle(const Duration(seconds: 5));
+    await tester.pumpAndSettle(const Duration(seconds: 3));
 
     expect(find.byKey(const Key('homepage')), findsOneWidget);
   });

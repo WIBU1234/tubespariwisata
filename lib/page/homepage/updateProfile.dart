@@ -45,7 +45,7 @@ class _UpdatePageState extends State<UpdatePage> {
         userId = userID;
       });
 
-      loginRegisHelper.loginById(id: userID).then((value) {
+      loginRegisHelper.loginById(id: int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
         });
