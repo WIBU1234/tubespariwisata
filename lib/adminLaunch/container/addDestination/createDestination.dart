@@ -382,7 +382,6 @@ class _CreatePageState extends State<CreatePage> {
                               imageFoto: base64string!,
                               destinationCategory: controllerCategory.text,
                               rating: int.parse(controllerRating.text),
-                              destinationPrice: double.parse(controllerPrice.text),
                             );
                             popper(context);
                           }

@@ -3,11 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 // PAGE IMPORTER
 import 'package:tubespariwisata/entity/user.dart';
-// FUNCTION IMPORTER
-// import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
-// import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
-// LAUNCHER IMPORTER
-// import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 // LAUNCHER FORCE PAGE
 import 'package:tubespariwisata/adminLaunch/container/attractions.dart';
 import 'package:tubespariwisata/page/homepage/settingscontainer.dart';

@@ -21,8 +21,7 @@ class ApiDestinasiHelper {
     required double longitude,
     required String imageFoto,
     required String destinationCategory,
-    required int rating,
-    required double destinationPrice,
+    required int rating
   }) async {
     try {
       // Logger().i(input.toRawJson());
@@ -37,9 +36,10 @@ class ApiDestinasiHelper {
           "destinationLongitude": longitude,
           "destinationImage": imageFoto,
           "destinationCategory": destinationCategory,
-          "destinationRating": rating,
-          "destinationPrice": destinationPrice
+          "destinationRating": rating
       };
+
+      print(imageFoto);
 
       var response = await post(Uri.http(url, endpoint),
           headers: {"Content-Type": "application/json", "Accept": "application/json"},      
