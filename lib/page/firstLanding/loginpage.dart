@@ -12,7 +12,7 @@ import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 
 class Loginpage extends StatefulWidget {
-  const Loginpage({Key? superKey}): super(key: superKey);
+  const Loginpage({Key? key}) : super(key: key);
 
   @override
   State<Loginpage> createState() => _LoginPageState();
