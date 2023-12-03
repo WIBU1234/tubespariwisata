@@ -66,7 +66,7 @@ class _CreatePageState extends State<CreatePage> {
         pickedImage.path,
         minWidth: 10,
         minHeight: 10,
-        quality: 20,
+        quality: 40,
       );
 
       if (compressedImage != null) {
@@ -336,25 +336,6 @@ class _CreatePageState extends State<CreatePage> {
                           validator: (value) {
                             if (value == '') {
                               return 'Destination Rating must be filled';
-                            }
-                            return null;
-                          }),
-                      const SizedBox(height: 20),
-                      TextFormField(
-                          keyboardType: TextInputType.number,
-                          controller: controllerPrice,
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.monetization_on),
-                            labelText: 'Destination Money',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 17),
-                          ),
-                          validator: (value) {
-                            if (value == '') {
-                              return 'Destination Price must be filled';
                             }
                             return null;
                           }),
