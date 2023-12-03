@@ -10,6 +10,7 @@ class Destinasi {
   String destinationImage;
   String destinationCategory;
   int destinationRating;
+  double destinationPrice;
 
   Destinasi(
       {this.id,
@@ -20,32 +21,8 @@ class Destinasi {
       required this.destinationLongitude,
       required this.destinationImage,
       required this.destinationCategory,
-      required this.destinationRating}
-  );
-
-  // Map<String, dynamic> toJson() => {
-  //   'id': id,
-  //   'destinationName': destinationName,
-  //   'destinationAddress': destinationAddress,
-  //   'destinationDescription': destinationDescription,
-  //   'destinationLatitude': destinationLatitude,
-  //   'destinationLongitude': destinationLongitude,
-  //   'destinationImage': destinationImage,
-  //   'destinationCategory': destinationCategory,
-  //   'destinationRating': destinationRating,
-  // };
-
-  // static Destinasi fromJson(Map<String, dynamic> json) => Destinasi(
-  //     id: json['id'],
-  //     destinationName: json['destinationName'],
-  //     destinationAddress: json['destinationAddress'],
-  //     destinationDescription: json['destinationDescription'],
-  //     destinationLatitude: json['destinationLatitude'],
-  //     destinationLongitude: json['destinationLongitude'],
-  //     destinationImage: json['destinationImage'],
-  //     destinationCategory: json['destinationCategory'],
-  //     destinationRating: json['destinationRating'],
-  // );
+      required this.destinationRating,
+      required this.destinationPrice});
 
   // UPDATE PLACEMENT
   factory Destinasi.fromRawJson(String str) => Destinasi.fromJson(json.decode(str));
@@ -59,6 +36,7 @@ class Destinasi {
     destinationImage: json["destinationImage"],
     destinationCategory: json["destinationCategory"],
     destinationRating: json["destinationRating"],
+    destinationPrice: (json["destinationPrice"] as num).toDouble(),
   );
 
   String toRawJson() => json.encode(toJson());
@@ -72,5 +50,6 @@ class Destinasi {
     "destinationImage": destinationImage,
     "destinationCategory": destinationCategory,
     "destinationRating": destinationRating,
+    "destinationPrice": destinationPrice,
   };
 }

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:tubespariwisata/entity/destinasi.dart';
 import 'dart:convert';
 // IMPORT LIB FROM FUNCTION
-// import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
 

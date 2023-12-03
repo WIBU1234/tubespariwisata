@@ -36,6 +36,7 @@ class _CreatePageState extends State<CreatePage> {
   TextEditingController controllerImage = TextEditingController();
   TextEditingController controllerCategory = TextEditingController();
   TextEditingController controllerRating = TextEditingController();
+  TextEditingController controllerPrice = TextEditingController();
   String id = const Uuid().v1();
   File? image;
   String? base64string;
@@ -86,27 +87,6 @@ class _CreatePageState extends State<CreatePage> {
     Uint8List imagebytes = await image.readAsBytes();
     base64string = base64.encode(imagebytes);
   }
-
-  // Future pickImage() async {
-  //   try {
-  //     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-
-  //     if (image == null) return;
-
-  //     final imageTemp = File(image.path);
-  //     setState(() {
-  //       this.image = imageTemp;
-  //       converting(imageTemp);
-  //     });
-  //   } on PlatformException catch (e) {
-  //     debugPrint('Failed to pick image : $e');
-  //   }
-  // }
-
-  // Future converting(File image) async {
-  //   Uint8List imagebytes = await image.readAsBytes();
-  //   base64string = base64.encode(imagebytes);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -356,6 +336,25 @@ class _CreatePageState extends State<CreatePage> {
                           validator: (value) {
                             if (value == '') {
                               return 'Destination Rating must be filled';
+                            }
+                            return null;
+                          }),
+                      const SizedBox(height: 20),
+                      TextFormField(
+                          keyboardType: TextInputType.number,
+                          controller: controllerPrice,
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.monetization_on),
+                            labelText: 'Destination Money',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50),
+                            ),
+                            contentPadding:
+                                const EdgeInsets.symmetric(vertical: 17),
+                          ),
+                          validator: (value) {
+                            if (value == '') {
+                              return 'Destination Price must be filled';
                             }
                             return null;
                           }),

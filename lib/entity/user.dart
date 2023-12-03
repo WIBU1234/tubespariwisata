@@ -25,7 +25,7 @@ class User {
 
   // CREATE EMPTY
   factory User.empty() => User(
-        id: null,
+        id: -240,
         username: "",
         email: "",
         password: "",

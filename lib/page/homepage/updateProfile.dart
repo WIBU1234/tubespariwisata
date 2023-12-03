@@ -6,8 +6,8 @@ import 'dart:ui';
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 // FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
-import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
 // MODEL IMPORTER
 import 'package:tubespariwisata/entity/user.dart';
 
@@ -45,7 +45,7 @@ class _UpdatePageState extends State<UpdatePage> {
         userId = userID;
       });
 
-      ApiFunctionHelper.searchUserByShared(int.parse(userID)).then((value) {
+      loginRegisHelper.loginById(id: int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
         });
@@ -278,7 +278,8 @@ class _UpdatePageState extends State<UpdatePage> {
                               token: userTemp!.token
                             );
                             ApiFunctionHelper.updatePassword(input);
-                            popper(context);
+                            popperToRoot(context);
+                            pushHomePage(context);
                           }
                         },
                         child: const Text(

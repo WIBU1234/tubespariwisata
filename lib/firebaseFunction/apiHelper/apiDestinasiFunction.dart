@@ -7,8 +7,11 @@ import 'package:http/http.dart';
 
 class ApiDestinasiHelper {
   // API URL
-  static const String url = "192.168.158.1";
-  static const String endpoint = 'tubesPariwisata/public/api/destinasi';
+  static const String url = "192.168.62.1";
+  static const String endpoint = '/tubesPariwisata/public/api/destinasi';
+
+  // static const String url = "127.0.0.1:8000";
+  // static const String endpoint = '/api/destinasi';
 
   static Future<Response> createDestinasi({
     required String destinationName,
@@ -18,23 +21,12 @@ class ApiDestinasiHelper {
     required double longitude,
     required String imageFoto,
     required String destinationCategory,
-    required int rating,
+    required int rating
   }) async {
     try {
-      Destinasi input = Destinasi(
-        destinationName: destinationName,
-        destinationAddress: alamatDestinasi,
-        destinationDescription: deskripsiDestinasi,
-        destinationLatitude: latitude,
-        destinationLongitude: longitude,
-        destinationImage: imageFoto,
-        destinationCategory: destinationCategory,
-        destinationRating: rating,
-      );
+      // Logger().i(input.toRawJson());
 
-      Logger().i(input.toRawJson());
-
-      print(imageFoto);
+      // print(imageFoto);
 
       var data = {
           "destinationName": destinationName,
@@ -46,6 +38,8 @@ class ApiDestinasiHelper {
           "destinationCategory": destinationCategory,
           "destinationRating": rating
       };
+
+      print(imageFoto);
 
       var response = await post(Uri.http(url, endpoint),
           headers: {"Content-Type": "application/json", "Accept": "application/json"},      
@@ -70,6 +64,7 @@ class ApiDestinasiHelper {
     required String imageFoto,
     required String destinationCategory,
     required int rating,
+    required double destinationPrice,
   }) async {
     try {
       Destinasi input = Destinasi(
@@ -81,6 +76,7 @@ class ApiDestinasiHelper {
         destinationImage: imageFoto,
         destinationCategory: destinationCategory,
         destinationRating: rating,
+        destinationPrice: destinationPrice,
       );
 
       Logger().i(input.toRawJson());
@@ -95,7 +91,8 @@ class ApiDestinasiHelper {
           "destinationLongitude": longitude,
           "destinationImage": imageFoto,
           "destinationCategory": destinationCategory,
-          "destinationRating": rating
+          "destinationRating": rating,
+          "destinationPrice": destinationPrice
       };
 
       var response = await put(Uri.http(url, endpoint + '/' + id.toString()),

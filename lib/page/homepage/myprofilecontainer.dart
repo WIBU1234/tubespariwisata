@@ -8,7 +8,7 @@ import 'package:tubespariwisata/entity/user.dart';
 import 'package:camera/camera.dart';
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
 // FORCE LAUNCH
 import 'package:tubespariwisata/hardware/camera.dart';
 
@@ -21,13 +21,22 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   String? userId;
-  User? userTemp;
+  User? userTemp, userTemp2;
   bool isLoading = true;
 
   @override
   void initState() {
     fetchImidiately();
     super.initState();
+  }
+
+  void fetchObject() {
+    getUserForObject().then((value) {
+      setState(() {
+        userTemp2 = value;
+        isLoading = false;
+      });
+    });
   }
 
   void fetchImidiately() {
@@ -41,7 +50,7 @@ class _ProfileState extends State<Profile> {
         userId = userID;
       });
 
-      ApiFunctionHelper.searchUserByShared(int.parse(userID)).then((value) {
+      loginRegisHelper.loginById(id: int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
           isLoading = false;
@@ -96,7 +105,7 @@ class _ProfileState extends State<Profile> {
                     borderRadius: BorderRadius.circular(20),
                     color: Colors.white.withOpacity(0.8),
                   ),
-                  // Add your content here
+
                   child: Container(
                     child: Padding(
                       padding: const EdgeInsets.all(3.0),

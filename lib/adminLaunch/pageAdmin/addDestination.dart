@@ -3,17 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 // PAGE IMPORTER
 import 'package:tubespariwisata/entity/user.dart';
-// FUNCTION IMPORTER
-// import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
-// import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
-// LAUNCHER IMPORTER
-// import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 // LAUNCHER FORCE PAGE
 import 'package:tubespariwisata/adminLaunch/container/attractions.dart';
 import 'package:tubespariwisata/page/homepage/settingscontainer.dart';
 
 class AddMain extends StatefulWidget {
   const AddMain({Key? superKey}): super(key: superKey);
+  
 
   @override
   State<AddMain> createState() => _AddMainState();
@@ -47,20 +43,24 @@ class _AddMainState extends State<AddMain> {
   // HOME CONTAINER
   Widget _buildAttractionsContainer() {
     return const AttractionContainer();
+    // return const SettingPage();
   }
 
   // PROFILE CONTAINER
   Widget _buildPersonContainer() {
-    return const AttractionContainer();
+   return const AttractionContainer();
+    // return const SettingPage();
   }
 
   // GRID ITEM CONTAINER
   Widget _buildSearchContainer() {
-    return const AttractionContainer();
+   return const AttractionContainer();
+    // return const SettingPage();
   }
 
   // SETTINGS CONTAINER
   Widget _buildSettingsContainer() {
+    // return const AttractionContainer();
     return const SettingPage();
   }
 
@@ -74,6 +74,7 @@ class _AddMainState extends State<AddMain> {
   Widget build(BuildContext context) {
     
     return Scaffold(
+      key: const Key('adminPage'),
       extendBody: true,
       body: _getSelectedScreen(),
       bottomNavigationBar: Padding(

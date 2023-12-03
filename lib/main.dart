@@ -1,6 +1,5 @@
 // FLUTTER LIB MATERIAL
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
 // FIRST PAGE LAUNCHER
 import 'package:tubespariwisata/page/firstLanding/loginpage.dart';
 import 'package:tubespariwisata/page/homepage/homepage.dart';
@@ -13,7 +12,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
 
   runApp(const ProviderScope(child: MainApp()));
 }
@@ -25,24 +23,6 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ResponsiveSizer(
       builder: (context, orientation, deviceType) {
-        Device.orientation == Orientation.portrait
-            ? Container(
-                width: 100.w,
-                height: 20.h,
-              )
-            : Container(
-                width: 100.w,
-                height: 12.h,
-              );
-        Device.screenType == ScreenType.tablet
-            ? Container(
-                width: 100.w,
-                height: 20.h,
-              )
-            : Container(
-                width: 100.w,
-                height: 12.5.h,
-              );
         return FutureBuilder<String?>(
           future: getUserID(),
           builder: (BuildContext context, AsyncSnapshot<String?> snapshot) {

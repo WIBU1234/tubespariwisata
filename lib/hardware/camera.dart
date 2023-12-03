@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 // OTHER
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 // FUNCTION
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
 
@@ -50,21 +51,34 @@ class _CameraPageState extends State<CameraPage> {
       await _cameraController.setFlashMode(FlashMode.off);
       XFile picture = await _cameraController.takePicture();
 
-      Uint8List imagebytes = await picture.readAsBytes();
-      String base64string = base64.encode(imagebytes);
+      // Uint8List imagebytes = await picture.readAsBytes();
+
+      final Uint8List? compressedImage = await FlutterImageCompress.compressWithFile(
+        picture.path,
+        minWidth: 10,
+        minHeight: 10,
+        quality: 40,
+      );
+
+      String base64Image = base64Encode(compressedImage!);
 
       Map<String, dynamic> newData = {
+        'id': widget.user.id,
         'username': widget.user.username,
         'email': widget.user.email,
         'password': widget.user.password,
         'nomorTelepon': widget.user.nomorTelepon,
         'tanggalLahir': widget.user.tanggalLahir,
-        'imageFoto': base64string,
+        'token': widget.user.token,
+        'imageFoto': base64Image,
       };
+
+      print(base64Image);
 
       tempUser = User.fromJson(newData);
       insertUpdate(tempUser);
-      popper(context);
+      popperToRoot(context);
+      pushHomePage(context);
 
     } on CameraException catch (e) {
       debugPrint('Error occured while taking picture: $e');
@@ -73,7 +87,7 @@ class _CameraPageState extends State<CameraPage> {
   }
 
   void insertUpdate(User input){
-    ApiFunctionHelper.insertUpdateImage(input);
+    ApiFunctionHelper.updatePassword(input);
   }
 
   Future initCamera(CameraDescription cameraDescription) async {
