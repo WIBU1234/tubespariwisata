@@ -39,7 +39,7 @@ class ApiDestinasiHelper {
           "destinationRating": rating
       };
 
-      print(imageFoto);
+      // print(imageFoto);
 
       var response = await post(Uri.http(url, endpoint),
           headers: {"Content-Type": "application/json", "Accept": "application/json"},      
