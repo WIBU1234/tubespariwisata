@@ -75,7 +75,7 @@ class _HomePageState extends State<Homepage> {
 
   // PROFILE CONTAINER
   Widget _buildPersonContainer() {
-    return Profile();
+    return const Profile();
   }
 
   // GRID ITEM CONTAINER
