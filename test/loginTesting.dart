@@ -5,6 +5,8 @@ import 'package:tubespariwisata/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 
+//flutter run test/widgettest.dart
+
 void main() {
   setUpAll(()  {
       HttpOverrides.global = null;

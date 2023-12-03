@@ -8,7 +8,7 @@ import 'package:tubespariwisata/entity/user.dart';
 import 'package:camera/camera.dart';
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
 // FORCE LAUNCH
 import 'package:tubespariwisata/hardware/camera.dart';
 
@@ -41,10 +41,9 @@ class _ProfileState extends State<Profile> {
         userId = userID;
       });
 
-      ApiFunctionHelper.searchUserByShared(int.parse(userID)).then((value) {
+      loginRegisHelper.loginById(id: userID).then((value) {
         setState(() {
           userTemp = value;
-          isLoading = false;
         });
       });
     }

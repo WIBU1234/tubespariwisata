@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
-import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 
 class SettingPage extends StatefulWidget {
@@ -32,7 +32,7 @@ class _SettingPageState extends State<SettingPage> {
         userId = userID;
       });
 
-      ApiFunctionHelper.searchUserByShared(userID).then((value) {
+      loginRegisHelper.loginById(id: userID).then((value) {
         setState(() {
           userTemp = value;
         });

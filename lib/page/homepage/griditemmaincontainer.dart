@@ -6,7 +6,7 @@ import 'package:tubespariwisata/entity/user.dart';
 // IMPORT FORCE PAGE
 import 'package:tubespariwisata/page/homepage/card_detail_page.dart';
 import 'package:tubespariwisata/page/homepage/settingscontainer.dart';
-import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
 
 class MainGrid extends StatefulWidget {
   const MainGrid({Key? key}) : super(key: key);
@@ -35,7 +35,7 @@ class _MainGridState extends State<MainGrid> {
         userId = userID;
       });
 
-      ApiFunctionHelper.searchUserByShared(userID).then((value) {
+      loginRegisHelper.loginById(id: userID).then((value) {
         setState(() {
           userTemp = value;
         });

@@ -7,11 +7,11 @@ import 'package:http/http.dart' as http;
 class loginRegisHelper {
   static http.Client client = http.Client();
   // API URL
-  // static const String url = "192.168.62.1";
-  // static const String endpoint = "/tubesPariwisata/public/api/login";
+  static const String url = "192.168.62.1";
+  static const String endpoint = "/tubesPariwisata/public/api/login";
 
-  static const String url = "127.0.0.1:8000";
-  static const String endpoint = '/api/login';
+  // static const String url = "127.0.0.1:8000";
+  // static const String endpoint = '/api/login';
 
   static Future<User> login({required String username, required String password}) async {
     try{
@@ -30,8 +30,24 @@ class loginRegisHelper {
     }
   }
 
-  static Future<LoginModel> loginTesting({required String username, required String password}) async {
+  static Future<User> loginById({required String id}) async {
+    String endpointV2 = '/tubesPariwisata/public/api/loginById';
+    // String endpointV2 = '/api/loginById'
 
+    try{
+      var apiResult = await client.get(Uri.http(url, endpointV2 + '/' + id));
+
+        if(apiResult.statusCode == 200) {
+          return User.fromJson(json.decode(apiResult.body)['data']);
+        } else {
+          return User.empty();
+        }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<LoginModel> loginTesting({required String username, required String password}) async {
     try{
       var apiResult = await client.post(Uri.http(url, endpoint), 
         body: {"username": username, "password": password}
