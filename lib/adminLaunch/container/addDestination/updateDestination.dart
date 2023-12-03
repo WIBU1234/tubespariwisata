@@ -342,25 +342,6 @@ class _UpdatePageState extends State<UpdatePageDestination> {
                             }
                             return null;
                           }),
-                      const SizedBox(height: 20),
-                      TextFormField(
-                          keyboardType: TextInputType.number,
-                          controller: controllerPrice,
-                          decoration: InputDecoration(
-                            prefixIcon: const Icon(Icons.monetization_on),
-                            labelText: 'Destination Price',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 17),
-                          ),
-                          validator: (value) {
-                            if (value == '') {
-                              return 'Destination Price must be filled';
-                            }
-                            return null;
-                          }),
                       const SizedBox(height: 28),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -385,8 +366,7 @@ class _UpdatePageState extends State<UpdatePageDestination> {
                               longitude: double.parse(controllerLongitude.text),
                               imageFoto: base64string!,
                               destinationCategory: controllerCategory.text,
-                              rating: int.parse(controllerRating.text),
-                              destinationPrice: double.parse(controllerPrice.text)
+                              rating: int.parse(controllerRating.text)
                             );
                             popper(context);
                           }

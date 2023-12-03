@@ -64,7 +64,6 @@ class ApiDestinasiHelper {
     required String imageFoto,
     required String destinationCategory,
     required int rating,
-    required double destinationPrice,
   }) async {
     try {
       Destinasi input = Destinasi(
@@ -76,7 +75,6 @@ class ApiDestinasiHelper {
         destinationImage: imageFoto,
         destinationCategory: destinationCategory,
         destinationRating: rating,
-        destinationPrice: destinationPrice,
       );
 
       Logger().i(input.toRawJson());
@@ -92,7 +90,6 @@ class ApiDestinasiHelper {
           "destinationImage": imageFoto,
           "destinationCategory": destinationCategory,
           "destinationRating": rating,
-          "destinationPrice": destinationPrice
       };
 
       var response = await put(Uri.http(url, endpoint + '/' + id.toString()),
