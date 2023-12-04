@@ -205,12 +205,12 @@ class _CreatePageState extends State<CreatePage> {
                             controllerImage.text = base64string!;
                           });
                         },
-                        child: const Text(
+                        child: Text(
                           'Add Photo',
-                          style: TextStyle(fontSize: 18, color: Colors.black),
+                          style: TextStyle(fontSize: screenWidth * 0.048, color: Colors.black),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: screenHeight * 0.03),
                       TextFormField(
                           controller: controllerName,
                           decoration: InputDecoration(
@@ -220,7 +220,7 @@ class _CreatePageState extends State<CreatePage> {
                               borderRadius: BorderRadius.circular(50),
                             ),
                             contentPadding:
-                                const EdgeInsets.symmetric(vertical: 17),
+                                EdgeInsets.symmetric(vertical: screenHeight * 0.022),
                           ),
                           validator: (value) {
                             if (value == '') {
@@ -228,7 +228,7 @@ class _CreatePageState extends State<CreatePage> {
                             }
                             return null;
                           }),
-                      const SizedBox(height: 20),
+                      SizedBox(height: screenHeight * 0.025),
                       TextFormField(
                           controller: controllerAddress,
                           decoration: InputDecoration(
@@ -238,7 +238,7 @@ class _CreatePageState extends State<CreatePage> {
                               borderRadius: BorderRadius.circular(50),
                             ),
                             contentPadding:
-                                const EdgeInsets.symmetric(vertical: 17),
+                                EdgeInsets.symmetric(vertical: screenHeight * 0.022),
                           ),
                           validator: (value) {
                             if (value == '') {
@@ -246,7 +246,7 @@ class _CreatePageState extends State<CreatePage> {
                             }
                             return null;
                           }),
-                      const SizedBox(height: 20),
+                      SizedBox(height: screenHeight * 0.025),
                       TextFormField(
                           controller: controllerDescription,
                           decoration: InputDecoration(
@@ -256,7 +256,7 @@ class _CreatePageState extends State<CreatePage> {
                               borderRadius: BorderRadius.circular(50),
                             ),
                             contentPadding:
-                                const EdgeInsets.symmetric(vertical: 17),
+                                EdgeInsets.symmetric(vertical: screenHeight * 0.022),
                           ),
                           validator: (value) {
                             if (value == '') {
@@ -264,7 +264,7 @@ class _CreatePageState extends State<CreatePage> {
                             }
                             return null;
                           }),
-                      const SizedBox(height: 20),
+                      SizedBox(height: screenHeight * 0.025),
                       TextFormField(
                           keyboardType: TextInputType.number,
                           controller: controllerLatitude,
@@ -276,7 +276,7 @@ class _CreatePageState extends State<CreatePage> {
                               borderRadius: BorderRadius.circular(50),
                             ),
                             contentPadding:
-                                const EdgeInsets.symmetric(vertical: 17),
+                                EdgeInsets.symmetric(vertical: screenHeight * 0.022),
                           ),
                           validator: (value) {
                             if (value == '') {
@@ -284,7 +284,7 @@ class _CreatePageState extends State<CreatePage> {
                             }
                             return null;
                           }),
-                      const SizedBox(height: 20),
+                      SizedBox(height: screenHeight * 0.025),
                       TextFormField(
                           keyboardType: TextInputType.number,
                           controller: controllerLongitude,
@@ -296,7 +296,7 @@ class _CreatePageState extends State<CreatePage> {
                               borderRadius: BorderRadius.circular(50),
                             ),
                             contentPadding:
-                                const EdgeInsets.symmetric(vertical: 17),
+                                EdgeInsets.symmetric(vertical: screenHeight * 0.022),
                           ),
                           validator: (value) {
                             if (value == '') {
@@ -304,7 +304,7 @@ class _CreatePageState extends State<CreatePage> {
                             }
                             return null;
                           }),
-                      const SizedBox(height: 20),
+                      SizedBox(height: screenHeight * 0.025),
                       TextFormField(
                           controller: controllerCategory,
                           decoration: InputDecoration(
@@ -314,7 +314,7 @@ class _CreatePageState extends State<CreatePage> {
                               borderRadius: BorderRadius.circular(50),
                             ),
                             contentPadding:
-                                const EdgeInsets.symmetric(vertical: 17),
+                                EdgeInsets.symmetric(vertical: screenHeight * 0.022),
                           ),
                           validator: (value) {
                             if (value == '') {
@@ -322,7 +322,7 @@ class _CreatePageState extends State<CreatePage> {
                             }
                             return null;
                           }),
-                      const SizedBox(height: 20),
+                      SizedBox(height: screenHeight * 0.025),
                       TextFormField(
                           keyboardType: TextInputType.number,
                           controller: controllerRating,
@@ -333,7 +333,7 @@ class _CreatePageState extends State<CreatePage> {
                               borderRadius: BorderRadius.circular(50),
                             ),
                             contentPadding:
-                                const EdgeInsets.symmetric(vertical: 17),
+                                EdgeInsets.symmetric(vertical: screenHeight * 0.022),
                           ),
                           validator: (value) {
                             if (value == '') {
@@ -341,12 +341,12 @@ class _CreatePageState extends State<CreatePage> {
                             }
                             return null;
                           }),
-                      const SizedBox(height: 28),
+                      SizedBox(height: screenHeight * 0.025),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 16),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.05, vertical: screenHeight * 0.024),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
@@ -370,12 +370,12 @@ class _CreatePageState extends State<CreatePage> {
                             pushAdminHomePage(context);
                           }
                         },
-                        child: const Text(
-                          'Edit Destination',
-                          style: TextStyle(fontSize: 18),
+                        child: Text(
+                          'Create Destination',
+                          style: TextStyle(fontSize: screenWidth * 0.05, color: Colors.white),
                         ),
                       ),
-                      const SizedBox(height: 28),
+                      SizedBox(height: screenHeight * 0.025),
                       buttonCreatePDF(context),
                     ],
                   ),
