@@ -10,6 +10,8 @@ import 'package:tubespariwisata/page/firstLanding/password/forgotPassword.dart';
 import 'package:tubespariwisata/page/firstLanding/password/newPassword.dart';
 import 'package:tubespariwisata/page/homepage/homepage.dart';
 import 'package:tubespariwisata/page/homepage/updateProfile.dart';
+import 'package:tubespariwisata/page/homepage/profileUI/myprofilecontainer.dart';
+
 
 import 'package:tubespariwisata/adminLaunch/pageAdmin/addDestination.dart';
 import 'package:tubespariwisata/adminLaunch/container/addDestination/createDestination.dart';
@@ -57,6 +59,11 @@ void pushScanQr(BuildContext context) {
 
 void ticketPage(BuildContext context, Destinasi destinasi) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => AllPage(destinasi: destinasi)));
+}
+
+// PUSH REPLACEMENT
+void pushReplacementProfile(BuildContext context){
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Profile()));
 }
 
 // ADMIN FUNCTION

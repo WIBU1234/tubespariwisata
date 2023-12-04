@@ -144,15 +144,23 @@ class _landingProfileState extends State<landingProfile> {
                                         ),
                                       ],
                                     ),
-                                    child: const Center(
-                                      child: Text(
-                                        "View My Profile",
-                                        style: TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w300,
-                                          color: Colors.white,
+                                    child: Center(
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          pushReplacementProfile(context);
+                                        },
+                                        child: const Center(
+                                          child: Text(
+                                            "View My Profile",
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w300,
+                                              color: Colors.white,
+                                            ),
+                                          ),
                                         ),
                                       ),
+
                                     ),
                                   ),
                                 ),

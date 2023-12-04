@@ -7,7 +7,7 @@ import 'package:http/http.dart';
 
 class ApiDestinasiHelper {
   // API URL
-  static const String url = "192.168.62.1";
+  static const String url = "192.168.91.1";
   static const String endpoint = '/tubesPariwisata/public/api/destinasi';
 
   // static const String url = "127.0.0.1:8000";

@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class loginRegisHelper {
   static http.Client client = http.Client();
   // API URL
-  static const String url = "192.168.62.1";
+  static const String url = "192.168.91.1";
   static const String endpoint = "/tubesPariwisata/public/api/login";
 
   // static const String url = "127.0.0.1:8000";
