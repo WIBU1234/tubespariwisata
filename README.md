@@ -43,3 +43,15 @@ UGD LIBRARY
 
 210711481 Gloria Estefania Yaspis // Membuat library printing dan pdf
 
+UGD TESTING
+Kelas A // Kelompok 1 :
+
+200710613 I Kadek Nikki Lababa // 
+
+210711185 Klasik Solafide Kabor Mambri Taidi // 
+
+210711186 Carolus Seto Arianto // Widget test (register-login)
+
+210711214 Ignasius Axel Cokrodiharjo // Widget test (read)
+
+210711481 Gloria Estefania Yaspis // Widget test (create)
