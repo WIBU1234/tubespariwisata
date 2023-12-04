@@ -58,11 +58,13 @@ class _CreatePageState extends State<CreatePage> {
 
   Future pickImage() async {
     try {
-      final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+      final pickedImage =
+          await ImagePicker().pickImage(source: ImageSource.gallery);
 
       if (pickedImage == null) return;
 
-      final Uint8List? compressedImage = await FlutterImageCompress.compressWithFile(
+      final Uint8List? compressedImage =
+          await FlutterImageCompress.compressWithFile(
         pickedImage.path,
         minWidth: 30,
         minHeight: 30,
@@ -70,7 +72,8 @@ class _CreatePageState extends State<CreatePage> {
       );
 
       if (compressedImage != null) {
-        final imageTemp = File(pickedImage.path)..writeAsBytesSync(compressedImage);
+        final imageTemp = File(pickedImage.path)
+          ..writeAsBytesSync(compressedImage);
 
         setState(() {
           image = imageTemp;
@@ -90,8 +93,8 @@ class _CreatePageState extends State<CreatePage> {
 
   @override
   Widget build(BuildContext context) {
-  double screenWidth = MediaQuery.of(context).size.width;
-  double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
         children: [
@@ -146,7 +149,8 @@ class _CreatePageState extends State<CreatePage> {
                       SizedBox(height: screenHeight * 0.01),
                       Center(
                         child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.02),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenHeight * 0.02),
                           child: Align(
                             alignment: Alignment.center,
                             child: Text(
@@ -191,7 +195,8 @@ class _CreatePageState extends State<CreatePage> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.yellow,
                           padding: EdgeInsets.symmetric(
-                              horizontal: screenWidth * 0.1, vertical: screenHeight * 0.016),
+                              horizontal: screenWidth * 0.1,
+                              vertical: screenHeight * 0.016),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
@@ -199,7 +204,7 @@ class _CreatePageState extends State<CreatePage> {
                         ),
                         onPressed: () {
                           image = null;
-                          
+
                           setState(() {
                             pickImage();
                             controllerImage.text = base64string!;
@@ -207,7 +212,9 @@ class _CreatePageState extends State<CreatePage> {
                         },
                         child: Text(
                           'Add Photo',
-                          style: TextStyle(fontSize: screenWidth * 0.048, color: Colors.black),
+                          style: TextStyle(
+                              fontSize: screenWidth * 0.048,
+                              color: Colors.black),
                         ),
                       ),
                       SizedBox(height: screenHeight * 0.03),
@@ -219,8 +226,8 @@ class _CreatePageState extends State<CreatePage> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            contentPadding:
-                                EdgeInsets.symmetric(vertical: screenHeight * 0.022),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: screenHeight * 0.022),
                           ),
                           validator: (value) {
                             if (value == '') {
@@ -237,8 +244,8 @@ class _CreatePageState extends State<CreatePage> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            contentPadding:
-                                EdgeInsets.symmetric(vertical: screenHeight * 0.022),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: screenHeight * 0.022),
                           ),
                           validator: (value) {
                             if (value == '') {
@@ -255,8 +262,8 @@ class _CreatePageState extends State<CreatePage> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            contentPadding:
-                                EdgeInsets.symmetric(vertical: screenHeight * 0.022),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: screenHeight * 0.022),
                           ),
                           validator: (value) {
                             if (value == '') {
@@ -275,8 +282,8 @@ class _CreatePageState extends State<CreatePage> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            contentPadding:
-                                EdgeInsets.symmetric(vertical: screenHeight * 0.022),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: screenHeight * 0.022),
                           ),
                           validator: (value) {
                             if (value == '') {
@@ -295,8 +302,8 @@ class _CreatePageState extends State<CreatePage> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            contentPadding:
-                                EdgeInsets.symmetric(vertical: screenHeight * 0.022),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: screenHeight * 0.022),
                           ),
                           validator: (value) {
                             if (value == '') {
@@ -313,8 +320,8 @@ class _CreatePageState extends State<CreatePage> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            contentPadding:
-                                EdgeInsets.symmetric(vertical: screenHeight * 0.022),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: screenHeight * 0.022),
                           ),
                           validator: (value) {
                             if (value == '') {
@@ -332,8 +339,8 @@ class _CreatePageState extends State<CreatePage> {
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(50),
                             ),
-                            contentPadding:
-                                EdgeInsets.symmetric(vertical: screenHeight * 0.022),
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: screenHeight * 0.022),
                           ),
                           validator: (value) {
                             if (value == '') {
@@ -346,14 +353,15 @@ class _CreatePageState extends State<CreatePage> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.green,
                           padding: EdgeInsets.symmetric(
-                              horizontal: screenWidth * 0.05, vertical: screenHeight * 0.024),
+                              horizontal: screenWidth * 0.05,
+                              vertical: screenHeight * 0.024),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
                           elevation: 6,
                         ),
                         onPressed: () async {
-                          if (!_formKey.currentState!.validate()) {
+                          if (_formKey.currentState!.validate()) {
                             // Handle validation errors
                           } else {
                             ApiDestinasiHelper.createDestinasi(
@@ -372,7 +380,9 @@ class _CreatePageState extends State<CreatePage> {
                         },
                         child: Text(
                           'Create Destination',
-                          style: TextStyle(fontSize: screenWidth * 0.05, color: Colors.white),
+                          style: TextStyle(
+                              fontSize: screenWidth * 0.05,
+                              color: Colors.white),
                         ),
                       ),
                       SizedBox(height: screenHeight * 0.025),
