@@ -1,5 +1,5 @@
 // ENTITY
-import 'package:logger/logger.dart';
+// import 'package:logger/logger.dart';
 import 'package:tubespariwisata/entity/destinasi.dart';
 // TOOLS
 import 'dart:convert';
@@ -7,11 +7,11 @@ import 'package:http/http.dart';
 
 class ApiDestinasiHelper {
   // API URL
-  static const String url = "192.168.62.1";
-  static const String endpoint = '/tubesPariwisata/public/api/destinasi';
+  // static const String url = "192.168.91.1";
+  // static const String endpoint = '/tubesPariwisata/public/api/destinasi';
 
-  // static const String url = "127.0.0.1:8000";
-  // static const String endpoint = '/api/destinasi';
+  static const String url = "10.0.2.2:8000";
+  static const String endpoint = '/api/destinasi';
 
   static Future<Response> createDestinasi({
     required String destinationName,
@@ -39,7 +39,7 @@ class ApiDestinasiHelper {
           "destinationRating": rating
       };
 
-      print(imageFoto);
+      // print(imageFoto);
 
       var response = await post(Uri.http(url, endpoint),
           headers: {"Content-Type": "application/json", "Accept": "application/json"},      
@@ -64,26 +64,21 @@ class ApiDestinasiHelper {
     required String imageFoto,
     required String destinationCategory,
     required int rating,
-    required double destinationPrice,
   }) async {
     try {
-      Destinasi input = Destinasi(
-        destinationName: destinationName,
-        destinationAddress: alamatDestinasi,
-        destinationDescription: deskripsiDestinasi,
-        destinationLatitude: latitude,
-        destinationLongitude: longitude,
-        destinationImage: imageFoto,
-        destinationCategory: destinationCategory,
-        destinationRating: rating,
-        destinationPrice: destinationPrice,
-      );
-
-      Logger().i(input.toRawJson());
-
-      print(imageFoto);
+      // Destinasi input = Destinasi(
+      //   destinationName: destinationName,
+      //   destinationAddress: alamatDestinasi,
+      //   destinationDescription: deskripsiDestinasi,
+      //   destinationLatitude: latitude,
+      //   destinationLongitude: longitude,
+      //   destinationImage: imageFoto,
+      //   destinationCategory: destinationCategory,
+      //   destinationRating: rating,
+      // );
 
       var data = {
+          "id": id,
           "destinationName": destinationName,
           "destinationAddress": alamatDestinasi,
           "destinationDescription": deskripsiDestinasi,
@@ -92,8 +87,11 @@ class ApiDestinasiHelper {
           "destinationImage": imageFoto,
           "destinationCategory": destinationCategory,
           "destinationRating": rating,
-          "destinationPrice": destinationPrice
       };
+
+      // Logger().i(input.toRawJson());
+
+      // print(imageFoto);
 
       var response = await put(Uri.http(url, endpoint + '/' + id.toString()),
           headers: {"Content-Type": "application/json", "Accept": "application/json"},      

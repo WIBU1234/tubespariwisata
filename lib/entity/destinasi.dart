@@ -10,7 +10,6 @@ class Destinasi {
   String destinationImage;
   String destinationCategory;
   int destinationRating;
-  double destinationPrice;
 
   Destinasi(
       {this.id,
@@ -21,8 +20,7 @@ class Destinasi {
       required this.destinationLongitude,
       required this.destinationImage,
       required this.destinationCategory,
-      required this.destinationRating,
-      required this.destinationPrice});
+      required this.destinationRating});
 
   // UPDATE PLACEMENT
   factory Destinasi.fromRawJson(String str) => Destinasi.fromJson(json.decode(str));
@@ -36,7 +34,6 @@ class Destinasi {
     destinationImage: json["destinationImage"],
     destinationCategory: json["destinationCategory"],
     destinationRating: json["destinationRating"],
-    destinationPrice: (json["destinationPrice"] as num).toDouble(),
   );
 
   String toRawJson() => json.encode(toJson());
@@ -50,6 +47,5 @@ class Destinasi {
     "destinationImage": destinationImage,
     "destinationCategory": destinationCategory,
     "destinationRating": destinationRating,
-    "destinationPrice": destinationPrice,
   };
 }

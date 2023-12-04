@@ -57,7 +57,7 @@ class _CameraPageState extends State<CameraPage> {
         picture.path,
         minWidth: 10,
         minHeight: 10,
-        quality: 40,
+        quality: 30,
       );
 
       String base64Image = base64Encode(compressedImage!);
@@ -76,7 +76,9 @@ class _CameraPageState extends State<CameraPage> {
       print(base64Image);
 
       tempUser = User.fromJson(newData);
-      insertUpdate(tempUser);
+
+      ApiFunctionHelper.updatePassword(tempUser);
+
       popperToRoot(context);
       pushHomePage(context);
 
@@ -84,10 +86,6 @@ class _CameraPageState extends State<CameraPage> {
       debugPrint('Error occured while taking picture: $e');
       return null;
     }
-  }
-
-  void insertUpdate(User input){
-    ApiFunctionHelper.updatePassword(input);
   }
 
   Future initCamera(CameraDescription cameraDescription) async {

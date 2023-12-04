@@ -7,7 +7,8 @@ import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
 // IMPORT FORCE PAGE
-import 'package:tubespariwisata/page/homepage/myprofilecontainer.dart';
+// import 'package:tubespariwisata/page/homepage/profileUI/myprofilecontainer.dart';
+import 'package:tubespariwisata/page/homepage/profileUI/landingProfile.dart';
 import 'package:tubespariwisata/page/homepage/mainhomecontainer.dart';
 import 'package:tubespariwisata/page/homepage/griditemmaincontainer.dart';
 import 'package:tubespariwisata/page/homepage/settingscontainer.dart';
@@ -70,17 +71,17 @@ class _HomePageState extends State<Homepage> {
 
   // HOME CONTAINER
   Widget _buildHomeContainer() {
-    return const MainHome();
+    return const MainGrid();
   }
 
   // PROFILE CONTAINER
   Widget _buildPersonContainer() {
-    return Profile();
+    return const landingProfile();
   }
 
   // GRID ITEM CONTAINER
   Widget _buildSearchContainer() {
-    return const MainGrid();
+    return const MainHome();
     // return MyHomePage();
   }
 

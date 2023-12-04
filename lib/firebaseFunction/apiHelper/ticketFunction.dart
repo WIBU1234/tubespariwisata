@@ -7,11 +7,11 @@ import 'package:http/http.dart';
 
 class ApiTicketHelper{
   // API URL
-  static const String url = "192.168.62.1";
-  static const String endpoint = '/tubesPariwisata/public/api/ticket';
+  // static const String url = "192.168.62.1";
+  // static const String endpoint = '/tubesPariwisata/public/api/ticket';
 
-  // static const String url = "127.0.0.1:8000";
-  // static const String endpoint = '/api/ticket';
+  static const String url = "10.0.2.2:8000";
+  static const String endpoint = '/api/ticket';
 
   static Future<Response> createTicket({
     required String ticketName,
