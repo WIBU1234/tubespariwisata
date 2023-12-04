@@ -1,5 +1,5 @@
 // ENTITY
-import 'package:logger/logger.dart';
+// import 'package:logger/logger.dart';
 import 'package:tubespariwisata/entity/destinasi.dart';
 // TOOLS
 import 'dart:convert';

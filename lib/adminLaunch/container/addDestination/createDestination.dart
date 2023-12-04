@@ -90,6 +90,8 @@ class _CreatePageState extends State<CreatePage> {
 
   @override
   Widget build(BuildContext context) {
+  double screenWidth = MediaQuery.of(context).size.width;
+  double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
         children: [
@@ -106,7 +108,7 @@ class _CreatePageState extends State<CreatePage> {
           ),
           Center(
             child: Container(
-              padding: const EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(screenWidth * 0.055),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.9),
                 borderRadius: BorderRadius.circular(20),
@@ -128,39 +130,39 @@ class _CreatePageState extends State<CreatePage> {
                     children: <Widget>[
                       Image.asset(
                         'resources/images/logo.png',
-                        width: 150,
-                        height: 150,
+                        width: screenWidth * 0.4,
+                        height: screenHeight * 0.2,
                       ),
-                      const Align(
+                      Align(
                         alignment: Alignment.center,
                         child: Text(
                           'Add Destination',
                           style: TextStyle(
-                            fontSize: 28,
+                            fontSize: screenWidth * 0.08,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: screenHeight * 0.01),
                       Center(
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: const Align(
+                          padding: EdgeInsets.symmetric(horizontal: screenHeight * 0.02),
+                          child: Align(
                             alignment: Alignment.center,
                             child: Text(
                               'Enter input data below',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: screenWidth * 0.047,
                                 color: Colors.grey,
                               ),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: screenHeight * 0.02),
                       Container(
-                        width: 160,
-                        height: 160,
+                        width: screenWidth * 0.5,
+                        height: screenHeight * 0.24,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.grey[200],
@@ -168,8 +170,8 @@ class _CreatePageState extends State<CreatePage> {
                         child: image != null
                             ? Image.file(
                                 image!,
-                                width: 160,
-                                height: 160,
+                                width: screenWidth * 0.2,
+                                height: screenHeight * 0.2,
                                 fit: BoxFit.cover,
                               )
                             : InkWell(
@@ -177,19 +179,19 @@ class _CreatePageState extends State<CreatePage> {
                                   image = null;
                                   pickImage();
                                 },
-                                child: const Icon(
+                                child: Icon(
                                   Icons.add_a_photo,
-                                  size: 60,
+                                  size: screenWidth * 0.2,
                                   color: Colors.grey,
                                 ),
                               ),
                       ),
-                      const SizedBox(height: 16),
+                      SizedBox(height: screenHeight * 0.026),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.yellow,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 30, vertical: 16),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: screenWidth * 0.1, vertical: screenHeight * 0.016),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
@@ -364,11 +366,12 @@ class _CreatePageState extends State<CreatePage> {
                               destinationCategory: controllerCategory.text,
                               rating: int.parse(controllerRating.text),
                             );
-                            popper(context);
+                            popperToRoot(context);
+                            pushAdminHomePage(context);
                           }
                         },
                         child: const Text(
-                          'Add Destination',
+                          'Edit Destination',
                           style: TextStyle(fontSize: 18),
                         ),
                       ),

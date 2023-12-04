@@ -368,7 +368,8 @@ class _UpdatePageState extends State<UpdatePageDestination> {
                               destinationCategory: controllerCategory.text,
                               rating: int.parse(controllerRating.text)
                             );
-                            popper(context);
+                            popperToRoot(context);
+                            pushAdminHomePage(context);
                           }
                         },
                         child: const Text(

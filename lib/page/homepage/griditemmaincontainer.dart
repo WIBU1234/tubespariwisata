@@ -86,9 +86,6 @@ class _MainGridState extends State<MainGrid> {
   Widget build(BuildContext context) {
 
     return Container(
-
-
-
       decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage("resources/images/bali.jpg"),
