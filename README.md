@@ -48,7 +48,7 @@ Kelas A // Kelompok 1 :
 
 200710613 I Kadek Nikki Lababa // 
 
-210711185 Klasik Solafide Kabor Mambri Taidi // 
+210711185 Klasik Solafide Kabor Mambri Taidi // Widget test(delete)
 
 210711186 Carolus Seto Arianto // Widget test (register-login)
 
