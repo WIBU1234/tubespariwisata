@@ -93,7 +93,6 @@ class _MainHomeState extends State<MainHome> {
                         width: 1,
                       ),
                     ),
-                    
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -111,7 +110,6 @@ class _MainHomeState extends State<MainHome> {
                       ],
                     ),
                   ),
-            
                   const SizedBox(height: 30),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,7 +129,6 @@ class _MainHomeState extends State<MainHome> {
                                 color: Colors.black,
                               ),
                             ),
-
                             Text(
                               "Yogyakarta",
                               style: TextStyle(
@@ -145,7 +142,6 @@ class _MainHomeState extends State<MainHome> {
 
                         // color: Colors.black,
                       ),
-            
                       Container(
                         width: 130,
                         height: 30,
@@ -161,7 +157,6 @@ class _MainHomeState extends State<MainHome> {
                             ),
                           ],
                         ),
-                        
                         child: const Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
@@ -175,7 +170,6 @@ class _MainHomeState extends State<MainHome> {
                                 ),
                               ),
                             ),
-
                             SizedBox(width: 2),
                             Text(
                               "See Other Destination",
@@ -190,12 +184,10 @@ class _MainHomeState extends State<MainHome> {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 12),
                   Container(
                     width: 280,
                     height: 80,
-
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
@@ -211,7 +203,6 @@ class _MainHomeState extends State<MainHome> {
                                 ),
                               ),
                             ),
-
                             SizedBox(height: 8),
                             Text(
                               "Attractions",
@@ -223,7 +214,6 @@ class _MainHomeState extends State<MainHome> {
                             ),
                           ],
                         ),
-
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -236,7 +226,6 @@ class _MainHomeState extends State<MainHome> {
                                 ),
                               ),
                             ),
-
                             SizedBox(height: 8),
                             Text(
                               "Tours",
@@ -248,7 +237,6 @@ class _MainHomeState extends State<MainHome> {
                             ),
                           ],
                         ),
-
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -261,7 +249,6 @@ class _MainHomeState extends State<MainHome> {
                                 ),
                               ),
                             ),
-
                             SizedBox(height: 8),
                             Text(
                               "Culture",
@@ -273,7 +260,6 @@ class _MainHomeState extends State<MainHome> {
                             ),
                           ],
                         ),
-
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -286,7 +272,6 @@ class _MainHomeState extends State<MainHome> {
                                 ),
                               ),
                             ),
-
                             SizedBox(height: 8),
                             Text(
                               "Culinary",
@@ -301,7 +286,6 @@ class _MainHomeState extends State<MainHome> {
                       ],
                     ),
                   ),
-
                   const SizedBox(height: 8),
                   Padding(
                     padding: const EdgeInsets.only(right: 0, left: 0),
@@ -316,144 +300,140 @@ class _MainHomeState extends State<MainHome> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 18),
                   Container(
                     width: 280,
                     height: 300,
-
                     child: GridView.count(
                       crossAxisCount: 2,
                       childAspectRatio: 0.7,
                       padding: const EdgeInsets.all(1.0),
                       mainAxisSpacing: 20.0,
                       crossAxisSpacing: 20.0,
-
                       children: [
-                        for(var destinasi in destinationList)
-                        Padding(
-                          padding: const EdgeInsets.only(left: 0, right: 0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: const BorderRadius.all(Radius.circular(20)),
-                              color: Colors.white.withOpacity(1.0),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  spreadRadius: 1,
-                                  blurRadius: 10,
-                                  offset: Offset(0, 4),
-                                ),
-                              ],
-                            ),
-                    
-                            child: Column(
-                              children: [
-                                Container(
-                                  width: 150,
-                                  height: 120,
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(20),
-                                      topRight: Radius.circular(20),
-                                    ),
-                                    image: DecorationImage(
-                                      image: MemoryImage(base64.decode(destinasi.destinationImage)),
-                                      fit: BoxFit.cover,
+                        for (var destinasi in destinationList)
+                          Padding(
+                            padding: const EdgeInsets.only(left: 0, right: 0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(20)),
+                                color: Colors.white.withOpacity(1.0),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    spreadRadius: 1,
+                                    blurRadius: 10,
+                                    offset: Offset(0, 4),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    width: 150,
+                                    height: 120,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(20),
+                                        topRight: Radius.circular(20),
+                                      ),
+                                      image: DecorationImage(
+                                        image: MemoryImage(base64.decode(
+                                            destinasi.destinationImage)),
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                                ),
-                    
-                                const SizedBox(height: 8),
-                                Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 4.0),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          destinasi.destinationName,
-                                          style: const TextStyle(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                    
-                                    const Padding(
-                                      padding: EdgeInsets.only(left: 4.0),
-                                      child: Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          "Rp. 50.000",
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.normal,
-                                            color: Colors.black,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                    
-                                const SizedBox(height: 8),
-                                GestureDetector(
-                                  onTap: (){
-                                    ticketPage(context, destinasi);
-                                  },
-                                  child: Container(
-                                    width: 80,
-                                    height: 14,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.grey[350],
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Colors.black12,
-                                          spreadRadius: 2,
-                                          blurRadius: 14,
-                                          offset: Offset(0, 9),
-                                        ),
-                                      ],
-                                    ),         
-                                    child: const Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        SizedBox(width: 6),
-                                        SizedBox(
-                                          child: Center(
-                                            child: Icon(
-                                              Icons.keyboard_arrow_down_outlined,
-                                              size: 14,
+                                  const SizedBox(height: 8),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 4.0),
+                                        child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(
+                                            destinasi.destinationName,
+                                            style: const TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.normal,
                                               color: Colors.black,
                                             ),
                                           ),
-                                        ),              
-                                        SizedBox(width: 2),
-                                        Text(
+                                        ),
+                                      ),
+                                      const Padding(
+                                        padding: EdgeInsets.only(left: 4.0),
+                                        child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(
+                                            "Rp. 50.000",
+                                            style: TextStyle(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.normal,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  GestureDetector(
+                                    onTap: () {
+                                      ticketPage(context, destinasi);
+                                    },
+                                    child: Container(
+                                      width: 80,
+                                      height: 14,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                        color: Colors.grey[350],
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Colors.black12,
+                                            spreadRadius: 2,
+                                            blurRadius: 14,
+                                            offset: Offset(0, 9),
+                                          ),
+                                        ],
+                                      ),
+                                      child: const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          SizedBox(width: 6),
+                                          SizedBox(
+                                            child: Center(
+                                              child: Icon(
+                                                Icons
+                                                    .keyboard_arrow_down_outlined,
+                                                size: 14,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(width: 2),
+                                          Text(
                                             "See Tickets",
                                             style: TextStyle(
                                               fontSize: 8,
                                               fontWeight: FontWeight.normal,
                                               color: Colors.black,
                                             ),
-                                        ),
-                                      ],
-                                    ),                
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                ),
-                    
-                              ],
+                                ],
+                              ),
                             ),
-                    
                           ),
-                        ),
                       ],
-
                     ),
                   ),
                 ],
@@ -500,7 +480,6 @@ class _MainHomeState extends State<MainHome> {
                 //         ),
                 //       )
                 //     : Container(),
-
               ),
             ),
           ),
