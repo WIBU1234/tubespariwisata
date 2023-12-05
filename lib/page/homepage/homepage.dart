@@ -98,7 +98,6 @@ class _HomePageState extends State<Homepage> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       key: const Key('homepage'),
       extendBody: true,
@@ -106,31 +105,30 @@ class _HomePageState extends State<Homepage> {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(bottom: 1),
         child: DotNavigationBar(
-          margin: const EdgeInsets.only(left: 10, right: 10),
-          currentIndex: _SelectedTab.values.indexOf(_selectedTab),
-          dotIndicatorColor: Colors.white,
-          unselectedItemColor: Colors.grey[300],
-          splashBorderRadius: 50,
-          onTap: _handleIndexChanged,
-          items: [
-            DotNavigationBarItem(
-              icon: const Icon(Icons.home),
-              selectedColor: const Color(0xff73544C),
-            ),
-            DotNavigationBarItem(
-              icon: const Icon(Icons.person),
-              selectedColor: const Color(0xff73544C),
-            ),
-            DotNavigationBarItem(
-              icon: const Icon(Icons.menu),
-              selectedColor: const Color(0xff73544C),
-            ),
-            DotNavigationBarItem(
-              icon: const Icon(Icons.settings),
-              selectedColor: const Color(0xff73544C),
-            ),
-          ],
-        ),
+            margin: const EdgeInsets.only(left: 10, right: 10),
+            currentIndex: _SelectedTab.values.indexOf(_selectedTab),
+            dotIndicatorColor: Colors.white,
+            unselectedItemColor: Colors.grey[300],
+            splashBorderRadius: 50,
+            onTap: _handleIndexChanged,
+            items: [
+              DotNavigationBarItem(
+                icon: const Icon(Icons.home),
+                selectedColor: const Color(0xff73544C),
+              ),
+              DotNavigationBarItem(
+                icon: const Icon(Icons.person),
+                selectedColor: const Color(0xff73544C),
+              ),
+              DotNavigationBarItem(
+                icon: const Icon(Icons.menu),
+                selectedColor: const Color(0xff73544C),
+              ),
+              DotNavigationBarItem(
+                icon: const Icon(Icons.settings),
+                selectedColor: const Color(0xff73544C),
+              ),
+            ]),
       ),
     );
   }

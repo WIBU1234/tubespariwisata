@@ -84,7 +84,6 @@ class _MainGridState extends State<MainGrid> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(

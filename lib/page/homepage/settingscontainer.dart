@@ -1,5 +1,7 @@
 // IMPORT LIB FROM FLUTTER
 import 'package:flutter/material.dart';
+import 'package:tubespariwisata/page/homepage/aboutUs.dart';
+import 'package:tubespariwisata/page/homepage/privacyPolicy.dart';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
@@ -77,32 +79,31 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                         child: Column(
                           children: [
-                            
-                            const Row(
+                            Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 SizedBox(
                                   width: 160.0,
                                   height: 100.0,
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
-                                      SizedBox(height: 14.0),
+                                      const SizedBox(height: 14.0),
                                       Text(
-                                        "Username",
-                                        style: TextStyle(
+                                        userTemp?.username ?? "Loading...",
+                                        style: const TextStyle(
                                           fontSize: 20,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
-
-                                      Row(
+                                      const Row(
                                         children: [
                                           Padding(
                                             padding: EdgeInsets.all(0),
-                                            child: Icon(Icons.location_on_sharp),
+                                            child:
+                                                Icon(Icons.location_on_sharp),
                                           ),
-
                                           Text(
                                             "Yogyakarta, Indonesia",
                                             style: TextStyle(
@@ -115,19 +116,18 @@ class _SettingPageState extends State<SettingPage> {
                                     ],
                                   ),
                                 ),
-                                Padding(
+                                const Padding(
                                   padding: EdgeInsets.only(left: 0.0),
                                   child: Center(
                                     child: CircleAvatar(
                                       radius: 30,
-                                      backgroundImage:
-                                          AssetImage("resources/images/bali.jpg"),
+                                      backgroundImage: AssetImage(
+                                          "resources/images/bali.jpg"),
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-
                             Center(
                               child: Padding(
                                 padding: const EdgeInsets.only(left: 0.0),
@@ -159,7 +159,6 @@ class _SettingPageState extends State<SettingPage> {
                                 ),
                               ),
                             ),
-
                           ],
                         ),
                       ),
@@ -245,13 +244,13 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                       ],
                     ),
-                    child: const Row(
+                    child: Row(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(left: 20.0),
                           child: Icon(Icons.info),
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(left: 8.0),
                           child: Text(
                             "About Us",
@@ -261,9 +260,18 @@ class _SettingPageState extends State<SettingPage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 80.0),
-                          child: Icon(Icons.arrow_forward_ios_sharp),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const AboutUs()),
+                            );
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.only(left: 80.0),
+                            child: Icon(Icons.arrow_forward_ios_sharp),
+                          ),
                         ),
                       ],
                     ),
@@ -287,13 +295,13 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                       ],
                     ),
-                    child: const Row(
+                    child: Row(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(left: 20.0),
                           child: Icon(Icons.security),
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(left: 8.0),
                           child: Text(
                             "Privacy Policy",
@@ -303,9 +311,18 @@ class _SettingPageState extends State<SettingPage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 45.0),
-                          child: Icon(Icons.arrow_forward_ios_sharp),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const PrivacyPolicy()),
+                            );
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.only(left: 45.0),
+                            child: Icon(Icons.arrow_forward_ios_sharp),
+                          ),
                         ),
                       ],
                     ),
@@ -329,13 +346,13 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                       ],
                     ),
-                    child: const Row(
+                    child: Row(
                       children: [
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(left: 20.0),
                           child: Icon(Icons.language_sharp),
                         ),
-                        Padding(
+                        const Padding(
                           padding: EdgeInsets.only(left: 8.0),
                           child: Text(
                             "Language",
@@ -345,9 +362,41 @@ class _SettingPageState extends State<SettingPage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 75.0),
-                          child: Icon(Icons.arrow_forward_ios_sharp),
+                        InkWell(
+                          onTap: () {
+                            // show modal radio select english or indonesia
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                    title: const Text("Language"),
+                                    content: SizedBox(
+                                      height: 100,
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            width: double.infinity,
+                                            child: TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: const Text('English')),
+                                          ),
+                                          SizedBox(
+                                            width: double.infinity,
+                                            child: TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                },
+                                                child: const Text('Indonesia')),
+                                          )
+                                        ],
+                                      ),
+                                    )));
+                          },
+                          child: const Padding(
+                            padding: EdgeInsets.only(left: 75.0),
+                            child: Icon(Icons.arrow_forward_ios_sharp),
+                          ),
                         ),
                       ],
                     ),
@@ -389,10 +438,28 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                         InkWell(
                           onTap: () {
-                            setState(() {
-                              removeUserID();
-                              pushLogin(context);
-                            });
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                      title: const Text("Log Out"),
+                                      content: const Text(
+                                          "Are you sure want to log out?"),
+                                      actions: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text("Cancel")),
+                                        TextButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                removeUserID();
+                                                pushLogin(context);
+                                              });
+                                            },
+                                            child: const Text("Log Out")),
+                                      ],
+                                    ));
                           },
                           child: const Padding(
                             padding: EdgeInsets.only(left: 90.0),

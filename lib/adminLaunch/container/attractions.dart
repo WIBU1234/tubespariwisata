@@ -7,9 +7,9 @@ import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
 
 class AttractionContainer extends StatefulWidget {
-  const AttractionContainer({Key? key, this.destinasiList}) : super(key: key);
-
-  final List<Destinasi>? destinasiList;
+  const AttractionContainer({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<AttractionContainer> createState() => _AttractionContainerState();
@@ -20,7 +20,6 @@ class _AttractionContainerState extends State<AttractionContainer> {
 
   @override
   void initState() {
-    destinasiList = widget.destinasiList!;
     // setForce();
     super.initState();
   }
@@ -79,8 +78,7 @@ class _AttractionContainerState extends State<AttractionContainer> {
                               padding: const EdgeInsets.only(left: 0, right: 0),
                               child: Container(
                                 decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(20)),
+                                  borderRadius: const BorderRadius.all(Radius.circular(20)),
                                   color: Colors.white.withOpacity(1.0),
                                   boxShadow: const [
                                     BoxShadow(
@@ -104,20 +102,18 @@ class _AttractionContainerState extends State<AttractionContainer> {
                                         image: DecorationImage(
                                           image:
                                               //AssetImage("resources/images/bali.jpg"),
-                                              MemoryImage(base64.decode(
-                                                  destinasi.destinationImage)),
+                                              MemoryImage(
+                                                  base64.decode(destinasi.destinationImage)),
                                           fit: BoxFit.cover,
                                         ),
                                       ),
                                     ),
                                     SizedBox(height: screenHeight * 0.01),
                                     Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Padding(
-                                          padding: EdgeInsets.only(
-                                              left: screenWidth * 0.02),
+                                          padding: EdgeInsets.only(left: screenWidth * 0.02),
                                           child: Align(
                                             alignment: Alignment.centerLeft,
                                             child: Text(
@@ -131,8 +127,7 @@ class _AttractionContainerState extends State<AttractionContainer> {
                                           ),
                                         ),
                                         Padding(
-                                          padding: EdgeInsets.only(
-                                              left: screenWidth * 0.02),
+                                          padding: EdgeInsets.only(left: screenWidth * 0.02),
                                           child: Align(
                                             alignment: Alignment.centerLeft,
                                             child: Text(
@@ -153,13 +148,11 @@ class _AttractionContainerState extends State<AttractionContainer> {
                                         // ticketPage(context, destinasi);
                                       },
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                                         children: [
                                           GestureDetector(
                                             onTap: () async {
-                                              updateDestinasi(
-                                                  context, destinasi);
+                                              updateDestinasi(context, destinasi);
                                               setForce();
                                             },
                                             child: Container(
@@ -167,8 +160,7 @@ class _AttractionContainerState extends State<AttractionContainer> {
                                               height: screenWidth * 0.07,
                                               decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        screenWidth * 0.035),
+                                                    BorderRadius.circular(screenWidth * 0.035),
                                                 color: Colors.grey[350],
                                                 boxShadow: const [
                                                   BoxShadow(
@@ -202,8 +194,7 @@ class _AttractionContainerState extends State<AttractionContainer> {
                                               height: screenWidth * 0.07,
                                               decoration: BoxDecoration(
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                        screenWidth * 0.035),
+                                                    BorderRadius.circular(screenWidth * 0.035),
                                                 color: Colors.grey[350],
                                                 boxShadow: const [
                                                   BoxShadow(
@@ -241,8 +232,7 @@ class _AttractionContainerState extends State<AttractionContainer> {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
                               padding: EdgeInsets.symmetric(
-                                  horizontal: screenWidth * 0.05,
-                                  vertical: screenHeight * 0.02),
+                                  horizontal: screenWidth * 0.05, vertical: screenHeight * 0.02),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
@@ -262,8 +252,7 @@ class _AttractionContainerState extends State<AttractionContainer> {
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
                               padding: EdgeInsets.symmetric(
-                                  horizontal: screenWidth * 0.06,
-                                  vertical: screenHeight * 0.02),
+                                  horizontal: screenWidth * 0.06, vertical: screenHeight * 0.02),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),
