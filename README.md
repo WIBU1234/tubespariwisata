@@ -11,7 +11,7 @@ UGD Layout
 - 210711481 Gloria Estefania Yaspis // Membuat halaman registrasi gender
 
 UGD Data
-- 200710613 I Kadek Nikki Lababa // Pengimplementasian button user
+- 200710613 I Kadek Nikki Lababa // pengimplementasian button user
 
 - 210711185 Klasik Solafide Kabor Mambri Taidi //  Mengimpementasikan SQLLite, akhirnya kelompok tetap memilih no sql
 
