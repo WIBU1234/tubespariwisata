@@ -137,14 +137,27 @@ class _ProfileState extends State<Profile> {
                             child: Column(
                               children: [
                                 const SizedBox(height: 20),
-                                const Text(
-                                  "My Profile",
-                                  style: TextStyle(
-                                    fontSize: 35,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(Icons.arrow_back),
+                                      onPressed: () {
+                                        popper(context);
+                                        pushHomePage(context);
+                                      },
+                                    ),
+                                    const Text(
+                                      "My Profile",
+                                      style: TextStyle(
+                                        fontSize: 35,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(height: 20),
+
+                                const SizedBox(height: 10),
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Align(

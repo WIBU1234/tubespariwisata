@@ -26,6 +26,8 @@ class ApiDestinasiHelper {
     try {
       // Logger().i(input.toRawJson());
 
+      // print("INI IMAGE FOTO");
+
       // print(imageFoto);
 
       var data = {
@@ -130,6 +132,18 @@ class ApiDestinasiHelper {
 
       yield list.map((destinasi) => Destinasi.fromJson(destinasi)).toList();
 
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<Destinasi> getDestinasiById(int id) async {
+    try {
+      var response = await get(Uri.http(url, endpoint + '/' + id.toString()));
+
+      if(response.statusCode != 200) throw Exception(response.reasonPhrase);
+
+      return Destinasi.fromJson(json.decode(response.body)['data']);
     } catch (e) {
       throw Exception(e.toString());
     }

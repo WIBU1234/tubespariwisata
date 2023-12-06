@@ -20,8 +20,7 @@ class _AttractionContainerState extends State<AttractionContainer> {
 
   @override
   void initState() {
-    destinasiList = widget.destinasiList!;
-    // setForce();
+    setForce();
     super.initState();
   }
 
@@ -104,8 +103,7 @@ class _AttractionContainerState extends State<AttractionContainer> {
                                         image: DecorationImage(
                                           image:
                                               //AssetImage("resources/images/bali.jpg"),
-                                              MemoryImage(base64.decode(
-                                                  destinasi.destinationImage)),
+                                              MemoryImage(base64.decode(destinasi.destinationImage)),
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -236,8 +234,8 @@ class _AttractionContainerState extends State<AttractionContainer> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Expanded(
-                          child: ElevatedButton(
+                        // Expanded(
+                          ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
                               padding: EdgeInsets.symmetric(
@@ -256,13 +254,13 @@ class _AttractionContainerState extends State<AttractionContainer> {
                               style: TextStyle(fontSize: screenWidth * 0.05),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          child: ElevatedButton(
+                        // ),
+                        // Expanded(
+                          ElevatedButton(
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.green,
                               padding: EdgeInsets.symmetric(
-                                  horizontal: screenWidth * 0.06,
+                                  horizontal: screenWidth * 0.05,
                                   vertical: screenHeight * 0.02),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10),
@@ -278,7 +276,7 @@ class _AttractionContainerState extends State<AttractionContainer> {
                               style: TextStyle(fontSize: screenWidth * 0.05),
                             ),
                           ),
-                        ),
+                        // ),
                       ],
                     ),
                   ],

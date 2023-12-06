@@ -72,9 +72,7 @@ class _AddMainState extends State<AddMain> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
-      key: const Key('adminPage'),
       extendBody: true,
       body: _getSelectedScreen(),
       bottomNavigationBar: Padding(

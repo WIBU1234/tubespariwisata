@@ -7,17 +7,17 @@ import 'package:http/http.dart';
 
 class ApiTicketHelper{
   // API URL
-  // static const String url = "192.168.62.1";
-  // static const String endpoint = '/tubesPariwisata/public/api/ticket';
+  static const String url = "192.168.239.1";
+  static const String endpoint = '/tubesPariwisata/public/api/ticket';
 
-  static const String url = "10.0.2.2:8000";
-  static const String endpoint = '/api/ticket';
+  // static const String url = "10.0.2.2:8000";
+  // static const String endpoint = '/api/ticket';
 
   static Future<Response> createTicket({
     required String ticketName,
     required String status,
     required int quantity,
-    required double ticketPrice,
+    required double price,
   }) async {
     try {
       // Logger().i(input.toRawJson());
@@ -27,7 +27,7 @@ class ApiTicketHelper{
           "ticketName": ticketName,
           "status": status,
           "quantity": quantity,
-          "ticketPrice": ticketPrice
+          "price": price
       };
 
       var response = await post(Uri.http(url, endpoint),
@@ -54,7 +54,7 @@ class ApiTicketHelper{
           "ticketName": input.ticketName,
           "status": input.status,
           "quantity": input.quantity,
-          "ticketPrice": input.ticketPrice
+          "price": input.price
       };
 
       var response = await put(Uri.http(url, endpoint + '/${input.id}'),
@@ -101,6 +101,24 @@ class ApiTicketHelper{
       return ticket;
     } catch (e) {
       return Future.error(e.toString());
+    }
+  }
+
+  static Stream<List<Ticket>> getTicketStream() async* {
+    try {
+      var response = await get(Uri.http(url, endpoint),
+          headers: {"Content-Type": "application/json", "Accept": "application/json"},      
+          );
+
+      if(response.statusCode != 200) throw Exception(response.reasonPhrase);
+
+      Iterable list = json.decode(response.body)['data'];
+
+      yield list.map((ticket) => Ticket.fromJson(ticket)).toList();
+
+    } catch (e) {
+      
+      throw Exception(e.toString());
     }
   }
 
