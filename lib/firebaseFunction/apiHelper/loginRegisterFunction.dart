@@ -43,30 +43,10 @@ class loginRegisHelper {
         if(apiResult.statusCode == 200) {
           return User.fromJson(json.decode(apiResult.body)['data']);
         } else {
-      print(id);
-      print(apiResult.body);
-
           return User.empty();
         }
     } catch (e) {
       throw Exception(e.toString());
-    }
-  }
-
-  static Future<LoginModel> loginTesting({required String username, required String password}) async {
-    try{
-      var apiResult = await client.post(Uri.http(url, endpoint), 
-        body: {"username": username, "password": password}
-        );
-
-        if(apiResult.statusCode == 200) {
-          final result = LoginModel.fromRawJson(apiResult.body);
-          return result;
-        } else {
-          throw Exception('Failed to login');
-        }
-    } catch (e) {
-      throw Exception('Error : ' + e.toString());
     }
   }
 }

@@ -1,16 +1,14 @@
 // IMPORT LIB FROM FLUTTER
 import 'package:flutter/material.dart';
-import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
-import 'dart:convert';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
 import 'package:tubespariwisata/entity/ticket.dart';
 import 'package:tubespariwisata/entity/destinasi.dart';
+import 'package:tubespariwisata/entity/book.dart';
 // import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/ticketFunction.dart';
-import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
 // FORCE LAUNCH
 
 class MyTicket extends StatefulWidget {
@@ -26,20 +24,12 @@ class MyTicketState extends State<MyTicket> {
   bool isLoading = true;
   Destinasi? destinasiTemp;
   List<Ticket> ticketList = [];
+  List<Book> bookList = [];
 
   @override
   void initState() {
     fetchImidiately();
     super.initState();
-  }
-
-  void fetchObject() {
-    getUserForObject().then((value) {
-      setState(() {
-        userTemp2 = value;
-        isLoading = false;
-      });
-    });
   }
 
   void fetchImidiately() {
@@ -59,9 +49,9 @@ class MyTicketState extends State<MyTicket> {
         });
       });
 
-      ApiTicketHelper.getTicketStream().listen((value) {
+      ApiTicketHelper.getTicketStream(id: int.parse(userID)).listen((value) {
         setState(() {
-          ticketList = value;
+          bookList = value;
           isLoading = false;
         });
       });
@@ -142,19 +132,20 @@ class MyTicketState extends State<MyTicket> {
                                   mainAxisSpacing: 20.0,
                                   crossAxisSpacing: 20.0,
                                     children:  [
-                                      for(var ticket in ticketList)
-                                      
-                                        FutureBuilder<Destinasi>(
-                                          future: ApiDestinasiHelper.getDestinasiById(ticket.idDestination),
-                                          builder: (BuildContext context, AsyncSnapshot<Destinasi> snapshot) {
-                                            if (snapshot.connectionState == ConnectionState.waiting) {
-                                              return const CircularProgressIndicator();
-                                            } else if (snapshot.hasError) {
-                                              return Text('Error: ${snapshot.error}');
-                                            } else if (snapshot.hasData) {
-                                              destinasiTemp = snapshot.data;
 
-                                              return Padding(
+                                      for(var book in bookList)
+                                        // FutureBuilder<Destinasi>(
+                                        //   future: ApiDestinasiHelper.getDestinasiById(ticket.idDestination),
+                                        //   builder: (BuildContext context, AsyncSnapshot<Destinasi> snapshot) {
+                                        //     if (snapshot.connectionState == ConnectionState.waiting) {
+                                        //       return const CircularProgressIndicator();
+                                        //     } else if (snapshot.hasError) {
+                                        //       return Text('Error: ${snapshot.error}');
+                                        //     } else if (snapshot.hasData) {
+                                        //       destinasiTemp = snapshot.data;
+
+                                        //       return 
+                                              Padding(
                                                 padding: const EdgeInsets.only(left: 0, right: 0),
                                                 child: Container(
                                                   width: 380,
@@ -178,10 +169,10 @@ class MyTicketState extends State<MyTicket> {
                                                         height: 120,
                                                         decoration: BoxDecoration(
                                                           borderRadius: BorderRadius.circular(20),
-                                                          image: DecorationImage(
-                                                            image: MemoryImage(base64.decode(destinasiTemp!.destinationImage)),
-                                                            fit: BoxFit.fill,
-                                                          ),
+                                                          // image: DecorationImage(
+                                                          //   image: MemoryImage(base64.decode(destinasiTemp!.destinationImage)),
+                                                          //   fit: BoxFit.fill,
+                                                          // ),
                                                         ),
                                                       ),
 
@@ -190,7 +181,7 @@ class MyTicketState extends State<MyTicket> {
                                                         children: [
                                                           const SizedBox(height: 12),
                                                           Text(
-                                                            ticket.ticketName,
+                                                            "ticket.ticketName",
                                                             style: const TextStyle(
                                                               fontWeight: FontWeight.w500,
                                                             ),
@@ -247,12 +238,12 @@ class MyTicketState extends State<MyTicket> {
                                                     ],
                                                   ),
                                                 ),
-                                              );
-                                            } else {
-                                              return Text('No data');
-                                            }
-                                          },
-                                        ),
+                                              ),
+                                        //     } else {
+                                        //       return const Text('No data');
+                                        //     }
+                                        //   },
+                                        // ),
 
                                       // Padding(
                                       //   padding: const EdgeInsets.only(left: 0, right: 0),
