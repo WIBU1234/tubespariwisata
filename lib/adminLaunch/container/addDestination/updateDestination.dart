@@ -67,9 +67,9 @@ class _UpdatePageState extends State<UpdatePageDestination> {
 
       final Uint8List? compressedImage = await FlutterImageCompress.compressWithFile(
         pickedImage.path,
-        minWidth: 10,
-        minHeight: 10,
-        quality: 20,
+        minWidth: 256,
+        minHeight: 256,
+        quality: 60,
       );
 
       if (compressedImage != null) {

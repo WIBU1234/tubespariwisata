@@ -13,6 +13,8 @@ import 'package:tubespariwisata/page/homepage/mainhomecontainer.dart';
 import 'package:tubespariwisata/page/homepage/griditemmaincontainer.dart';
 import 'package:tubespariwisata/page/homepage/settingscontainer.dart';
 
+import 'package:tubespariwisata/page/homepage/myTicket/myTicket.dart';
+
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
 
@@ -71,7 +73,7 @@ class _HomePageState extends State<Homepage> {
 
   // HOME CONTAINER
   Widget _buildHomeContainer() {
-    return const MainGrid();
+    return const MyTicket();
   }
 
   // PROFILE CONTAINER

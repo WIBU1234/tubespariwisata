@@ -186,7 +186,7 @@ class _LoginPageState extends State<Loginpage> {
                                   ),
                                 );
                                 saveUserID(userTemp.id.toString());
-                                saveUserForObject(userTemp);
+
                                 pushHomePage(context);
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(

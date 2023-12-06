@@ -66,9 +66,9 @@ class _CreatePageState extends State<CreatePage> {
       final Uint8List? compressedImage =
           await FlutterImageCompress.compressWithFile(
         pickedImage.path,
-        minWidth: 30,
-        minHeight: 30,
-        quality: 40,
+        minWidth: 256,
+        minHeight: 256,
+        quality: 60,
       );
 
       if (compressedImage != null) {
