@@ -1,5 +1,4 @@
 import 'package:tubespariwisata/entity/user.dart';
-import 'package:tubespariwisata/entity/testingModel/loginModel.dart';
 // TOOLS
 import 'dart:convert';
 import 'package:http/http.dart' as http;

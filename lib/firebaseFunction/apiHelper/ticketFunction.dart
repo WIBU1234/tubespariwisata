@@ -1,5 +1,4 @@
 // ENTITY
-import 'package:tubespariwisata/entity/ticket.dart';
 import 'package:tubespariwisata/entity/book.dart';
 // TOOLS
 import 'dart:convert';
@@ -19,7 +18,6 @@ class ApiTicketHelper{
     // String endpointV2 = "/api/getAllTicketByIDUser";
 
     String idUser = id.toString();
-    print("Ini ID USER : $idUser");
 
     try {
       var apiResult = await client.post(Uri.http(url, endpointV2),
@@ -33,26 +31,7 @@ class ApiTicketHelper{
           throw Exception(apiResult.reasonPhrase);
         }
     } catch (e) {
-      print("Ini ID USER : $idUser");
       throw Exception(e.toString());
     }
   }
-
-  // static Future<List<Ticket>> getTicketForDropdown() async {
-  //   try {
-  //     var response = await get(Uri.http(url, endpoint),
-  //         headers: {"Content-Type": "application/json", "Accept": "application/json"},      
-  //         );
-
-  //     if(response.statusCode != 200) throw Exception(response.reasonPhrase);
-
-  //     List<Ticket> ticket = (jsonDecode(response.body) as List)
-  //         .map((e) => Ticket.fromJson(e))
-  //         .toList();
-
-  //     return ticket;
-  //   } catch (e) {
-  //     return Future.error(e.toString());
-  //   }
-  // } 
 }

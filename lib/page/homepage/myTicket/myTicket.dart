@@ -8,6 +8,7 @@ import 'package:tubespariwisata/entity/destinasi.dart';
 import 'package:tubespariwisata/entity/book.dart';
 // import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/ticketFunction.dart';
 // FORCE LAUNCH
 
@@ -46,6 +47,7 @@ class MyTicketState extends State<MyTicket> {
       loginRegisHelper.loginById(id: int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
+          isLoading = false;
         });
       });
 
@@ -134,17 +136,17 @@ class MyTicketState extends State<MyTicket> {
                                     children:  [
 
                                       for(var book in bookList)
-                                        // FutureBuilder<Destinasi>(
-                                        //   future: ApiDestinasiHelper.getDestinasiById(ticket.idDestination),
-                                        //   builder: (BuildContext context, AsyncSnapshot<Destinasi> snapshot) {
-                                        //     if (snapshot.connectionState == ConnectionState.waiting) {
-                                        //       return const CircularProgressIndicator();
-                                        //     } else if (snapshot.hasError) {
-                                        //       return Text('Error: ${snapshot.error}');
-                                        //     } else if (snapshot.hasData) {
-                                        //       destinasiTemp = snapshot.data;
+                                        FutureBuilder<Destinasi>(
+                                          future: ApiDestinasiHelper.getDestinasiById(book.idDestinasi),
+                                          builder: (BuildContext context, AsyncSnapshot<Destinasi> snapshot) {
+                                            if (snapshot.connectionState == ConnectionState.waiting) {
+                                              return const CircularProgressIndicator();
+                                            } else if (snapshot.hasError) {
+                                              return Text('Error: ${snapshot.error}');
+                                            } else if (snapshot.hasData) {
+                                              destinasiTemp = snapshot.data;
 
-                                        //       return 
+                                              return 
                                               Padding(
                                                 padding: const EdgeInsets.only(left: 0, right: 0),
                                                 child: Container(
@@ -238,12 +240,12 @@ class MyTicketState extends State<MyTicket> {
                                                     ],
                                                   ),
                                                 ),
-                                              ),
-                                        //     } else {
-                                        //       return const Text('No data');
-                                        //     }
-                                        //   },
-                                        // ),
+                                              );
+                                            } else {
+                                              return const Text('No data');
+                                            }
+                                          },
+                                        ),
 
                                       // Padding(
                                       //   padding: const EdgeInsets.only(left: 0, right: 0),
