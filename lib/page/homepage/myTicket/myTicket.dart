@@ -7,11 +7,12 @@ import 'package:tubespariwisata/entity/user.dart';
 import 'package:tubespariwisata/entity/ticket.dart';
 import 'package:tubespariwisata/entity/destinasi.dart';
 import 'package:tubespariwisata/entity/book.dart';
-// import 'package:dot_navigation_bar/dot_navigation_bar.dart';
+
 import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/ticketFunction.dart';
 // FORCE LAUNCH
+import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 
 class MyTicket extends StatefulWidget {
   const MyTicket({Key? key}) : super(key: key);
@@ -49,7 +50,6 @@ class MyTicketState extends State<MyTicket> {
       loginRegisHelper.loginById(id: int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
-          isLoading = false;
         });
       });
 
@@ -136,6 +136,7 @@ class MyTicketState extends State<MyTicket> {
                                   mainAxisSpacing: 20.0,
                                   crossAxisSpacing: 20.0,
                                   children:  [
+                                    
                                     for(var book in bookList) 
                                       FutureBuilder<Destinasi>(
                                         future: ApiDestinasiHelper.getDestinasiById(book.idDestinasi),
@@ -223,9 +224,9 @@ class MyTicketState extends State<MyTicket> {
                                                                   ),
                                                                   child: GestureDetector(
                                                                     onTap: () {
-                                                                      // Handle the click event here
+                                                                      detailPageTicket(context, book);
                                                                     },
-                                                                    
+
                                                                     child: const Row(
                                                                       mainAxisAlignment: MainAxisAlignment.center,
                                                                       children: [
