@@ -1,5 +1,6 @@
 // ENTITY
 import 'package:tubespariwisata/entity/book.dart';
+import 'package:tubespariwisata/entity/ticket.dart';
 // TOOLS
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -31,6 +32,19 @@ class ApiTicketHelper{
           throw Exception(apiResult.reasonPhrase);
         }
     } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Future<Ticket> getTicketById(int id) async {
+    try {
+      var response = await http.get(Uri.http(url, endpoint + '/' + id.toString()));
+
+      if(response.statusCode != 200) throw Exception(response.reasonPhrase);
+
+      return Ticket.fromJson(json.decode(response.body)['data']);
+    } catch (e) {
+      print("Throw Error");
       throw Exception(e.toString());
     }
   }

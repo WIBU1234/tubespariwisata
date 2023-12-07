@@ -5,7 +5,7 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import 'package:quickalert/quickalert.dart';
 
-class component{
+class componentSnackAlert{
   static snackBarSuccess(BuildContext context, String message){
     showTopSnackBar(
         Overlay.of(context),

@@ -2,6 +2,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:tubespariwisata/component/customSnackAlert.dart';
 // PAGE IMPORTER
 import 'package:tubespariwisata/entity/user.dart';
 // FUNCTION IMPORTER
@@ -154,12 +155,7 @@ class _LoginPageState extends State<Loginpage> {
                         if(usernameController.text == "admin" && passwordController.text == "admin") {
                           saveUserID("admin");
                           popper(context);
-                          
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Welcome Admin'),
-                            ),
-                          );
+                          componentSnackAlert.snackBarSuccess(context, "Welcome Admin");
 
                           pushAdminHomePage(context); 
                         } else {
@@ -180,20 +176,11 @@ class _LoginPageState extends State<Loginpage> {
                             setState(() {
                               userTemp = user;
                               if (userTemp.id != -240) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('Success Login! User ID: ${userTemp.id}'),
-                                  ),
-                                );
                                 saveUserID(userTemp.id.toString());
-
+                                componentSnackAlert.snackBarSuccess(context, 'Success Login! WELCOME ${userTemp.username}');
                                 pushHomePage(context);
                               } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Login failed. Please check your credentials.'),
-                                  ),
-                                );
+                                componentSnackAlert.snackBarError(context, "Failed Login! Please Check Your Credential");
                               }
                             });
                           });
