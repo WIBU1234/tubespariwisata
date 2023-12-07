@@ -10,7 +10,7 @@ import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction
 // import 'package:tubespariwisata/page/homepage/profileUI/myprofilecontainer.dart';
 import 'package:tubespariwisata/page/homepage/profileUI/landingProfile.dart';
 import 'package:tubespariwisata/page/homepage/mainhomecontainer.dart';
-import 'package:tubespariwisata/page/homepage/griditemmaincontainer.dart';
+// import 'package:tubespariwisata/page/homepage/griditemmaincontainer.dart';
 import 'package:tubespariwisata/page/homepage/settingscontainer.dart';
 
 import 'package:tubespariwisata/page/homepage/myTicket/myTicket.dart';

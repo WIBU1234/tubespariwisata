@@ -36,6 +36,9 @@ dependencies:
   mockito: ^5.0.0
   test: ^1.16.0
 
+  top_snackbar_flutter: ^3.1.0
+  quickalert: ^1.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
