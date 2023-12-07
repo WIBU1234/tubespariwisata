@@ -26,7 +26,7 @@ class MyDetailTicket extends StatefulWidget {
 
 class _MyDetailTicketState extends State<MyDetailTicket> {
   String? userId;
-  User? userTemp, userTemp2;
+  User? userTemp;
   Destinasi? destinasiTemp;
   Ticket? ticketTemp;
   bool isLoading = true;
@@ -91,7 +91,7 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                 child: Center(
                   child: Container(
                     width: 330,
-                    height: 610,
+                    height: 740,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: Colors.white.withOpacity(0.8),
@@ -102,7 +102,7 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                         child: Center(
                           child: Container(
                             width: 300,
-                            height: 580,
+                            height: 680,
 
                             // Add your content here SINI WOI
                             child: Column(
@@ -139,7 +139,7 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                 const SizedBox(height: 20),
                                 Container(
                                   width: 280,
-                                  height: 500,
+                                  height: 600,
                                   // color: Colors.black,
 
                                   child: Column(
@@ -410,9 +410,52 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                               ),
                                             ),
                                           ),
-
                                         ],
+                                      ),
 
+                                      const SizedBox(height: 10),
+                                      Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+
+                                        children: [
+                                          Container(
+                                            width: 100,
+                                            height: 100,
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey[400],
+                                              borderRadius: BorderRadius.circular(10),
+                                              boxShadow: const [
+                                                BoxShadow(
+                                                  color: Colors.black12,
+                                                  spreadRadius: 1,
+                                                  blurRadius: 10,
+                                                  offset: Offset(0, 4),
+                                                ),
+                                              ],
+                                            ),
+
+                                            child: const Column(
+                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              children: [
+                                                SizedBox(height: 10),
+                                                Padding(
+                                                  padding: EdgeInsets.all(0),
+                                                  child: Icon(Icons.picture_as_pdf, size: 60.0),
+                                                ),
+
+                                                SizedBox(height: 2),
+                                                Text(
+                                                  'PDF',
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w300,
+                                                    fontSize: 16.0,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
                                       ),
 
                                     ],
