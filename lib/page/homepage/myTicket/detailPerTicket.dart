@@ -8,17 +8,19 @@ import 'package:tubespariwisata/entity/ticket.dart';
 import 'package:tubespariwisata/entity/destinasi.dart';
 import 'package:tubespariwisata/entity/book.dart';
 // import 'package:dot_navigation_bar/dot_navigation_bar.dart';
+import 'package:uuid/uuid.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/ticketFunction.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiBookFunction.dart';
+import 'package:tubespariwisata/pdf/pdfTicket_view.dart';
 // FORCE LAUNCH
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 
 class MyDetailTicket extends StatefulWidget {
-  final Book book;
-
   const MyDetailTicket({Key? key, required this.book}) : super(key: key);
+
+  final Book book;
 
   @override
   State<MyDetailTicket> createState() => _MyDetailTicketState();
@@ -30,6 +32,7 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
   Destinasi? destinasiTemp;
   Ticket? ticketTemp;
   bool isLoading = true;
+  String id = const Uuid().v1();
 
   @override
   void initState() {
@@ -54,9 +57,11 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
         });
       });
 
-      ApiDestinasiHelper.getDestinasiById(widget.book.idDestinasi).then((value) {
+      ApiDestinasiHelper.getDestinasiById(widget.book.idDestinasi)
+          .then((value) {
         setState(() {
           destinasiTemp = value;
+          isLoading = false;
         });
       });
 
@@ -71,6 +76,7 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoading = this.isLoading ?? false;
     // final _formKey = GlobalKey<FormState>();
     // double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
@@ -114,16 +120,17 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                         popperToRoot(context);
                                         pushHomePage(context);
                                       },
-
                                       child: const Padding(
-                                        padding: EdgeInsets.only(top: 20, left: 20),
-                                        child: Icon(Icons.keyboard_arrow_left, size: 30.0),
+                                        padding:
+                                            EdgeInsets.only(top: 20, left: 20),
+                                        child: Icon(Icons.keyboard_arrow_left,
+                                            size: 30.0),
                                       ),
                                     ),
-
                                     const Center(
                                       child: Padding(
-                                        padding: EdgeInsets.only(top: 20, left: 0),
+                                        padding:
+                                            EdgeInsets.only(top: 20, left: 0),
                                         child: Text(
                                           "Details Information",
                                           style: TextStyle(
@@ -135,7 +142,6 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                     ),
                                   ],
                                 ),
-
                                 const SizedBox(height: 20),
                                 Container(
                                   width: 280,
@@ -149,7 +155,8 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                         // height: 180,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           boxShadow: const [
                                             BoxShadow(
                                               color: Colors.black12,
@@ -161,8 +168,10 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                         ),
 
                                         child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.start,
-                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
                                           children: [
                                             const SizedBox(height: 10),
                                             Container(
@@ -172,7 +181,8 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
 
                                               decoration: BoxDecoration(
                                                 color: Colors.white,
-                                                borderRadius: BorderRadius.circular(10),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
                                                 boxShadow: const [
                                                   BoxShadow(
                                                     color: Colors.black12,
@@ -182,12 +192,13 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                                   ),
                                                 ],
                                                 image: DecorationImage(
-                                                  image: MemoryImage(base64.decode(destinasiTemp!.destinationImage)),
+                                                  image: MemoryImage(base64
+                                                      .decode(destinasiTemp!
+                                                          .destinationImage)),
                                                   fit: BoxFit.fill,
                                                 ),
                                               ),
                                             ),
-
                                             const SizedBox(height: 8),
                                             Text(
                                               destinasiTemp!.destinationName,
@@ -196,53 +207,59 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                                 fontSize: 24.0,
                                               ),
                                             ),
-
                                             const SizedBox(height: 8),
                                             Container(
-                                              width: 100,
-                                              height: 20,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.circular(6),
-                                                color: Colors.grey[300],
-                                              ),
-                                              child: GestureDetector(
-                                                onTap: () {
-
-                                                },
-                                                child: const Row(
-                                                  mainAxisAlignment: MainAxisAlignment.center,
-                                                  children: [
-                                                    Padding(
-                                                      padding: EdgeInsets.only(left: 5),
-                                                      child: Text(
-                                                        "See Ticket",
-                                                        style: TextStyle(
-                                                          fontSize: 12,
-                                                          fontWeight: FontWeight.w300,
+                                                width: 100,
+                                                height: 20,
+                                                decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(6),
+                                                  color: Colors.grey[300],
+                                                ),
+                                                child: GestureDetector(
+                                                  onTap: () {},
+                                                  child: const Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 5),
+                                                        child: Text(
+                                                          "See Ticket",
+                                                          style: TextStyle(
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight.w300,
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),                                                       
-                                                    Padding(
-                                                      padding: EdgeInsets.only(left: 5),
-                                                      child: Icon(Icons.arrow_forward_ios, size: 12.0),
-                                                    ),
-                                                  ],
-                                                ),
-                                              )                                              
-                                            ),
-
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 5),
+                                                        child: Icon(
+                                                            Icons
+                                                                .arrow_forward_ios,
+                                                            size: 12.0),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )),
                                             const SizedBox(height: 10),
                                           ],
                                         ),
                                       ),
-
                                       const SizedBox(height: 10),
                                       Container(
                                         width: 280,
                                         height: 160,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           boxShadow: const [
                                             BoxShadow(
                                               color: Colors.black12,
@@ -252,86 +269,107 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                             ),
                                           ],
                                         ),
-
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            const SizedBox(height: 10),
-                                            const Padding(
-                                              padding: EdgeInsets.only(left: 8.0),
-                                              child: Text(
-                                                "Package Details",
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.normal,
-                                                  fontSize: 20.0,
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(height: 10),
+                                              const Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 8.0),
+                                                child: Text(
+                                                  "Package Details",
+                                                  style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 20.0,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-
-                                            const SizedBox(height: 6),
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 10.0),
-                                              child: Text(
-                                                ticketTemp!.ticketName,
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.normal,
-                                                  fontSize: 16.0,
+                                              const SizedBox(height: 6),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10.0),
+                                                child: Text(
+                                                  ticketTemp!.ticketName,
+                                                  style: const TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 16.0,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-
-                                            const SizedBox(height: 10),
-                                            const Padding(
-                                              padding: EdgeInsets.only(left: 8.0),
-                                              child: Text(
-                                                "Validity Period",
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.normal,
-                                                  fontSize: 20.0,
+                                              const SizedBox(height: 10),
+                                              const Padding(
+                                                padding:
+                                                    EdgeInsets.only(left: 8.0),
+                                                child: Text(
+                                                  "Validity Period",
+                                                  style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 20.0,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-
-                                            const SizedBox(height: 6),
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 10.0),
-                                              child: Text(
-                                                'Date of Departure :  ${widget.book.dateofDeparture}',
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.normal,
-                                                  fontSize: 16.0,
+                                              const SizedBox(height: 6),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10.0),
+                                                child: Text(
+                                                  'Date of Departure :  ${widget.book.dateofDeparture}',
+                                                  style: const TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 16.0,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-
-                                            const SizedBox(height: 6),
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 10.0),
-                                              child: Text(
-                                                'Date of Return :  ${widget.book.dateofReturn}',
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.normal,
-                                                  fontSize: 16.0,
+                                              const SizedBox(height: 6),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10.0),
+                                                child: Text(
+                                                  'Date of Return :  ${widget.book.dateofReturn}',
+                                                  style: const TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 16.0,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-
-                                          ],
+                                              const SizedBox(height: 6),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10.0),
+                                                child: Text(
+                                                  'Resi :  ${widget.book.nomorResi}',
+                                                  style: const TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    fontSize: 16.0,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
-
                                       const SizedBox(height: 10),
                                       Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
                                         children: [
                                           Container(
                                             width: 100,
                                             height: 100,
                                             decoration: BoxDecoration(
                                               color: Colors.grey[400],
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               boxShadow: const [
                                                 BoxShadow(
                                                   color: Colors.black12,
@@ -341,16 +379,17 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                                 ),
                                               ],
                                             ),
-
                                             child: const Column(
-                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
                                               children: [
                                                 SizedBox(height: 10),
                                                 Padding(
                                                   padding: EdgeInsets.all(0),
-                                                  child: Icon(Icons.edit_document, size: 60.0),
+                                                  child: Icon(
+                                                      Icons.edit_document,
+                                                      size: 60.0),
                                                 ),
-
                                                 SizedBox(height: 2),
                                                 Text(
                                                   'Review',
@@ -362,13 +401,13 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                               ],
                                             ),
                                           ),
-
                                           Container(
                                             width: 100,
                                             height: 100,
                                             decoration: BoxDecoration(
                                               color: Colors.grey[400],
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               boxShadow: const [
                                                 BoxShadow(
                                                   color: Colors.black12,
@@ -378,31 +417,30 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                                 ),
                                               ],
                                             ),
-
                                             child: GestureDetector(
                                               onTap: () {
-                                                ApiBookHelper.deleteDataBooking(widget.book.id!).then((value) {
-                                                  if(value == 200) {
-                                                    popperToRoot(context);
-                                                    pushHomePage(context);
-                                                  }
-                                                });
+                                                ApiBookHelper.deleteDataBooking(
+                                                    widget.book.id!);
+                                                popperToRoot(context);
+                                                pushHomePage(context);
                                               },
-
                                               child: const Column(
-                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
                                                 children: [
                                                   SizedBox(height: 10),
                                                   Padding(
                                                     padding: EdgeInsets.all(0),
-                                                    child: Icon(Icons.attach_money, size: 60.0),
+                                                    child: Icon(
+                                                        Icons.attach_money,
+                                                        size: 60.0),
                                                   ),
-                                            
                                                   SizedBox(height: 2),
                                                   Text(
                                                     'Refund',
                                                     style: TextStyle(
-                                                      fontWeight: FontWeight.w300,
+                                                      fontWeight:
+                                                          FontWeight.w300,
                                                       fontSize: 16.0,
                                                     ),
                                                   ),
@@ -412,19 +450,20 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                           ),
                                         ],
                                       ),
-
                                       const SizedBox(height: 10),
                                       Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceAround,
                                         children: [
                                           Container(
                                             width: 100,
                                             height: 100,
                                             decoration: BoxDecoration(
                                               color: Colors.grey[400],
-                                              borderRadius: BorderRadius.circular(10),
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                               boxShadow: const [
                                                 BoxShadow(
                                                   color: Colors.black12,
@@ -434,34 +473,48 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                                 ),
                                               ],
                                             ),
-
-                                            child: const Column(
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              children: [
-                                                SizedBox(height: 10),
-                                                Padding(
-                                                  padding: EdgeInsets.all(0),
-                                                  child: Icon(Icons.picture_as_pdf, size: 60.0),
-                                                ),
-
-                                                SizedBox(height: 2),
-                                                Text(
-                                                  'PDF',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w300,
-                                                    fontSize: 16.0,
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                createPdfDetail(
+                                                  widget.book.nomorResi,
+                                                  widget.book.dateofDeparture,
+                                                  widget.book.dateofReturn,
+                                                  id,
+                                                  destinasiTemp,
+                                                  context,
+                                                  userTemp,
+                                                  ticketTemp,
+                                                );
+                                              },
+                                              child: const Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  SizedBox(height: 10),
+                                                  Padding(
+                                                    padding: EdgeInsets.all(0),
+                                                    child: Icon(
+                                                        Icons.picture_as_pdf,
+                                                        size: 60.0),
                                                   ),
-                                                ),
-                                              ],
+                                                  SizedBox(height: 2),
+                                                  Text(
+                                                    'PDF',
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      fontSize: 16.0,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ],
                                       ),
-
                                     ],
                                   ),
                                 ),
-
                               ],
                             ),
                           ),
@@ -472,6 +525,6 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                 ),
               ),
       ),
-    );    
+    );
   }
 }
