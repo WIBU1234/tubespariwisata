@@ -9,10 +9,10 @@ import 'package:tubespariwisata/firebaseFunction/apiHelper/globalURL.dart';
 class ApiFunctionHelper {
   // API URL
   static const String url = globalURL.url;
-  static const String endpoint = '/tubesPariwisata/public/api/user';
+  // static const String endpoint = '/tubesPariwisata/public/api/user';
 
-  // static const String url = "10.0.2.2:8000";
-  // static const String endpoint = '/api/user';
+  // static const String url = globalURL.url;
+  static const String endpoint = '/api/user';
 
   static Future<Response> createUser({
     required String username,
@@ -36,7 +36,7 @@ class ApiFunctionHelper {
       );
 
       var response = await post(Uri.http(url, endpoint),
-          headers: {"Content-Type": "application/json"},      
+          headers: {"Content-Type": "application/json"},
           body: input.toRawJson());
 
       if(response.statusCode != 200) throw Exception(response.reasonPhrase);
@@ -49,7 +49,7 @@ class ApiFunctionHelper {
 
   static Stream<List<User>> getUser() async* {
     try {
-      var response = await get(Uri.http(url, endpoint));
+      var response = await get(Uri.http(url, endpoint), headers: {"Content-Type": "application/json"});
 
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
 
@@ -63,7 +63,7 @@ class ApiFunctionHelper {
 
   static Future<List<User>> fetchAll() async {
     try {
-      var response = await get(Uri.http(url, endpoint));
+      var response = await get(Uri.http(url, endpoint), headers: {"Content-Type": "application/json"});
 
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
 
@@ -77,7 +77,7 @@ class ApiFunctionHelper {
 
   static Future<User> searchUserForLogin(String username, String password) async {
     try {
-      var response = await get(Uri.http(url, endpoint));
+      var response = await get(Uri.http(url, endpoint), headers: {"Content-Type": "application/json"});
 
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
 

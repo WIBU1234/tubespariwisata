@@ -253,70 +253,84 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                           ],
                                         ),
 
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            const SizedBox(height: 10),
-                                            const Padding(
-                                              padding: EdgeInsets.only(left: 8.0),
-                                              child: Text(
-                                                "Package Details",
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.normal,
-                                                  fontSize: 20.0,
+                                        child: SingleChildScrollView(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(height: 10),
+                                              const Padding(
+                                                padding: EdgeInsets.only(left: 8.0),
+                                                child: Text(
+                                                  "Package Details",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.normal,
+                                                    fontSize: 20.0,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-
-                                            const SizedBox(height: 6),
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 10.0),
-                                              child: Text(
-                                                ticketTemp!.ticketName,
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.normal,
-                                                  fontSize: 16.0,
+                                        
+                                              const SizedBox(height: 6),
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 10.0),
+                                                child: Text(
+                                                  ticketTemp!.ticketName,
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.normal,
+                                                    fontSize: 16.0,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-
-                                            const SizedBox(height: 10),
-                                            const Padding(
-                                              padding: EdgeInsets.only(left: 8.0),
-                                              child: Text(
-                                                "Validity Period",
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.normal,
-                                                  fontSize: 20.0,
+                                        
+                                              const SizedBox(height: 10),
+                                              const Padding(
+                                                padding: EdgeInsets.only(left: 8.0),
+                                                child: Text(
+                                                  "Validity Period",
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.normal,
+                                                    fontSize: 20.0,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-
-                                            const SizedBox(height: 6),
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 10.0),
-                                              child: Text(
-                                                'Date of Departure :  ${widget.book.dateofDeparture}',
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.normal,
-                                                  fontSize: 16.0,
+                                        
+                                              const SizedBox(height: 6),
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 10.0),
+                                                child: Text(
+                                                  'Date of Departure :  ${widget.book.dateofDeparture}',
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.normal,
+                                                    fontSize: 16.0,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-
-                                            const SizedBox(height: 6),
-                                            Padding(
-                                              padding: const EdgeInsets.only(left: 10.0),
-                                              child: Text(
-                                                'Date of Return :  ${widget.book.dateofReturn}',
-                                                style: const TextStyle(
-                                                  fontWeight: FontWeight.normal,
-                                                  fontSize: 16.0,
+                                        
+                                              const SizedBox(height: 6),
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 10.0),
+                                                child: Text(
+                                                  'Date of Return :  ${widget.book.dateofReturn}',
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.normal,
+                                                    fontSize: 16.0,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-
-                                          ],
+                                        
+                                              const SizedBox(height: 6),
+                                              Padding(
+                                                padding: const EdgeInsets.only(left: 10.0),
+                                                child: Text(
+                                                  'Resi :  ${widget.book.nomorResi}',
+                                                  style: const TextStyle(
+                                                    fontWeight: FontWeight.normal,
+                                                    fontSize: 16.0,
+                                                  ),
+                                                ),
+                                              ),
+                                        
+                                            ],
+                                          ),
                                         ),
                                       ),
 
@@ -324,7 +338,6 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                       Row(
                                         crossAxisAlignment: CrossAxisAlignment.center,
                                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-
                                         children: [
                                           Container(
                                             width: 100,
@@ -380,8 +393,8 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                             ),
 
                                             child: GestureDetector(
-                                              onTap: () async {
-                                                await ApiBookHelper.deleteDataBooking(widget.book.id!);
+                                              onTap: () {
+                                                ApiBookHelper.deleteDataBooking(widget.book.id!);
                                                 popperToRoot(context);
                                                 pushHomePage(context);
                                               },

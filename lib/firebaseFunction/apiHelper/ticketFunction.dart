@@ -11,20 +11,21 @@ class ApiTicketHelper{
   static http.Client client = http.Client();
   // API URL
   static const String url = globalURL.url;
-  static const String endpoint = '/tubesPariwisata/public/api/ticket';
+  // static const String endpoint = '/tubesPariwisata/public/api/ticket';
 
   // static const String url = globalURL.url;
-  // static const String endpoint = '/api/ticket';
+  static const String endpoint = '/api/ticket';
   
   static Stream<List<Book>> getTicketStream({required int id}) async* {
-    String endpointV2 = "/tubesPariwisata/public/api/getAllTicketByIDUser";
-    // String endpointV2 = "/api/getAllTicketByIDUser";
+    // String endpointV2 = "/tubesPariwisata/public/api/getAllTicketByIDUser";
+    String endpointV2 = "/api/getAllTicketByIDUser";
 
     String idUser = id.toString();
 
     try {
       var apiResult = await client.post(Uri.http(url, endpointV2),
-        body: {"idUser": idUser});
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"idUser": idUser}));
 
         if(apiResult.statusCode == 200){
           Iterable list = json.decode(apiResult.body)['data'];
@@ -46,7 +47,8 @@ class ApiTicketHelper{
 
     try{
       var apiResult = await client.post(Uri.http(url, endpointV2),
-        body: {"idDestinasi": idTarget});
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"idDestinasi": idTarget}));
 
         if(apiResult.statusCode == 200){
           Iterable list = json.decode(apiResult.body)['data'];
@@ -62,7 +64,8 @@ class ApiTicketHelper{
 
   static Future<Ticket> getTicketById(int id) async {
     try {
-      var response = await http.get(Uri.http(url, endpoint + '/' + id.toString()));
+      var response = await http.get(Uri.http(url, endpoint + '/' + id.toString()),
+        headers: {"Content-Type": "application/json"});
 
       if(response.statusCode != 200) throw Exception(response.reasonPhrase);
 

@@ -9,16 +9,17 @@ class loginRegisHelper {
   static http.Client client = http.Client();
   // API URL
   static const String url = globalURL.url;
-  static const String endpoint = "/tubesPariwisata/public/api/login";
+  // static const String endpoint = "/tubesPariwisata/public/api/login";
 
   // static const String url = globalURL.url;
-  // static const String endpoint = '/api/login';
+  static const String endpoint = '/api/login';
 
   static Future<User> login({required String username, required String password}) async {
     try{
-      var apiResult = await client.post(Uri.http(url, endpoint), 
-        body: {"username": username, "password": password}
-        );
+      var apiResult = await client.post(Uri.http(url, endpoint),
+        headers: {"Content-Type": "application/json"},
+        body: json.encode({"username": username, "password": password})
+        ).timeout(const Duration(seconds: 5));
 
         if(apiResult.statusCode == 200) {
           return User.fromJson(json.decode(apiResult.body)['data']);
@@ -32,14 +33,15 @@ class loginRegisHelper {
   }
 
   static Future<User> loginById({required int id}) async {
-    String endpointV2 = '/tubesPariwisata/public/api/loginById';
-    // String endpointV2 = '/api/loginById';
+    // String endpointV2 = '/tubesPariwisata/public/api/loginById';
+    String endpointV2 = '/api/loginById';
 
     String idUser = id.toString();
 
     try{
       var apiResult = await client.post(Uri.http(url, endpointV2),
-        body: {"id": idUser});
+        headers: {"Content-Type": "application/json"},
+        body: json.encode({"id": idUser}));
 
         if(apiResult.statusCode == 200) {
           return User.fromJson(json.decode(apiResult.body)['data']);

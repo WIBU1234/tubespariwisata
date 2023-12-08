@@ -10,10 +10,10 @@ import 'package:tubespariwisata/firebaseFunction/apiHelper/globalURL.dart';
 class ApiDestinasiHelper {
   // API URL
   static const String url = globalURL.url;
-  static const String endpoint = '/tubesPariwisata/public/api/destinasi';
+  // static const String endpoint = '/tubesPariwisata/public/api/destinasi';
 
   // static const String url = globalURL.url;
-  // static const String endpoint = '/api/destinasi';
+  static const String endpoint = '/api/destinasi';
 
   static Future<Response> createDestinasi({
     required String destinationName,
@@ -46,7 +46,7 @@ class ApiDestinasiHelper {
       // print(imageFoto);
 
       var response = await post(Uri.http(url, endpoint),
-          headers: {"Content-Type": "application/json", "Accept": "application/json"},      
+          headers: {"Content-Type": "application/json"},
           body: jsonEncode(data),
           );
 
@@ -98,7 +98,7 @@ class ApiDestinasiHelper {
       // print(imageFoto);
 
       var response = await put(Uri.http(url, endpoint + '/' + id.toString()),
-          headers: {"Content-Type": "application/json", "Accept": "application/json"},      
+          headers: {"Content-Type": "application/json"},      
           body: jsonEncode(data),
           );
 
@@ -113,7 +113,7 @@ class ApiDestinasiHelper {
   static Future<Response> deleteDestinasi(int id) async {
     try {
       var response = await delete(Uri.http(url, endpoint + '/' + id.toString()),
-          headers: {"Content-Type": "application/json", "Accept": "application/json"},      
+          headers: {"Content-Type": "application/json"},
           );
 
       if(response.statusCode != 200) throw Exception(response.reasonPhrase);
@@ -126,7 +126,7 @@ class ApiDestinasiHelper {
 
   static Stream<List<Destinasi>> getDestinasi() async* {
     try {
-      var response = await get(Uri.http(url, endpoint));
+      var response = await get(Uri.http(url, endpoint), headers: {"Content-Type": "application/json"});
 
       if(response.statusCode != 200) throw Exception(response.reasonPhrase);
 
@@ -141,7 +141,7 @@ class ApiDestinasiHelper {
 
   static Future<Destinasi> getDestinasiById(int id) async {
     try {
-      var response = await get(Uri.http(url, endpoint + '/' + id.toString()));
+      var response = await get(Uri.http(url, endpoint + '/' + id.toString()), headers: {"Content-Type": "application/json"});
 
       if(response.statusCode != 200) throw Exception(response.reasonPhrase);
 
