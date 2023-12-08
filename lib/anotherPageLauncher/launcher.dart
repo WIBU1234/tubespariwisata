@@ -22,6 +22,10 @@ import 'package:tubespariwisata/adminLaunch/pageAdmin/addDestination.dart';
 import 'package:tubespariwisata/adminLaunch/container/addDestination/createDestination.dart';
 import 'package:tubespariwisata/adminLaunch/container/addDestination/updateDestination.dart';
 
+import 'package:tubespariwisata/page/homepage/myTicket/myTicket.dart';
+
+import 'package:tubespariwisata/page/homepage/settingsPageElement/aboutUs.dart';
+
 // LAUNCHER PAGE TO PAY
 import 'package:tubespariwisata/page/homepage/detailPageElement/ticketProcessPage.dart';
 
@@ -66,6 +70,10 @@ void ticketPage(BuildContext context, Destinasi destinasi) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => AllPage(destinasi: destinasi)));
 }
 
+void myTicket(BuildContext context){
+  Navigator.push(context, MaterialPageRoute(builder: (_) => const MyTicket()));
+}
+
 void buyTicketProcess(BuildContext context, Destinasi destinasi, Ticket ticket, User user) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => BuyTicketPage(destinasi: destinasi, ticket: ticket, user: user)));
 }
@@ -76,6 +84,10 @@ void payTicketProcess(BuildContext context, Book book, Destinasi destinasi, int 
 
 void detailPageTicket(BuildContext context, Book book) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => MyDetailTicket(book: book)));
+}
+
+void aboutUs(BuildContext context) {
+  Navigator.push(context, MaterialPageRoute(builder: (_) => const AboutUs()));
 }
 
 // PUSH REPLACEMENT

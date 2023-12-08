@@ -19,7 +19,7 @@ class loginRegisHelper {
       var apiResult = await client.post(Uri.http(url, endpoint),
         headers: {"Content-Type": "application/json"},
         body: json.encode({"username": username, "password": password})
-        ).timeout(const Duration(seconds: 5));
+        );
 
         if(apiResult.statusCode == 200) {
           return User.fromJson(json.decode(apiResult.body)['data']);

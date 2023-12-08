@@ -82,31 +82,38 @@ class _SettingPageState extends State<SettingPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
                                 SizedBox(
-                                  width: 160.0,
+                                  width: 200.0,
                                   height: 100.0,
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       SizedBox(height: 14.0),
                                       Text(
-                                        "Username",
+                                        "Good Morning,",
                                         style: TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 13,
                                           fontWeight: FontWeight.w500,
                                         ),
                                       ),
-
+                                      SizedBox(height: 7.0),
+                                      Text(
+                                        "Username",
+                                        style: TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      SizedBox(height: 7.0),
                                       Row(
                                         children: [
                                           Padding(
                                             padding: EdgeInsets.all(0),
                                             child: Icon(Icons.location_on_sharp),
                                           ),
-
                                           Text(
                                             "Yogyakarta, Indonesia",
                                             style: TextStyle(
-                                              fontSize: 12,
+                                              fontSize: 13,
                                               fontWeight: FontWeight.w500,
                                             ),
                                           ),
@@ -121,7 +128,7 @@ class _SettingPageState extends State<SettingPage> {
                                     child: CircleAvatar(
                                       radius: 30,
                                       backgroundImage:
-                                          AssetImage("resources/images/bali.jpg"),
+                                        AssetImage("resources/images/bali.jpg"),
                                     ),
                                   ),
                                 ),
@@ -228,44 +235,50 @@ class _SettingPageState extends State<SettingPage> {
                   ),
                 ),
                 const SizedBox(height: 12),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    width: 250,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: Colors.grey[400],
-                      borderRadius: BorderRadius.circular(60.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.5),
-                          spreadRadius: 0,
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: const Row(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 20.0),
-                          child: Icon(Icons.info),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 8.0),
-                          child: Text(
-                            "About Us",
-                            style: TextStyle(
-                              fontSize: 18,
-                              // fontWeight: FontWeight.bold,
+                GestureDetector(
+                  onTap: () {
+                    aboutUs(context);
+                  },
+
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      width: 250,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[400],
+                        borderRadius: BorderRadius.circular(60.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.5),
+                            spreadRadius: 0,
+                            blurRadius: 10,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: const Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 20.0),
+                            child: Icon(Icons.info),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              "About Us",
+                              style: TextStyle(
+                                fontSize: 18,
+                                // fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 80.0),
-                          child: Icon(Icons.arrow_forward_ios_sharp),
-                        ),
-                      ],
+                          Padding(
+                            padding: EdgeInsets.only(left: 80.0),
+                            child: Icon(Icons.arrow_forward_ios_sharp),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),

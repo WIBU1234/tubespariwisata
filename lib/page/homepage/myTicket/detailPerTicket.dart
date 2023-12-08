@@ -16,9 +16,9 @@ import 'package:tubespariwisata/firebaseFunction/apiHelper/apiBookFunction.dart'
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 
 class MyDetailTicket extends StatefulWidget {
-  final Book book;
-
   const MyDetailTicket({Key? key, required this.book}) : super(key: key);
+
+  final Book book;
 
   @override
   State<MyDetailTicket> createState() => _MyDetailTicketState();
@@ -57,6 +57,7 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
       ApiDestinasiHelper.getDestinasiById(widget.book.idDestinasi).then((value) {
         setState(() {
           destinasiTemp = value;
+          isLoading = false;
         });
       });
 
@@ -71,6 +72,7 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
 
   @override
   Widget build(BuildContext context) {
+      bool isLoading = this.isLoading ?? false;
     // final _formKey = GlobalKey<FormState>();
     // double screenWidth = MediaQuery.of(context).size.width;
     // double screenHeight = MediaQuery.of(context).size.height;
@@ -181,7 +183,7 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                                     offset: Offset(0, 4),
                                                   ),
                                                 ],
-                                                image: DecorationImage(
+                                                image: DecorationImage (
                                                   image: MemoryImage(base64.decode(destinasiTemp!.destinationImage)),
                                                   fit: BoxFit.fill,
                                                 ),
@@ -445,24 +447,27 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                               ],
                                             ),
 
-                                            child: const Column(
-                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                              children: [
-                                                SizedBox(height: 10),
-                                                Padding(
-                                                  padding: EdgeInsets.all(0),
-                                                  child: Icon(Icons.picture_as_pdf, size: 60.0),
-                                                ),
+                                            child: GestureDetector(
 
-                                                SizedBox(height: 2),
-                                                Text(
-                                                  'PDF',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w300,
-                                                    fontSize: 16.0,
+                                              child: const Column(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: [
+                                                  SizedBox(height: 10),
+                                                  Padding(
+                                                    padding: EdgeInsets.all(0),
+                                                    child: Icon(Icons.picture_as_pdf, size: 60.0),
                                                   ),
-                                                ),
-                                              ],
+                                            
+                                                  SizedBox(height: 2),
+                                                  Text(
+                                                    'PDF',
+                                                    style: TextStyle(
+                                                      fontWeight: FontWeight.w300,
+                                                      fontSize: 16.0,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ],

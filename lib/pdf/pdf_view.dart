@@ -48,37 +48,6 @@ Future<void> createPdf(
     },
   );
 
-  final List<CustomRow> elements = [
-    CustomRow("Item Name", "Item Price", "Amount", "Sub Total Product"),
-    for (var product in soldProducts)
-      CustomRow(
-        product.name,
-        product.price.toStringAsFixed(2),
-        product.amount.toString(),
-        (product.price * product.amount).toStringAsFixed(2),
-      ),
-    CustomRow(
-      "Sub Total",
-      "",
-      "",
-      "Rp ${getSubTotal(soldProducts)}",
-    ),
-    CustomRow(
-      "PPN Total(10%)",
-      "",
-      "",
-      "Rp ${getPPNTotal(soldProducts)}",
-    ),
-    CustomRow(
-      "Total",
-      "",
-      "",
-      "Rp ${(double.parse(getSubTotal(soldProducts)) + double.parse(getPPNTotal(soldProducts))).toStringAsFixed(2)}",
-    )
-  ];
-
-  pw.Widget table = itemColumn(elements);
-
   doc.addPage(
     pw.MultiPage(
       pageTheme: pdfTheme,
@@ -102,7 +71,6 @@ Future<void> createPdf(
                 topOfInvoice(imageInvoice),
                 barcodeGaris(id),
                 pw.SizedBox(height: 5.h),
-                contentOfInvoice(table),
                 barcodeKotak(id),
                 pw.SizedBox(height: 1.h),
               ])),

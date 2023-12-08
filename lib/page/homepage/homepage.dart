@@ -7,12 +7,10 @@ import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 import 'package:tubespariwisata/entity/user.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
 // IMPORT FORCE PAGE
-// import 'package:tubespariwisata/page/homepage/profileUI/myprofilecontainer.dart';
 import 'package:tubespariwisata/page/homepage/profileUI/landingProfile.dart';
 import 'package:tubespariwisata/page/homepage/mainhomecontainer.dart';
-// import 'package:tubespariwisata/page/homepage/griditemmaincontainer.dart';
 import 'package:tubespariwisata/page/homepage/settingscontainer.dart';
-
+import 'package:tubespariwisata/page/homepage/mainHomepage/mainHomepage.dart';
 import 'package:tubespariwisata/page/homepage/myTicket/myTicket.dart';
 
 class Homepage extends StatefulWidget {
@@ -73,7 +71,8 @@ class _HomePageState extends State<Homepage> {
 
   // HOME CONTAINER
   Widget _buildHomeContainer() {
-    return const MyTicket();
+    return const MainGrid();
+    // return const MyTicket();
   }
 
   // PROFILE CONTAINER

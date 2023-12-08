@@ -298,7 +298,7 @@ class _PayTicketPageState extends State<PayTicketPage> {
                                           if (!_formKey.currentState!.validate()) {
                                             componentSnackAlert.snackBarError(context, "Please fill all of the avaible field");
                                           } else {
-                                            componentSnackAlert.snackBarSuccess(context, "Yeayyy it's time to pay");
+                                            componentSnackAlert.quickAlertSuccess(context, "Berhasil membeli tiket berjumlah ${widget.numberTicket}");
                                             ApiBookHelper.loopNumberofTicket(widget.book, widget.numberTicket);
                                             popperToRoot(context);
                                             pushHomePage(context);

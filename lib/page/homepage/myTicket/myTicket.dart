@@ -50,7 +50,6 @@ class MyTicketState extends State<MyTicket> {
       loginRegisHelper.loginById(id: int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
-          isLoading = false;
         });
       });
 
@@ -98,14 +97,20 @@ class MyTicketState extends State<MyTicket> {
                             child: Column(
 
                               children: [
-                                const Row(
+                                Row(
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 20, left: 20),
-                                      child: Icon(Icons.keyboard_arrow_left, size: 30.0),
+                                    GestureDetector(
+                                      onTap: () {
+                                        popper(context);
+                                      },
+
+                                      child: const Padding(
+                                        padding: EdgeInsets.only(top: 20, left: 20),
+                                        child: Icon(Icons.keyboard_arrow_left, size: 30.0),
+                                      ),
                                     ),
 
-                                    Center(
+                                    const Center(
                                       child: Padding(
                                         padding: EdgeInsets.only(top: 20, left: 0),
                                         child: Text(

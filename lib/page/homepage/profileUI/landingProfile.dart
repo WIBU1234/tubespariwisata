@@ -205,27 +205,33 @@ class _landingProfileState extends State<landingProfile> {
                           ),
                         ],
                       ),
-                      child: const Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 20.0),
-                            child: Icon(Icons.shopping_cart_rounded),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              'Your purchase list',
-                              style: TextStyle(
-                                fontSize: 18,
-                                // fontWeight: FontWeight.bold,
+                      child: GestureDetector(
+                        onTap: () {
+                          myTicket(context);
+                        },
+
+                        child: const Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(left: 20.0),
+                              child: Icon(Icons.shopping_cart_rounded),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 8.0),
+                              child: Text(
+                                'Your purchase list',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  // fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 15.0),
-                            child: Icon(Icons.arrow_forward_ios_sharp),
-                          ),
-                        ],
+                            Padding(
+                              padding: EdgeInsets.only(left: 15.0),
+                              child: Icon(Icons.arrow_forward_ios_sharp),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -273,63 +279,63 @@ class _landingProfileState extends State<landingProfile> {
                   ),
 
                   const SizedBox(height: 25),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 30.0),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "Your Favorite Activity",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.normal,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  InkWell(
-                    onTap: () {
-                      pushScanQr(context);
-                    },
-                    child: Container(
-                      width: 250,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[400],
-                        borderRadius: BorderRadius.circular(60.0),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.5),
-                            spreadRadius: 0,
-                            blurRadius: 10,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: const Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 20.0),
-                            child: Icon(Icons.shopping_cart_rounded),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 8.0),
-                            child: Text(
-                              'Favorite Activity List',
-                              style: TextStyle(
-                                fontSize: 18,
-                                // fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(left: 0),
-                            child: Icon(Icons.arrow_forward_ios_sharp),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // const Padding(
+                  //   padding: EdgeInsets.only(left: 30.0),
+                  //   child: Align(
+                  //     alignment: Alignment.centerLeft,
+                  //     child: Text(
+                  //       "Your Favorite Activity",
+                  //       style: TextStyle(
+                  //         fontSize: 16,
+                  //         fontWeight: FontWeight.normal,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // const SizedBox(height: 16),
+                  // InkWell(
+                  //   onTap: () {
+                  //     pushScanQr(context);
+                  //   },
+                  //   child: Container(
+                  //     width: 250,
+                  //     height: 50,
+                  //     decoration: BoxDecoration(
+                  //       color: Colors.grey[400],
+                  //       borderRadius: BorderRadius.circular(60.0),
+                  //       boxShadow: [
+                  //         BoxShadow(
+                  //           color: Colors.black.withOpacity(0.5),
+                  //           spreadRadius: 0,
+                  //           blurRadius: 10,
+                  //           offset: const Offset(0, 4),
+                  //         ),
+                  //       ],
+                  //     ),
+                  //     // child: const Row(
+                  //     //   children: [
+                  //     //     Padding(
+                  //     //       padding: EdgeInsets.only(left: 20.0),
+                  //     //       child: Icon(Icons.shopping_cart_rounded),
+                  //     //     ),
+                  //     //     Padding(
+                  //     //       padding: EdgeInsets.only(left: 8.0),
+                  //     //       child: Text(
+                  //     //         'Favorite Activity List',
+                  //     //         style: TextStyle(
+                  //     //           fontSize: 18,
+                  //     //           // fontWeight: FontWeight.bold,
+                  //     //         ),
+                  //     //       ),
+                  //     //     ),
+                  //     //     Padding(
+                  //     //       padding: EdgeInsets.only(left: 0),
+                  //     //       child: Icon(Icons.arrow_forward_ios_sharp),
+                  //     //     ),
+                  //     //   ],
+                  //     // ),
+                  //   ),
+                  // ),
                 ],
 
               ),

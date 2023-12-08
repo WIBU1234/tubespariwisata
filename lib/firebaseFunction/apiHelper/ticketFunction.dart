@@ -40,8 +40,8 @@ class ApiTicketHelper{
   }
 
   static Stream<List<Ticket>> getTicketByIdDestinasi(int idDestinasi) async* {
-    String endpointV2 = "/tubesPariwisata/public/api/getAllTicketByIdDestinasi";
-    // String endpointV2 = "/api/getAllTicketByIdDestinasi";
+    // String endpointV2 = "/tubesPariwisata/public/api/getAllTicketByIdDestinasi";
+    String endpointV2 = "/api/getAllTicketByIdDestinasi";
 
     String idTarget = idDestinasi.toString();
 

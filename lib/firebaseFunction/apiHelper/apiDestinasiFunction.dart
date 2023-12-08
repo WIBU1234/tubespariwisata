@@ -126,7 +126,8 @@ class ApiDestinasiHelper {
 
   static Stream<List<Destinasi>> getDestinasi() async* {
     try {
-      var response = await get(Uri.http(url, endpoint), headers: {"Content-Type": "application/json"});
+      var response = await get(Uri.http(url, endpoint),
+        headers: {"Content-Type": "application/json"});
 
       if(response.statusCode != 200) throw Exception(response.reasonPhrase);
 

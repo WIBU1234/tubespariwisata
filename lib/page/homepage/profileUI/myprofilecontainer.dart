@@ -9,6 +9,7 @@ import 'package:camera/camera.dart';
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiUserFunction.dart';
 // FORCE LAUNCH
 import 'package:tubespariwisata/hardware/camera.dart';
 
@@ -489,7 +490,9 @@ class _ProfileState extends State<Profile> {
                                                   elevation: 6,
                                                 ),
                                                 onPressed: () {
-                                                  // pushHomePage(context, userTemp);
+                                                  ApiFunctionHelper.deleteUser(id: userTemp!.id!);
+                                                  popperToRoot(context);
+                                                  pushLogin(context);
                                                 },
                                                 child: const Text(
                                                   'Delete',
