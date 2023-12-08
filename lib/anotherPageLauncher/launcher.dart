@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tubespariwisata/entity/user.dart';
 import 'package:tubespariwisata/entity/destinasi.dart';
 import 'package:tubespariwisata/entity/book.dart';
+import 'package:tubespariwisata/entity/ticket.dart';
 
 // LAUNCHER VIEW
 import 'package:tubespariwisata/page/firstLanding/registerpage.dart';
@@ -14,6 +15,7 @@ import 'package:tubespariwisata/page/homepage/updateProfile.dart';
 import 'package:tubespariwisata/page/homepage/profileUI/myprofilecontainer.dart';
 
 import 'package:tubespariwisata/page/homepage/myTicket/detailPerTicket.dart';
+import 'package:tubespariwisata/page/homepage/detailPageElement/ticketBuy.dart';
 
 import 'package:tubespariwisata/adminLaunch/pageAdmin/addDestination.dart';
 import 'package:tubespariwisata/adminLaunch/container/addDestination/createDestination.dart';
@@ -61,6 +63,10 @@ void pushScanQr(BuildContext context) {
 
 void ticketPage(BuildContext context, Destinasi destinasi) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => AllPage(destinasi: destinasi)));
+}
+
+void buyTicketProcess(BuildContext context, Destinasi destinasi, Ticket ticket, User user) {
+  Navigator.push(context, MaterialPageRoute(builder: (_) => BuyTicketPage(destinasi: destinasi, ticket: ticket, user: user)));
 }
 
 void detailPageTicket(BuildContext context, Book book) {

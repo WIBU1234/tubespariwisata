@@ -38,6 +38,28 @@ class ApiTicketHelper{
     }
   }
 
+  static Stream<List<Ticket>> getTicketByIdDestinasi(int idDestinasi) async* {
+    String endpointV2 = "/tubesPariwisata/public/api/getAllTicketByIdDestinasi";
+    // String endpointV2 = "/api/getAllTicketByIdDestinasi";
+
+    String idTarget = idDestinasi.toString();
+
+    try{
+      var apiResult = await client.post(Uri.http(url, endpointV2),
+        body: {"idDestinasi": idTarget});
+
+        if(apiResult.statusCode == 200){
+          Iterable list = json.decode(apiResult.body)['data'];
+
+          yield list.map((ticket) => Ticket.fromJson(ticket)).toList();
+        } else {
+          throw Exception(apiResult.reasonPhrase);
+        }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
   static Future<Ticket> getTicketById(int id) async {
     try {
       var response = await http.get(Uri.http(url, endpoint + '/' + id.toString()));

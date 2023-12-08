@@ -50,6 +50,7 @@ class MyTicketState extends State<MyTicket> {
       loginRegisHelper.loginById(id: int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
+          isLoading = false;
         });
       });
 

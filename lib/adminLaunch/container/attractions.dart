@@ -128,21 +128,21 @@ class _AttractionContainerState extends State<AttractionContainer> {
                                             ),
                                           ),
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                              left: screenWidth * 0.02),
-                                          child: Align(
-                                            alignment: Alignment.centerLeft,
-                                            child: Text(
-                                              "Rp. 50.000",
-                                              style: TextStyle(
-                                                fontSize: screenWidth * 0.03,
-                                                fontWeight: FontWeight.normal,
-                                                color: Colors.black,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                        // Padding(
+                                        //   padding: EdgeInsets.only(
+                                        //       left: screenWidth * 0.02),
+                                        //   child: Align(
+                                        //     alignment: Alignment.centerLeft,
+                                        //     child: Text(
+                                        //       "Rp. 50.000",
+                                        //       style: TextStyle(
+                                        //         fontSize: screenWidth * 0.03,
+                                        //         fontWeight: FontWeight.normal,
+                                        //         color: Colors.black,
+                                        //       ),
+                                        //     ),
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
                                     SizedBox(height: screenHeight * 0.01),
