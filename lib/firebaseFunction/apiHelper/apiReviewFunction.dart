@@ -1,13 +1,12 @@
 // ENTITY
 // import 'package:logger/logger.dart';
-import 'package:logger/logger.dart';
-import 'package:test/expect.dart';
+
 import 'package:tubespariwisata/entity/review.dart';
 // TOOLS
 import 'dart:convert';
 import 'package:http/http.dart';
 
-class ApiDestinasiHelper {
+class ApiReviewHelper {
   // API URL
   static const String url = "20.255.52.134";
   static const String endpoint = '/tubesPariwisata/public/api/ticket';
@@ -15,10 +14,10 @@ class ApiDestinasiHelper {
   // static const String url = "127.0.0.1:8000";
   // static const String endpoint = '/api/ticket';
 
-  static Future<Response> createTicket({
+  static Future<Response> createReview({
     required int idUser,
     required int idDestinasi,
-    required int review,
+    required String review,
     required int rating,
   }) async {
     try {
@@ -46,11 +45,11 @@ class ApiDestinasiHelper {
     }
   }
 
-  static Future<Response> updateTicket({
+  static Future<Response> updateReview({
     required int id,
     required int idUser,
     required int idDestinasi,
-    required int review,
+    required String review,
     required int rating,
   }) async {
     try {
