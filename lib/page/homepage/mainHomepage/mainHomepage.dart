@@ -8,6 +8,7 @@ import 'package:tubespariwisata/entity/destinasi.dart';
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
+import 'package:tubespariwisata/page/homepage/detailnreview/destinasiWisata.dart';
 
 class MainGrid extends StatefulWidget {
   const MainGrid({Key? key}) : super(key: key);
@@ -207,7 +208,7 @@ class _MainGridState extends State<MainGrid> {
                                   ),
                                   child: GestureDetector(
                                     onTap: () {
-                                      ticketPage(context, destinasi);
+                                      Navigator.push(context, MaterialPageRoute(builder: (_) => DestinasiWisata(destinasi: destinasi)));
                                     },
                                     child: Column(
                                       children: [

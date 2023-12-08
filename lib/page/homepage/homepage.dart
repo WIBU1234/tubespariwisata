@@ -11,7 +11,7 @@ import 'package:tubespariwisata/page/homepage/profileUI/landingProfile.dart';
 import 'package:tubespariwisata/page/homepage/mainhomecontainer.dart';
 import 'package:tubespariwisata/page/homepage/settingscontainer.dart';
 import 'package:tubespariwisata/page/homepage/mainHomepage/mainHomepage.dart';
-import 'package:tubespariwisata/page/homepage/myTicket/myTicket.dart';
+// import 'package:tubespariwisata/page/homepage/myTicket/myTicket.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);

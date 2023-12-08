@@ -2,8 +2,8 @@ import 'dart:convert';
 
 class Review {
   int? id;
-  int? idUser;
-  int? idDestinasi;
+  int idUser;
+  int idDestinasi;
   String review;
   int rating;
 

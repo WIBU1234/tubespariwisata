@@ -11,10 +11,10 @@ class ApiBookHelper{
   static http.Client client = http.Client();
   // API URL
   static const String url = globalURL.url;
-  // static const String endpoint = '/tubesPariwisata/public/api/book';
+  static const String endpoint = '/tubesPariwisata/public/api/book';
 
   // static const String url = globalURL.url;
-  static const String endpoint = '/api/book';
+  // static const String endpoint = '/api/book';
 
   static Future<void> loopNumberofTicket(Book book, int numberStore) async {
     for(int i = 0; i < numberStore; i++){

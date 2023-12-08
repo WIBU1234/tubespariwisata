@@ -1,28 +1,55 @@
 // IMPORT LIB FROM FLUTTER
 import 'package:flutter/material.dart';
+import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 import 'dart:convert';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/entity/destinasi.dart';
+import 'package:tubespariwisata/entity/review.dart';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiReviewFunction.dart';
+import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 
-class AddReviewDestinasiWisata extends StatelessWidget {
-  const AddReviewDestinasiWisata({Key? key, required this.destinasi})
+class AddReviewDestinasiWisata extends StatefulWidget {
+  const AddReviewDestinasiWisata({Key? key, required this.destinasi, required this.review})
       : super(key: key);
 
   final Destinasi destinasi;
+  final Review review;
+
+  @override
+  State<AddReviewDestinasiWisata> createState() => _AddReviewDestinasiWisataState();
+}
+
+class _AddReviewDestinasiWisataState extends State<AddReviewDestinasiWisata> {
+  String? userId;
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController controllerReview = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+  }
+
+  void fetchData() async {
+    String? userID = await getUserID();
+  
+    if (userID != null) {
+      setState(() {
+        userId = userID;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Tambah Review"),
-      ),
       body: SafeArea(
         child: Column(children: [
           Container(
             height: 220,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: MemoryImage(base64.decode(destinasi.destinationImage)),
+                image: MemoryImage(base64.decode(widget.destinasi.destinationImage)),
                 fit: BoxFit.cover,
               ),
             ),
@@ -45,7 +72,7 @@ class AddReviewDestinasiWisata extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        destinasi.destinationName,
+                        widget.destinasi.destinationName,
                         style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -57,7 +84,7 @@ class AddReviewDestinasiWisata extends StatelessWidget {
                   const SizedBox(height: 6),
                   Row(
                     children: [
-                      for (int i = 0; i < destinasi.destinationRating; i++)
+                      for (int i = 0; i < widget.destinasi.destinationRating; i++)
                         const Icon(
                           Icons.star,
                           color: Colors.black,
@@ -75,7 +102,7 @@ class AddReviewDestinasiWisata extends StatelessWidget {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        destinasi.destinationAddress,
+                        widget.destinasi.destinationAddress,
                         style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.normal,
@@ -89,61 +116,84 @@ class AddReviewDestinasiWisata extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.only(left: 16, right: 16),
-              child: SingleChildScrollView(
-                  child: SizedBox(
-                width: double.infinity,
-                child: Column(children: [
-                  const SizedBox(
-                    width: double.infinity,
-                    child: Text(
-                      "What do you think?",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  const SizedBox(
-                    width: double.infinity,
-                    child: TextField(
-                      minLines: 10,
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: 'Write your review here',
-                      ),
-                      maxLines: null,
-                      keyboardType: TextInputType.multiline,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
-                      foregroundColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                    ),
-                    child: const Center(
+          Form(
+            key: _formKey,
+            child: Expanded(
+              child: Container(
+                padding: const EdgeInsets.only(left: 16, right: 16),
+                child: SingleChildScrollView(
+                    child: SizedBox(
+                  width: double.infinity,
+                  child: Column(children: [
+                    const SizedBox(
+                      width: double.infinity,
                       child: Text(
-                        "Tambah Review",
+                        "What do you think?",
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 12,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
                         ),
                       ),
                     ),
-                  ),
-                ]),
-              )),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      width: double.infinity,
+                      child: TextFormField(
+                        controller: controllerReview,
+                        minLines: 10,
+                        decoration: const InputDecoration(
+                          border: OutlineInputBorder(),
+                          hintText: 'Write your review here',
+                        ),
+                        maxLines: null,
+                        keyboardType: TextInputType.multiline,
+                        validator: (value) {
+                          if(value == ''){
+                            return 'Please fill the review';
+                          }
+                          return null;
+                        }
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    ElevatedButton(
+                      onPressed: () {
+                        if(!_formKey.currentState!.validate()){
+
+                        }else{
+                          if (userId != null && widget.destinasi.id != null) {
+                            ApiDestinasiHelper.createReview(
+                              idUser: int.parse(userId!),
+                              idDestinasi: widget.destinasi.id!,
+                              review: controllerReview.text,
+                              rating: 0);
+
+                            popperToRoot(context);
+                            pushHomePage(context);
+                          }
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.black,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "Tambah Review",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
+                )),
+              ),
             ),
           ),
         ]),

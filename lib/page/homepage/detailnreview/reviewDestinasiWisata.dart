@@ -1,40 +1,70 @@
 // IMPORT LIB FROM FLUTTER
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
+import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 import 'dart:convert';
+import 'package:tubespariwisata/firebaseFunction/apiHelper/apiReviewFunction.dart';
 // IMPORT LIB FROM FUNCTION
 import 'package:tubespariwisata/entity/destinasi.dart';
+import 'package:tubespariwisata/entity/review.dart';
+import 'package:tubespariwisata/entity/user.dart';
 import 'package:tubespariwisata/page/homepage/detailnreview/addReviewDestinasiWisata.dart';
 import 'package:tubespariwisata/page/homepage/detailnreview/updateReviewDestinasiWisata.dart';
-// import 'package:tubespariwisata/firebaseFunction/functionFirebaseHelper.dart';
+import 'package:tubespariwisata/sharedPreferencesFunction/shared.dart';
 
-class ReviewDestinasiWisata extends StatelessWidget {
+class ReviewDestinasiWisata extends StatefulWidget {
   const ReviewDestinasiWisata({Key? key, required this.destinasi})
       : super(key: key);
 
   final Destinasi destinasi;
 
   @override
+  State<ReviewDestinasiWisata> createState() => _ReviewDestinasiWisataState();
+}
+
+class _ReviewDestinasiWisataState extends State<ReviewDestinasiWisata> {
+
+  List<Review> reviewList = [];
+  User? userTemp;
+  Review? reviewTemp;
+  String? userId;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchData();
+    getReview();
+  }
+
+  void fetchData() async {
+    String? userID = await getUserID();
+  
+    if (userID != null) {
+      setState(() {
+        userId = userID;
+      });
+    }
+  }
+
+  void getReview() {
+    ApiDestinasiHelper.getReviewByIdDestinasi(widget.destinasi.id!).listen((value) {
+      setState(() {
+        reviewList = value;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final faker = Faker();
-    final reviews = List.generate(
-      10,
-      (index) => {
-        "name": faker.person.name(),
-        "review": faker.lorem.sentence(),
-      },
-    );
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Review Destinasi Wisata"),
-      ),
       body: SafeArea(
         child: Column(children: [
           Container(
             height: 220,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: MemoryImage(base64.decode(destinasi.destinationImage)),
+                image: MemoryImage(base64.decode(widget.destinasi.destinationImage)),
                 fit: BoxFit.cover,
               ),
             ),
@@ -57,7 +87,7 @@ class ReviewDestinasiWisata extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                        destinasi.destinationName,
+                        widget.destinasi.destinationName,
                         style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
@@ -69,7 +99,7 @@ class ReviewDestinasiWisata extends StatelessWidget {
                   const SizedBox(height: 6),
                   Row(
                     children: [
-                      for (int i = 0; i < destinasi.destinationRating; i++)
+                      for (int i = 0; i < widget.destinasi.destinationRating; i++)
                         const Icon(
                           Icons.star,
                           color: Colors.black,
@@ -87,7 +117,7 @@ class ReviewDestinasiWisata extends StatelessWidget {
                       ),
                       const SizedBox(width: 5),
                       Text(
-                        destinasi.destinationAddress,
+                        widget.destinasi.destinationAddress,
                         style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.normal,
@@ -112,11 +142,13 @@ class ReviewDestinasiWisata extends StatelessWidget {
                       // Button review
                       ElevatedButton(
                         onPressed: () {
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => AddReviewDestinasiWisata(
-                                destinasi: destinasi,
+                                destinasi: widget.destinasi,
+                                review: reviewTemp!,
                               ),
                             ),
                           );
@@ -152,7 +184,7 @@ class ReviewDestinasiWisata extends StatelessWidget {
                   child: SizedBox(
                 width: double.infinity,
                 child: Column(children: [
-                  for (var review in reviews)
+                  for (reviewTemp in reviewList)
                     SizedBox(
                       width: double.infinity,
                       child: Container(
@@ -183,21 +215,23 @@ class ReviewDestinasiWisata extends StatelessWidget {
                                       NetworkImage("https://i.pravatar.cc/100"),
                                 ),
                                 const SizedBox(width: 10),
-                                Text(
-                                  review["name"] as String,
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
+                                Flexible(
+                                  child: Text(
+                                    reviewTemp!.review,
+                                    style: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black,
+                                    ),
                                   ),
-                                ),
+                                )
                               ],
                             ),
                             const SizedBox(height: 10),
                             SizedBox(
                               width: double.infinity,
                               child: Text(
-                                review["review"] as String,
+                                reviewTemp!.rating.toString(),
                                 style: const TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.normal,
@@ -218,8 +252,8 @@ class ReviewDestinasiWisata extends StatelessWidget {
                                         MaterialPageRoute(
                                           builder: (context) =>
                                               UpdateReviewDestinasiWisata(
-                                            destinasi: destinasi,
-                                            review: review['review'] as String,
+                                            destinasi: widget.destinasi,
+                                            review: reviewTemp!,
                                           ),
                                         ),
                                       );
@@ -247,28 +281,38 @@ class ReviewDestinasiWisata extends StatelessWidget {
                                   height: 30,
                                   child: ElevatedButton(
                                     onPressed: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (context) => AlertDialog(
-                                                title:
-                                                    const Text("Delete Review"),
-                                                content: const Text(
-                                                    "Are you sure want to delete this review?"),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                    },
-                                                    child: const Text("Cancel"),
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                    },
-                                                    child: const Text("Delete"),
-                                                  ),
-                                                ],
-                                              ));
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) => AlertDialog(
+                                                  title:
+                                                      const Text("Delete Review"),
+                                                  content: const Text(
+                                                      "Are you sure want to delete this review?"),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () {
+                                                                                                                
+                                                      },
+                                                      child: const Text("Cancel"),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          ApiDestinasiHelper.deleteReview(reviewTemp!.id!);
+                                                          popperToRoot(context);
+                                                          pushHomePage(context);
+                                                        
+                                                        },
+                                                        
+                                                        child: const Text("Delete")
+                                                        ),
+                                                    ),
+                                                  ],
+                                                )
+                                              );
                                     },
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Colors.black,

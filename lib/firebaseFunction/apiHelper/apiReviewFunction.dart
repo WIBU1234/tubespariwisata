@@ -9,15 +9,15 @@ import 'package:tubespariwisata/firebaseFunction/apiHelper/globalURL.dart';
 class ApiDestinasiHelper {
   // API URL
   static const String url = globalURL.url;
-  // static const String endpoint = '/tubesPariwisata/public/api/ticket';
+  static const String endpoint = '/tubesPariwisata/public/api/review';
 
   // static const String url = "127.0.0.1:8000";
-  static const String endpoint = '/api/ticket';
+  // static const String endpoint = '/api/review';
 
   static Future<Response> createReview({
     required int idUser,
     required int idDestinasi,
-    required int review,
+    required String review,
     required int rating,
   }) async {
     try {
@@ -28,11 +28,8 @@ class ApiDestinasiHelper {
         "rating": rating,
       };
 
-      var response = await post(
-        Uri.http(url, endpoint),
-        headers: {
-          "Content-Type": "application/json"
-        },
+      var response = await post(Uri.http(url, endpoint),
+        headers: {"Content-Type": "application/json"},
         body: jsonEncode(data),
       );
 
@@ -44,11 +41,11 @@ class ApiDestinasiHelper {
     }
   }
 
-  static Future<Response> updateTicket({
+  static Future<Response> updateReview({
     required int id,
     required int idUser,
     required int idDestinasi,
-    required int review,
+    required String review,
     required int rating,
   }) async {
     try {
@@ -99,6 +96,27 @@ class ApiDestinasiHelper {
     try {
       var response = await get(Uri.http(url, endpoint), 
         headers: {"Content-Type": "application/json"},);
+
+      if (response.statusCode != 200) throw Exception(response.reasonPhrase);
+
+      Iterable list = json.decode(response.body)['data'];
+
+      yield list.map((review) => Review.fromJson(review)).toList();
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  static Stream<List<Review>> getReviewByIdDestinasi(int idDestinasi) async* {
+    String endpointV2 = '/tubesPariwisata/public/api/getAllReviewByIdDestinasi';
+    // String endpointV2 = '/api/getAllReviewByIdDestinasi'
+
+    print(idDestinasi);
+
+    try {
+      var response = await post(Uri.http(url, endpointV2),
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"idDestinasi": idDestinasi}));
 
       if (response.statusCode != 200) throw Exception(response.reasonPhrase);
 

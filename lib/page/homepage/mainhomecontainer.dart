@@ -10,6 +10,8 @@ import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/apiDestinasiFunction.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
 
+import 'package:tubespariwisata/page/homepage/detailnreview/destinasiWisata.dart';
+
 class MainHome extends StatefulWidget {
   const MainHome({Key? key}) : super(key: key);
 
