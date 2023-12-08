@@ -4,13 +4,15 @@ import 'package:tubespariwisata/entity/destinasi.dart';
 // TOOLS
 import 'dart:convert';
 import 'package:http/http.dart';
+// IMPORT GLOBAL URL
+import 'package:tubespariwisata/firebaseFunction/apiHelper/globalURL.dart';
 
 class ApiDestinasiHelper {
   // API URL
-  static const String url = "192.168.239.1";
+  static const String url = globalURL.url;
   static const String endpoint = '/tubesPariwisata/public/api/destinasi';
 
-  // static const String url = "10.0.2.2:8000";
+  // static const String url = globalURL.url;
   // static const String endpoint = '/api/destinasi';
 
   static Future<Response> createDestinasi({

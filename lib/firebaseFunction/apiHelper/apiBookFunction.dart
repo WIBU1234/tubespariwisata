@@ -3,14 +3,16 @@
 // import 'package:tubespariwisata/entity/ticket.dart';
 // TOOLS
 import 'package:http/http.dart' as http;
+// IMPORT GLOBAL URL
+import 'package:tubespariwisata/firebaseFunction/apiHelper/globalURL.dart';
 
 class ApiBookHelper{
   static http.Client client = http.Client();
   // API URL
-  static const String url = "192.168.239.1";
+  static const String url = globalURL.url;
   static const String endpoint = '/tubesPariwisata/public/api/book';
 
-  // static const String url = "10.0.2.2:8000";
+  // static const String url = globalURL.url;
   // static const String endpoint = '/api/book';
 
   static Future<int> deleteDataBooking(int id) async {
