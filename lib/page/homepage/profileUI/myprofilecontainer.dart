@@ -8,16 +8,9 @@ import 'package:tubespariwisata/entity/user.dart';
 import 'package:camera/camera.dart';
 import 'dart:convert';
 import 'dart:typed_data';
-// import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'package:tubespariwisata/firebaseFunction/apiHelper/loginRegisterFunction.dart';
 // FORCE LAUNCH
 import 'package:tubespariwisata/hardware/camera.dart';
-
-// IMPORT FORCE PAGE
-// import 'package:tubespariwisata/page/homepage/profileUI/landingProfile.dart';
-// import 'package:tubespariwisata/page/homepage/mainhomecontainer.dart';
-// import 'package:tubespariwisata/page/homepage/griditemmaincontainer.dart';
-// import 'package:tubespariwisata/page/homepage/settingscontainer.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -27,7 +20,6 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  // var selectedTab = _SelectedTab.person;
   String? userId;
   User? userTemp, userTemp2;
   bool isLoading = true;
@@ -47,8 +39,20 @@ class _ProfileState extends State<Profile> {
     });
   }
 
-  void fetchImidiately() {
-    fetchData();
+  void fetchImidiately() async {
+    String? userID = await getUserID();
+    if (userID != null) {
+      setState(() {
+        userId = userID;
+      });
+
+      loginRegisHelper.loginById(id: int.parse(userID)).then((value) {
+        setState(() {
+          userTemp = value;
+          isLoading = false;
+        });
+      });
+    }
   }
 
   void fetchData() async {
@@ -66,46 +70,6 @@ class _ProfileState extends State<Profile> {
       });
     }
   }
-
-  // Widget getSelectedScreen() {
-  //   switch (selectedTab) {
-  //     case _SelectedTab.home:
-  //       return _buildHomeContainer();
-  //     case _SelectedTab.person:
-  //       return _buildPersonContainer();
-  //     case _SelectedTab.search:
-  //       return _buildSearchContainer();
-  //     case _SelectedTab.settings:
-  //       return _buildSettingsContainer();
-  //   }
-  // }
-
-  // // HOME CONTAINER
-  // Widget _buildHomeContainer() {
-  //   return const MainGrid();
-  // }
-
-  // // PROFILE CONTAINER
-  // Widget _buildPersonContainer() {
-  //   return const Profile();
-  // }
-
-  // // GRID ITEM CONTAINER
-  // Widget _buildSearchContainer() {
-  //   return const MainHome();
-  //   // return MyHomePage();
-  // }
-
-  // // SETTINGS CONTAINER
-  // Widget _buildSettingsContainer() {
-  //   return const SettingPage();
-  // }
-
-  // void handleIndexChanged(int i) {
-  //   setState(() {
-  //     selectedTab = _SelectedTab.values[i];
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -173,14 +137,27 @@ class _ProfileState extends State<Profile> {
                             child: Column(
                               children: [
                                 const SizedBox(height: 20),
-                                const Text(
-                                  "My Profile",
-                                  style: TextStyle(
-                                    fontSize: 35,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(Icons.arrow_back),
+                                      onPressed: () {
+                                        popper(context);
+                                        pushHomePage(context);
+                                      },
+                                    ),
+                                    const Text(
+                                      "My Profile",
+                                      style: TextStyle(
+                                        fontSize: 35,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                const SizedBox(height: 20),
+
+                                const SizedBox(height: 10),
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Align(
@@ -209,8 +186,7 @@ class _ProfileState extends State<Profile> {
                                           child: userTemp!.imageFoto != "NOTHAVE"
                                                   ? ClipOval(
                                                       child: Image.memory(
-                                                          Uint8List.fromList(base64
-                                                              .decode(userTemp!.imageFoto)),
+                                                          Uint8List.fromList(base64.decode(userTemp!.imageFoto)),
                                                           fit: BoxFit.cover,
                                                           width: 100,
                                                           height: 100),
@@ -536,34 +512,6 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
       ),
-
-      // bottomNavigationBar: DotNavigationBar(
-      //   dotIndicatorColor: Colors.white,
-      //   unselectedItemColor: Colors.grey[300],
-      //   splashBorderRadius: 50,
-      //   currentIndex: _SelectedTab.values.indexOf(selectedTab),
-      //   onTap: handleIndexChanged,
-      //   items: [
-      //     DotNavigationBarItem(
-      //       icon: const Icon(Icons.home),
-      //       selectedColor: const Color(0xff73544C),
-      //     ),
-      //     DotNavigationBarItem(
-      //       icon: const Icon(Icons.person),
-      //       selectedColor: const Color(0xff73544C),
-      //     ),
-      //     DotNavigationBarItem(
-      //       icon: const Icon(Icons.menu),
-      //       selectedColor: const Color(0xff73544C),
-      //     ),
-      //     DotNavigationBarItem(
-      //       icon: const Icon(Icons.settings),
-      //       selectedColor: const Color(0xff73544C),
-      //     ),
-      //   ],
-      // ),
     );    
   }
 }
-
-// enum _SelectedTab { home, person, search, settings }

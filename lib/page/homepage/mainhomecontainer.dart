@@ -386,20 +386,20 @@ class _MainHomeState extends State<MainHome> {
                                         ),
                                       ),
                       
-                                      const Padding(
-                                        padding: EdgeInsets.only(left: 4.0),
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            "Rp. 50.000",
-                                            style: TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.normal,
-                                              color: Colors.black,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
+                                      // const Padding(
+                                      //   padding: EdgeInsets.only(left: 4.0),
+                                      //   child: Align(
+                                      //     alignment: Alignment.centerLeft,
+                                      //     child: Text(
+                                      //       "Rp. 50.000",
+                                      //       style: TextStyle(
+                                      //         fontSize: 10,
+                                      //         fontWeight: FontWeight.normal,
+                                      //         color: Colors.black,
+                                      //       ),
+                                      //     ),
+                                      //   ),
+                                      // ),
                                     ],
                                   ),
                       
@@ -422,7 +422,7 @@ class _MainHomeState extends State<MainHome> {
                                             offset: Offset(0, 9),
                                           ),
                                         ],
-                                      ),         
+                                      ),
                                       child: const Row(
                                         mainAxisAlignment: MainAxisAlignment.start,
                                         children: [

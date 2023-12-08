@@ -1,7 +1,7 @@
 // FLUTTER MATERIAL
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-// FLUTTER FUNCTION PAGE
+import 'package:tubespariwisata/component/customSnackAlert.dart';
 import 'dart:ui';
 // FLUTTER PAGE LAUNCHER
 import 'package:tubespariwisata/anotherPageLauncher/launcher.dart';
@@ -262,20 +262,8 @@ class _InputPageState extends State<RegisterPage> {
                           } else {
                             setForce();
                             if (ApiFunctionHelper.isUserInList(userList, controllerEmail.text)) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Email is already registered'),
-                                ),
-                              );
+                              componentSnackAlert.snackBarInfo(context, 'Email is already registered');
                             } else {
-                              // createUser(
-                              //   username: controllerName.text,
-                              //   email: controllerEmail.text,
-                              //   password: controllerPassword.text,
-                              //   nomorTelepon: controllerNomorTelepon.text,
-                              //   tanggalLahir: controllerTanggalLahir.text,
-                              //   token: '0',
-                              // );
                               ApiFunctionHelper.createUser(
                                 username: controllerName.text,
                                 email: controllerEmail.text,
@@ -285,6 +273,7 @@ class _InputPageState extends State<RegisterPage> {
                                 token: '0',
                               );
                               popper(context);
+                              componentSnackAlert.quickAlertSuccess(context, "Berhasil membuat akun baru!");
                             }
                           }
                         },

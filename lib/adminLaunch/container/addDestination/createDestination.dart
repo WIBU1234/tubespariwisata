@@ -66,9 +66,9 @@ class _CreatePageState extends State<CreatePage> {
       final Uint8List? compressedImage =
           await FlutterImageCompress.compressWithFile(
         pickedImage.path,
-        minWidth: 30,
-        minHeight: 30,
-        quality: 40,
+        minWidth: 256,
+        minHeight: 256,
+        quality: 60,
       );
 
       if (compressedImage != null) {
@@ -360,9 +360,23 @@ class _CreatePageState extends State<CreatePage> {
                           ),
                           elevation: 6,
                         ),
-                        onPressed: () async {
+                        onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             // Handle validation errors
+
+                            ApiDestinasiHelper.createDestinasi(
+                              destinationName: controllerName.text,
+                              alamatDestinasi: controllerAddress.text,
+                              deskripsiDestinasi: controllerDescription.text,
+                              latitude: double.parse(controllerLatitude.text),
+                              longitude: double.parse(controllerLongitude.text),
+                              imageFoto: base64string!,
+                              destinationCategory: controllerCategory.text,
+                              rating: int.parse(controllerRating.text),
+                            );
+                            popperToRoot(context);
+                            pushAdminHomePage(context);
+
                           } else {
                             ApiDestinasiHelper.createDestinasi(
                               destinationName: controllerName.text,

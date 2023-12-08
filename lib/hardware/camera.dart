@@ -55,9 +55,9 @@ class _CameraPageState extends State<CameraPage> {
 
       final Uint8List? compressedImage = await FlutterImageCompress.compressWithFile(
         picture.path,
-        minWidth: 10,
-        minHeight: 10,
-        quality: 30,
+        minWidth: 256,
+        minHeight: 256,
+        quality: 60,
       );
 
       String base64Image = base64Encode(compressedImage!);
@@ -77,7 +77,7 @@ class _CameraPageState extends State<CameraPage> {
 
       tempUser = User.fromJson(newData);
 
-      ApiFunctionHelper.updatePassword(tempUser);
+      await ApiFunctionHelper.updatePassword(tempUser);
 
       popperToRoot(context);
       pushHomePage(context);
