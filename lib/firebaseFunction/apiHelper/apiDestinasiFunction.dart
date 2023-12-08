@@ -10,10 +10,10 @@ import 'package:tubespariwisata/firebaseFunction/apiHelper/globalURL.dart';
 class ApiDestinasiHelper {
   // API URL
   static const String url = globalURL.url;
-  static const String endpoint = '/tubesPariwisata/public/api/destinasi';
+  // static const String endpoint = '/tubesPariwisata/public/api/destinasi';
 
   // static const String url = globalURL.url;
-  // static const String endpoint = '/api/destinasi';
+  static const String endpoint = '/api/destinasi';
 
   static Future<Response> createDestinasi({
     required String destinationName,
@@ -142,7 +142,8 @@ class ApiDestinasiHelper {
 
   static Future<Destinasi> getDestinasiById(int id) async {
     try {
-      var response = await get(Uri.http(url, endpoint + '/' + id.toString()), headers: {"Content-Type": "application/json"});
+      var response = await get(Uri.http(url, endpoint + '/' + id.toString()),
+      headers: {"Content-Type": "application/json"});
 
       if(response.statusCode != 200) throw Exception(response.reasonPhrase);
 

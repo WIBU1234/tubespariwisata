@@ -274,7 +274,7 @@ class _MainGridState extends State<MainGrid> {
                                   ),
                                   child: GestureDetector(
                                     onTap: () {
-                                      ticketPage(context, destinasi);
+                                      Navigator.push(context, MaterialPageRoute(builder: (_) => DestinasiWisata(destinasi: destinasi)));
                                     },
                                     child: Column(
                                       children: [

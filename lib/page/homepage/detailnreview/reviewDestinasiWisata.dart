@@ -228,17 +228,17 @@ class _ReviewDestinasiWisataState extends State<ReviewDestinasiWisata> {
                               ],
                             ),
                             const SizedBox(height: 10),
-                            SizedBox(
-                              width: double.infinity,
-                              child: Text(
-                                reviewTemp!.rating.toString(),
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ),
+                            // SizedBox(
+                            //   width: double.infinity,
+                            //   child: Text(
+                            //     reviewTemp!.rating.toString(),
+                            //     style: const TextStyle(
+                            //       fontSize: 16,
+                            //       fontWeight: FontWeight.normal,
+                            //       color: Colors.black,
+                            //     ),
+                            //   ),
+                            // ),
                             const SizedBox(height: 10),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,

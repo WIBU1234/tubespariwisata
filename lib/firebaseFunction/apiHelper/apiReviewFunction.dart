@@ -9,10 +9,10 @@ import 'package:tubespariwisata/firebaseFunction/apiHelper/globalURL.dart';
 class ApiDestinasiHelper {
   // API URL
   static const String url = globalURL.url;
-  static const String endpoint = '/tubesPariwisata/public/api/review';
+  // static const String endpoint = '/tubesPariwisata/public/api/review';
 
   // static const String url = "127.0.0.1:8000";
-  // static const String endpoint = '/api/review';
+  static const String endpoint = '/api/review';
 
   static Future<Response> createReview({
     required int idUser,
@@ -108,8 +108,8 @@ class ApiDestinasiHelper {
   }
 
   static Stream<List<Review>> getReviewByIdDestinasi(int idDestinasi) async* {
-    String endpointV2 = '/tubesPariwisata/public/api/getAllReviewByIdDestinasi';
-    // String endpointV2 = '/api/getAllReviewByIdDestinasi'
+    // String endpointV2 = '/tubesPariwisata/public/api/getAllReviewByIdDestinasi';
+    String endpointV2 = '/api/getAllReviewByIdDestinasi';
 
     print(idDestinasi);
 

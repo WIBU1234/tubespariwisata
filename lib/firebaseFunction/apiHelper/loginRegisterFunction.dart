@@ -9,10 +9,10 @@ class loginRegisHelper {
   static http.Client client = http.Client();
   // API URL
   static const String url = globalURL.url;
-  static const String endpoint = "/tubesPariwisata/public/api/login";
+  // static const String endpoint = "/tubesPariwisata/public/api/login";
 
   // static const String url = globalURL.url;
-  // static const String endpoint = '/api/login';
+  static const String endpoint = '/api/login';
 
   static Future<User> login({required String username, required String password}) async {
     try{
@@ -33,8 +33,8 @@ class loginRegisHelper {
   }
 
   static Future<User> loginById({required int id}) async {
-    String endpointV2 = '/tubesPariwisata/public/api/loginById';
-    // String endpointV2 = '/api/loginById';
+    // String endpointV2 = '/tubesPariwisata/public/api/loginById';
+    String endpointV2 = '/api/loginById';
 
     String idUser = id.toString();
 

@@ -190,6 +190,8 @@ class _AttractionContainerState extends State<AttractionContainer> {
                                                 destinasiList.remove(destinasi);
                                               });
 
+
+
                                               // await ApiDestinasiHelper
                                               //     .deleteDestinasi(
                                               //         destinasi.id!);

@@ -11,14 +11,14 @@ class ApiTicketHelper{
   static http.Client client = http.Client();
   // API URL
   static const String url = globalURL.url;
-  static const String endpoint = '/tubesPariwisata/public/api/ticket';
+  // static const String endpoint = '/tubesPariwisata/public/api/ticket';
 
   // static const String url = globalURL.url;
-  // static const String endpoint = '/api/ticket';
+  static const String endpoint = '/api/ticket';
   
   static Stream<List<Book>> getTicketStream({required int id}) async* {
-    String endpointV2 = "/tubesPariwisata/public/api/getAllTicketByIDUser";
-    // String endpointV2 = "/api/getAllTicketByIDUser";
+    // String endpointV2 = "/tubesPariwisata/public/api/getAllTicketByIDUser";
+    String endpointV2 = "/api/getAllTicketByIDUser";
 
     String idUser = id.toString();
 
@@ -40,8 +40,8 @@ class ApiTicketHelper{
   }
 
   static Stream<List<Ticket>> getTicketByIdDestinasi(int idDestinasi) async* {
-    String endpointV2 = "/tubesPariwisata/public/api/getAllTicketByIdDestinasi";
-    // String endpointV2 = "/api/getAllTicketByIdDestinasi";
+    // String endpointV2 = "/tubesPariwisata/public/api/getAllTicketByIdDestinasi";
+    String endpointV2 = "/api/getAllTicketByIdDestinasi";
 
     String idTarget = idDestinasi.toString();
 
