@@ -141,22 +141,38 @@ class _PayTicketPageState extends State<PayTicketPage> {
                             ],
                           ),
                 
-                          const SizedBox(height: 30),
+                          const SizedBox(height: 24),
                           const Align(
-                            alignment: Alignment.centerLeft,
+                            alignment: Alignment.center,
                             child: Text(
                               "Payment",
                               style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
                                 color: Colors.black,
                               ),
                             ),
                           ),  
-                
-                          const SizedBox(height: 10),
-                          const SingleChildScrollView(
-                            
+
+                          const SizedBox(height: 8),
+                          Form(
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                              child: Column(
+                                children: [
+                                  Container(
+                                    decoration: const BoxDecoration(
+                                      border: Border(
+                                        bottom: BorderSide(
+                                          color: Colors.black38,
+                                          width: 1.0,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ),
                           ),
                         ],
                       ),
