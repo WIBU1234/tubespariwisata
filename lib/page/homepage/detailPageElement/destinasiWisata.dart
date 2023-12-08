@@ -14,9 +14,6 @@ class DestinasiWisata extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Destinasi Wisata"),
-      ),
       body: SafeArea(
         child: Column(children: [
           Container(
