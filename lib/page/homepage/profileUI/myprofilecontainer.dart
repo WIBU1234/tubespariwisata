@@ -148,19 +148,19 @@ class _ProfileState extends State<Profile> {
                 padding: const EdgeInsets.only(bottom: 50),
                 child: Center(  
                   child: Container(
-                    width: 380,
-                    height: 660,
+                    width: MediaQuery.of(context).size.width * 0.9,
+                    height: MediaQuery.of(context).size.height * 0.80,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.white.withOpacity(0.8),
+                      color: Colors.white,
                     ),
                     child: Container(
                       child: Padding(
                         padding: const EdgeInsets.all(3.0),
                         child: Center(
                           child: Container(
-                            width: 350,
-                            height: 630,
+                            width: MediaQuery.of(context).size.width * 0.85,
+                            height: MediaQuery.of(context).size.height * 0.78,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
                               border: Border.all(
@@ -186,8 +186,8 @@ class _ProfileState extends State<Profile> {
                                   child: Align(
                                     alignment: Alignment.topCenter,
                                     child: Container(
-                                      width: 100,
-                                      height: 100,
+                                      width: 180,
+                                      height: 180,
                                       decoration: const BoxDecoration(
                                         shape: BoxShape.circle,
                                         color: Colors.grey,
@@ -195,14 +195,7 @@ class _ProfileState extends State<Profile> {
                                       child: InkWell(
                                         onTap: () async {
                                           await availableCameras().then(
-                                              (value) => Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (_) =>
-                                                          CameraPage(
-                                                              cameras: value,
-                                                              user:
-                                                                  userTemp!))));
+                                              (value) => Navigator.push(context, MaterialPageRoute(builder: (_) => CameraPage(cameras: value, user: userTemp!))));
                                         },
                                         child: Center(
                                           // child: widget.picture != null
@@ -242,8 +235,8 @@ class _ProfileState extends State<Profile> {
                                 ),
                                 const SizedBox(height: 10),
                                 SizedBox(
-                                    height: 360,
-                                    width: 280,
+                                    height: 350,
+                                    width: MediaQuery.of(context).size.width * 0.78,
                                     child: SingleChildScrollView(
                                       child: Column(
                                         children: [
@@ -266,16 +259,13 @@ class _ProfileState extends State<Profile> {
                                               controller: controllerName,
                                               enabled: false,
                                               decoration: InputDecoration(
-                                                prefixIcon:
-                                                    const Icon(Icons.person),
+                                                prefixIcon: const Icon(Icons.person),
                                                 labelText: userTemp!.username,
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(50),
+                                                borderRadius:
+                                                  BorderRadius.circular(50),
                                                 ),
-                                                contentPadding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 8),
+                                                contentPadding: const EdgeInsets.symmetric(vertical: 8),
                                               ),
                                               validator: (value) {
                                                 if (value == '') {
@@ -305,16 +295,12 @@ class _ProfileState extends State<Profile> {
                                               controller: controllerEmail,
                                               enabled: false,
                                               decoration: InputDecoration(
-                                                prefixIcon:
-                                                    const Icon(Icons.mail),
+                                                prefixIcon: const Icon(Icons.mail),
                                                 labelText: userTemp!.email,
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(50),
+                                                  borderRadius: BorderRadius.circular(50),
                                                 ),
-                                                contentPadding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 10),
+                                                contentPadding: const EdgeInsets.symmetric(vertical: 10),
                                               ),
                                               validator: (value) {
                                                 if (value == '') {
@@ -344,16 +330,13 @@ class _ProfileState extends State<Profile> {
                                               controller: controllerPassword,
                                               enabled: false,
                                               decoration: InputDecoration(
-                                                prefixIcon:
-                                                    const Icon(Icons.lock),
+                                                prefixIcon: const Icon(Icons.lock),
                                                 labelText: userTemp!.password,
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(50),
+                                                  borderRadius: BorderRadius.circular(50),
                                                 ),
                                                 contentPadding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 10),
+                                                    const EdgeInsets.symmetric(vertical: 10),
                                                 suffixIcon: IconButton(
                                                   onPressed: () {
                                                     setState(() {
@@ -363,13 +346,6 @@ class _ProfileState extends State<Profile> {
                                                   },
                                                   icon: const Icon(
                                                     Icons.visibility_off,
-                                                    // TF DEAD CODE
-                                                    // isPasswordVisible
-                                                    //     ? Icons.visibility_off
-                                                    //     : Icons.visibility,
-                                                    // color: isPasswordVisible
-                                                    //     ? Colors.grey
-                                                    //     : Colors.blue,
                                                   ),
                                                 ),
                                               ),
@@ -403,23 +379,17 @@ class _ProfileState extends State<Profile> {
                                           ),
                                           const SizedBox(height: 10),
                                           TextFormField(
-                                              keyboardType:
-                                                  TextInputType.number,
-                                              controller:
-                                                  controllerNomorTelepon,
+                                              keyboardType: TextInputType.number,
+                                              controller: controllerNomorTelepon,
                                               enabled: false,
                                               decoration: InputDecoration(
-                                                prefixIcon:
-                                                    const Icon(Icons.phone),
-                                                labelText:
-                                                    userTemp!.nomorTelepon,
+                                                prefixIcon: const Icon(Icons.phone),
+                                                labelText: userTemp!.nomorTelepon,
                                                 border: OutlineInputBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(50),
-                                                ),
-                                                contentPadding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 10),
+                                                    BorderRadius.circular(50),
+                                                  ),
+                                                contentPadding: const EdgeInsets.symmetric(vertical: 10),
                                               ),
                                               validator: (value) {
                                                 if (value == '') {
@@ -446,22 +416,16 @@ class _ProfileState extends State<Profile> {
                                           ),
                                           const SizedBox(height: 10),
                                           TextFormField(
-                                              controller:
-                                                  controllerTanggalLahir,
+                                              controller: controllerTanggalLahir,
                                               onTap: selectDate,
                                               enabled: false,
                                               decoration: InputDecoration(
-                                                prefixIcon: const Icon(
-                                                    Icons.date_range),
-                                                labelText:
-                                                    userTemp!.tanggalLahir,
+                                                prefixIcon: const Icon(Icons.date_range),
+                                                labelText: userTemp!.tanggalLahir,
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(50),
+                                                  borderRadius:BorderRadius.circular(50),
                                                 ),
-                                                contentPadding:
-                                                    const EdgeInsets.symmetric(
-                                                        vertical: 10),
+                                                contentPadding: const EdgeInsets.symmetric(vertical: 10),
                                               ),
                                               validator: (value) {
                                                 if (value == '') {
@@ -470,59 +434,48 @@ class _ProfileState extends State<Profile> {
                                                 return null;
                                               }),
                                           const SizedBox(height: 24),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor: Colors.green,
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 30,
-                                                      vertical: 14),
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            16),
+                                          Padding(
+                                            padding: EdgeInsets.only(bottom: 10.0), // Adjust the bottom padding as needed
+                                            child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                ElevatedButton(
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: Colors.green,
+                                                    padding: const EdgeInsets.symmetric(horizontal: 44, vertical: 14),
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(16),
+                                                    ),
+                                                    elevation: 6,
                                                   ),
-                                                  elevation: 6,
-                                                ),
-                                                onPressed: () {
-                                                  pushUpdateProfile(
-                                                      context, userTemp!);
-                                                },
-                                                child: const Text(
-                                                  'Update',
-                                                  style:
-                                                      TextStyle(fontSize: 18),
-                                                ),
-                                              ),
-                                              ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor: Colors.red,
-                                                  padding: const EdgeInsets
-                                                      .symmetric(
-                                                      horizontal: 30,
-                                                      vertical: 14),
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            16),
+                                                  onPressed: () {
+                                                    pushUpdateProfile(context, userTemp!);
+                                                  },
+                                                  child: const Text(
+                                                    'Update',
+                                                    style: TextStyle(fontSize: 18),
                                                   ),
-                                                  elevation: 6,
                                                 ),
-                                                onPressed: () {
-                                                  // pushHomePage(context, userTemp);
-                                                },
-                                                child: const Text(
-                                                  'Delete',
-                                                  style:
-                                                      TextStyle(fontSize: 18),
+                                                ElevatedButton(
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor: Colors.red,
+                                                    padding: const EdgeInsets.symmetric(horizontal: 44, vertical: 14),
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(16),
+                                                    ),
+                                                    elevation: 6,
+                                                  ),
+                                                  onPressed: () {
+                                                    // pushHomePage(context, userTemp);
+                                                  },
+                                                  child: const Text(
+                                                    'Delete',
+                                                    style: TextStyle(fontSize: 18),
+                                                  ),
                                                 ),
-                                              ),
-                                            ],
-                                          )
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       ),
                                     )),

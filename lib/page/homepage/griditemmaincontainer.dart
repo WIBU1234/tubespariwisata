@@ -147,7 +147,7 @@ class _MainGridState extends State<MainGrid> {
         padding: const EdgeInsets.only(bottom: 50),
         child: Center(
           child: Container(
-            width: 380,
+            width: MediaQuery.of(context).size.width * 0.92,
             height: MediaQuery.of(context).size.height * 0.8,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
@@ -161,7 +161,7 @@ class _MainGridState extends State<MainGrid> {
                     const SizedBox(height: 15),
                     Container(
                       width: 350,
-                      height: 100,
+                      height: 110,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                         border: Border.all(

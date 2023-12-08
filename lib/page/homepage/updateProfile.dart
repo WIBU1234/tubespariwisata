@@ -89,7 +89,7 @@ class _UpdatePageState extends State<UpdatePage> {
             child: Container(
               padding: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
-                color: Colors.white.withOpacity(0.9),
+                color: Colors.white,
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
@@ -107,13 +107,8 @@ class _UpdatePageState extends State<UpdatePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Image.asset(
-                        'resources/images/logo.png',
-                        width: 150,
-                        height: 150,
-                      ),
                       const Text(
-                        'Registration',
+                        'Update',
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
@@ -122,22 +117,35 @@ class _UpdatePageState extends State<UpdatePage> {
 
                       const SizedBox(height: 10),
                       const Text(
-                        'Please enter input your data below',
+                        'Update Your Data',
                         style: TextStyle(
                           fontSize: 16, 
                           color: Colors.grey),
                       ),
 
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 15),
+                      Padding(
+                        padding: EdgeInsets.only(left: 5.0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Full Name",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
                       TextFormField(
                         controller: controllerName,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.person),
-                          labelText: 'Name',
+                          labelText: 'Enter your Full Name',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 17),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 17, horizontal: 20),
                         ),
                         validator: (value) {
                           if(value == ''){
@@ -150,16 +158,29 @@ class _UpdatePageState extends State<UpdatePage> {
                         }
                       ),
 
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 15),
+                      Padding(
+                        padding: EdgeInsets.only(left: 5.0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "E-mail",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
                       TextFormField(
                         controller: controllerEmail,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.mail),
-                          labelText: 'Email',
+                          labelText: 'Enter your Email',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 17),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 17, horizontal: 20),
                         ),
                         validator: (value) {
                           if(value == ''){
@@ -172,16 +193,29 @@ class _UpdatePageState extends State<UpdatePage> {
                         }
                       ),
                       
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 15),
+                      Padding(
+                        padding: EdgeInsets.only(left: 5.0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Password",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
                       TextFormField(
                         controller: controllerPassword,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.lock),
-                          labelText: 'Password',
+                          labelText: 'Enter your Password',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 17),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 17, horizontal: 20),
                           suffixIcon: IconButton(
                             onPressed: () {
                               setState(() {
@@ -210,17 +244,30 @@ class _UpdatePageState extends State<UpdatePage> {
                         }
                       ),
 
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 15),
+                      Padding(
+                        padding: EdgeInsets.only(left: 5.0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Phone Number",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
                       TextFormField(
                         keyboardType: TextInputType.number,
                         controller: controllerNomorTelepon,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.phone),
-                          labelText: 'Phone Number',
+                          labelText: 'Enter your Phone Number',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 17),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 17, horizontal: 20),
                         ),
                         validator: (value) {
                           if(value == ''){
@@ -233,17 +280,30 @@ class _UpdatePageState extends State<UpdatePage> {
                         }
                       ),
 
-                      const SizedBox(height: 24),
+                      const SizedBox(height: 15),
+                      Padding(
+                        padding: EdgeInsets.only(left: 5.0),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Date of Birth",
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 5),
                       TextFormField(
                         controller: controllerTanggalLahir,
                         onTap: _selectDate,
                         decoration: InputDecoration(
-                          prefixIcon: const Icon(Icons.date_range),
-                          labelText: 'Date of Birth',
+                          labelText: 'Enter your Date of Birth',
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(50),
                           ),
-                          contentPadding: const EdgeInsets.symmetric(vertical: 17),
+                          contentPadding: const EdgeInsets.symmetric(vertical: 17, horizontal: 20),
                         ),
                         validator: (value) {
                           if(value == ''){

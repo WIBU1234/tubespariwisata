@@ -47,125 +47,113 @@ class _landingProfileState extends State<landingProfile> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 70),
+        padding: const EdgeInsets.only(bottom: 50),
         child: Center(
           child: Container(
-            width: 330,
-            height: 610,
+            width: MediaQuery.of(context).size.width * 0.92,
+            height: MediaQuery.of(context).size.height * 0.80,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white,
             ),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   Padding(
                       padding: const EdgeInsets.only(bottom: 0.0),
                       child: Center(
                         child: Container(
-                          width: 300,
-                          height: 140,
+                          width: 350,
+                          height: 130,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(15),
                             border: Border.all(
                               color: Colors.black,
                               width: 1,
                             ),
                           ),
-                          child: Column(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
-            
-                              const Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                children: [
-                                  SizedBox(
-                                    width: 160.0,
-                                    height: 100.0,
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                              SizedBox(
+                                width: 200.0,
+                                height: 100.0,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(height: 10.0),
+                                    Text(
+                                      "Good Morning,",
+                                      style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    SizedBox(height: 7.0),
+                                    Text(
+                                      "Username",
+                                      style: TextStyle(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                    SizedBox(height: 7.0),
+                                    Row(
                                       children: [
-                                        SizedBox(height: 14.0),
-                                        Text(
-                                          "Username",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-            
-                                        Row(
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.all(0),
-                                              child: Icon(Icons.location_on_sharp),
-                                            ),
-            
-                                            Text(
-                                              "Yogyakarta, Indonesia",
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w500,
+                                        Center(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(left: 0.0),
+                                            child: Container(
+                                              width: 120,
+                                              height: 30,
+                                              decoration: BoxDecoration(
+                                                color: Colors.black,
+                                                borderRadius: BorderRadius.circular(60.0),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                    color: Colors.black.withOpacity(0.5),
+                                                    spreadRadius: 0,
+                                                    blurRadius: 10,
+                                                    offset: const Offset(0, 4),
+                                                  ),
+                                                ],
+                                              ),
+                                              child: Center(
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    pushReplacementProfile(context);
+                                                  },
+                                                  child: const Center(
+                                                    child: Text(
+                                                      "View My Profile",
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        fontWeight: FontWeight.w300,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(left: 0.0),
-                                    child: Center(
-                                      child: CircleAvatar(
-                                        radius: 30,
-                                        backgroundImage:
-                                            AssetImage("resources/images/bali.jpg"),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-            
-                              Center(
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 0.0),
-                                  child: Container(
-                                    width: 120,
-                                    height: 30,
-                                    decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.circular(60.0),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.5),
-                                          spreadRadius: 0,
-                                          blurRadius: 10,
-                                          offset: const Offset(0, 4),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Center(
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          pushReplacementProfile(context);
-                                        },
-                                        child: const Center(
-                                          child: Text(
-                                            "View My Profile",
-                                            style: TextStyle(
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w300,
-                                              color: Colors.white,
-                                            ),
                                           ),
                                         ),
-                                      ),
-
+                                      ],
                                     ),
+                                  ],
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.only(left: 0.0),
+                                child: Center(
+                                  child: CircleAvatar(
+                                    radius: 30,
+                                    backgroundImage:
+                                      AssetImage("resources/images/bali.jpg"),
                                   ),
                                 ),
                               ),
-            
                             ],
                           ),
                         ),
@@ -173,7 +161,7 @@ class _landingProfileState extends State<landingProfile> {
             
                   const SizedBox(height: 25),
                   const Padding(
-                    padding: EdgeInsets.only(left: 30.0),
+                    padding: EdgeInsets.only(left: 20.0),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -191,7 +179,7 @@ class _landingProfileState extends State<landingProfile> {
                       pushScanQr(context);
                     },
                     child: Container(
-                      width: 250,
+                      width: 340,
                       height: 50,
                       decoration: BoxDecoration(
                         color: Colors.grey[400],
@@ -233,7 +221,7 @@ class _landingProfileState extends State<landingProfile> {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Container(
-                      width: 250,
+                      width: 340,
                       height: 50,
                       decoration: BoxDecoration(
                         color: Colors.grey[400],
@@ -274,7 +262,7 @@ class _landingProfileState extends State<landingProfile> {
 
                   const SizedBox(height: 25),
                   const Padding(
-                    padding: EdgeInsets.only(left: 30.0),
+                    padding: EdgeInsets.only(left: 20.0),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -292,7 +280,7 @@ class _landingProfileState extends State<landingProfile> {
                       pushScanQr(context);
                     },
                     child: Container(
-                      width: 250,
+                      width: 340,
                       height: 50,
                       decoration: BoxDecoration(
                         color: Colors.grey[400],
