@@ -380,13 +380,10 @@ class _MyDetailTicketState extends State<MyDetailTicket> {
                                             ),
 
                                             child: GestureDetector(
-                                              onTap: () {
-                                                ApiBookHelper.deleteDataBooking(widget.book.id!).then((value) {
-                                                  if(value == 200) {
-                                                    popperToRoot(context);
-                                                    pushHomePage(context);
-                                                  }
-                                                });
+                                              onTap: () async {
+                                                await ApiBookHelper.deleteDataBooking(widget.book.id!);
+                                                popperToRoot(context);
+                                                pushHomePage(context);
                                               },
 
                                               child: const Column(

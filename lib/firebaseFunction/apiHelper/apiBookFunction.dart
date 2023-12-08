@@ -1,7 +1,8 @@
 // ENTITY
-// import 'package:tubespariwisata/entity/book.dart';
-// import 'package:tubespariwisata/entity/ticket.dart';
+import 'package:tubespariwisata/entity/book.dart';
+import 'package:uuid/uuid.dart';
 // TOOLS
+import 'dart:convert';
 import 'package:http/http.dart' as http;
 // IMPORT GLOBAL URL
 import 'package:tubespariwisata/firebaseFunction/apiHelper/globalURL.dart';
@@ -14,6 +15,31 @@ class ApiBookHelper{
 
   // static const String url = globalURL.url;
   // static const String endpoint = '/api/book';
+
+  static Future<void> loopNumberofTicket(Book book, int numberStore) async {
+    for(int i = 0; i < numberStore; i++){
+      await storeDataBooking(book, numberStore);
+    }
+  }
+
+  static Future<http.Response> storeDataBooking(Book book, int numberStore) async {
+
+    book.nomorResi = Uuid().v4().substring(0, 5);
+
+    try{
+      var apiResult = await client.post(Uri.http(url, endpoint),
+        headers: {"Content-Type": "application/json", "Accept": "application/json"}, 
+        body: jsonEncode(book));
+
+        if(apiResult.statusCode == 200){
+          return apiResult;
+        } else {
+          throw Exception(apiResult.reasonPhrase);
+        }
+    } catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 
   static Future<int> deleteDataBooking(int id) async {
     try {

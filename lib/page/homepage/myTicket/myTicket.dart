@@ -65,10 +65,6 @@ class MyTicketState extends State<MyTicket> {
 
   @override
   Widget build(BuildContext context) {
-    // final _formKey = GlobalKey<FormState>();
-    // double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       extendBody: true,
       body: Container(
@@ -179,7 +175,7 @@ class MyTicketState extends State<MyTicket> {
                                                       child: Row(
                                                         children: [
                                                           Container(
-                                                            width: 120,
+                                                            width: 100,
                                                             height: 120,
                                                             decoration: BoxDecoration(
                                                               borderRadius: BorderRadius.circular(20),
@@ -192,6 +188,7 @@ class MyTicketState extends State<MyTicket> {
 
                                                           const SizedBox(width: 12),
                                                           Column(
+                                                            crossAxisAlignment: CrossAxisAlignment.start,
                                                             children: [
                                                               const SizedBox(height: 12),
                                                               Text(
@@ -202,54 +199,59 @@ class MyTicketState extends State<MyTicket> {
                                                               ),
 
                                                               const SizedBox(height: 6),
-                                                              Padding(
-                                                                padding: const EdgeInsets.only(left: 0),
-                                                                child: Text(
-                                                                  book.dateofDeparture,
-                                                                  style: const TextStyle(
-                                                                    fontWeight: FontWeight.w300,
-                                                                    fontSize: 12,
+                                                              Align(
+                                                                alignment: Alignment.centerLeft,
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets.only(left: 0),
+                                                                  child: Text(
+                                                                    book.dateofDeparture,
+                                                                    style: const TextStyle(
+                                                                      fontWeight: FontWeight.w300,
+                                                                      fontSize: 12,
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
 
                                                               const SizedBox(height: 26),
-                                                              Padding(
-                                                                padding: const EdgeInsets.only(left: 0),
-                                                                child: Container(
-                                                                  width: 100,
-                                                                  height: 20,
-                                                                  decoration: BoxDecoration(
-                                                                    borderRadius: BorderRadius.circular(10),
-                                                                    color: Colors.grey[300],
-                                                                  ),
-                                                                  child: GestureDetector(
-                                                                    onTap: () {
-                                                                      detailPageTicket(context, book);
-                                                                    },
-
-                                                                    child: const Row(
-                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                      children: [
-                                                                        Padding(
-                                                                          padding: EdgeInsets.only(left: 5),
-                                                                          child: Text(
-                                                                            "See Ticket",
-                                                                            style: TextStyle(
-                                                                              fontSize: 12,
-                                                                              fontWeight: FontWeight.w300,
+                                                              Center(
+                                                                child: Padding(
+                                                                  padding: const EdgeInsets.only(left: 0),
+                                                                  child: Container(
+                                                                    width: 100,
+                                                                    height: 20,
+                                                                    decoration: BoxDecoration(
+                                                                      borderRadius: BorderRadius.circular(10),
+                                                                      color: Colors.grey[300],
+                                                                    ),
+                                                                    child: GestureDetector(
+                                                                      onTap: () {
+                                                                        detailPageTicket(context, book);
+                                                                      },
+                                                              
+                                                                      child: const Row(
+                                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                                        children: [
+                                                                          Padding(
+                                                                            padding: EdgeInsets.only(left: 5),
+                                                                            child: Text(
+                                                                              "See Ticket",
+                                                                              style: TextStyle(
+                                                                                fontSize: 12,
+                                                                                fontWeight: FontWeight.w300,
+                                                                              ),
                                                                             ),
                                                                           ),
-                                                                        ),                                                       
-
-                                                                        Padding(
-                                                                          padding: EdgeInsets.only(left: 5),
-                                                                          child: Icon(Icons.arrow_forward_ios, size: 12.0),
-                                                                        ),
-                                                                      ],
-                                                                    ),
-                                                                  )
-                                                                  
+                                                              
+                                                                          Padding(
+                                                                            padding: EdgeInsets.only(left: 5),
+                                                                            child: Icon(Icons.arrow_forward_ios, size: 12.0),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                    )
+                                                                    
+                                                                  ),
                                                                 ),
                                                               ),
 
