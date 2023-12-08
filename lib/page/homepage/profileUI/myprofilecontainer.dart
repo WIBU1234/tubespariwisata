@@ -146,9 +146,9 @@ class _ProfileState extends State<Profile> {
             ? const CircularProgressIndicator()
             : Padding(
                 padding: const EdgeInsets.only(bottom: 50),
-                child: Center(
+                child: Center(  
                   child: Container(
-                    width: 350,
+                    width: 380,
                     height: 660,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -159,7 +159,7 @@ class _ProfileState extends State<Profile> {
                         padding: const EdgeInsets.all(3.0),
                         child: Center(
                           child: Container(
-                            width: 320,
+                            width: 350,
                             height: 630,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
@@ -228,7 +228,7 @@ class _ProfileState extends State<Profile> {
                                 const SizedBox(height: 20),
                                 Padding(
                                   padding: const EdgeInsets.only(
-                                      right: 30, left: 30),
+                                      right: 15, left: 15),
                                   child: Container(
                                     decoration: const BoxDecoration(
                                       border: Border(
@@ -275,7 +275,7 @@ class _ProfileState extends State<Profile> {
                                                 ),
                                                 contentPadding:
                                                     const EdgeInsets.symmetric(
-                                                        vertical: 10),
+                                                        vertical: 8),
                                               ),
                                               validator: (value) {
                                                 if (value == '') {

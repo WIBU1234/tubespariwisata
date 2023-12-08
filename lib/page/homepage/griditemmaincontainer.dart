@@ -329,6 +329,63 @@ class _MainGridState extends State<MainGrid> {
                         color: Colors.black,
                       ),
                     ),
+                    const SizedBox(height: 15),
+                    Container(
+                      width: 350,
+                      height: 240,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Column(
+                          children: [
+                            for (var destinasi in destinationList)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 5, bottom: 13),
+                                child: Container(
+                                  width: 350,
+                                  height: 95,
+                                  decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                                    color: Colors.white.withOpacity(1.0),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.black12,
+                                        spreadRadius: 1,
+                                        blurRadius: 10,
+                                        offset: Offset(0, 4),
+                                      ),
+                                    ],
+                                  ),
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      ticketPage(context, destinasi);
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Container(
+                                          width: 350,
+                                          height: 95,
+                                          decoration: BoxDecoration(
+                                            borderRadius: const BorderRadius.only(
+                                              topLeft: Radius.circular(20),
+                                              topRight: Radius.circular(20),
+                                              bottomLeft: Radius.circular(20),
+                                              bottomRight: Radius.circular(20),
+                                            ),
+                                            image: DecorationImage(
+                                              image: MemoryImage(base64.decode(destinasi.destinationImage)),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),

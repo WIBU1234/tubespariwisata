@@ -68,7 +68,7 @@ void main() {
 
     await widgetTester.pumpWidget(MaterialApp(
         home: AttractionContainer(
-      destinasiList: destinasiList,
+      // destinasiList: destinasiList,
     )));
 
     await widgetTester.pumpAndSettle();
