@@ -186,8 +186,7 @@ class _ProfileState extends State<Profile> {
                                           child: userTemp!.imageFoto != "NOTHAVE"
                                                   ? ClipOval(
                                                       child: Image.memory(
-                                                          Uint8List.fromList(base64
-                                                              .decode(userTemp!.imageFoto)),
+                                                          Uint8List.fromList(base64.decode(userTemp!.imageFoto)),
                                                           fit: BoxFit.cover,
                                                           width: 100,
                                                           height: 100),

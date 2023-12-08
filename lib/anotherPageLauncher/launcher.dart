@@ -16,6 +16,7 @@ import 'package:tubespariwisata/page/homepage/profileUI/myprofilecontainer.dart'
 
 import 'package:tubespariwisata/page/homepage/myTicket/detailPerTicket.dart';
 import 'package:tubespariwisata/page/homepage/detailPageElement/ticketBuy.dart';
+import 'package:tubespariwisata/page/homepage/detailPageElement/ticketPayment.dart';
 
 import 'package:tubespariwisata/adminLaunch/pageAdmin/addDestination.dart';
 import 'package:tubespariwisata/adminLaunch/container/addDestination/createDestination.dart';
@@ -67,6 +68,10 @@ void ticketPage(BuildContext context, Destinasi destinasi) {
 
 void buyTicketProcess(BuildContext context, Destinasi destinasi, Ticket ticket, User user) {
   Navigator.push(context, MaterialPageRoute(builder: (_) => BuyTicketPage(destinasi: destinasi, ticket: ticket, user: user)));
+}
+
+void payTicketProcess(BuildContext context, Book book, Destinasi destinasi, int numberTicket){
+  Navigator.push(context, MaterialPageRoute(builder: (_) => PayTicketPage(book: book, destinasi: destinasi,numberTicket: numberTicket)));
 }
 
 void detailPageTicket(BuildContext context, Book book) {
