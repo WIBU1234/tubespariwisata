@@ -50,7 +50,6 @@ class MyTicketState extends State<MyTicket> {
       loginRegisHelper.loginById(id: int.parse(userID)).then((value) {
         setState(() {
           userTemp = value;
-          isLoading = false;
         });
       });
 
@@ -65,10 +64,6 @@ class MyTicketState extends State<MyTicket> {
 
   @override
   Widget build(BuildContext context) {
-    // final _formKey = GlobalKey<FormState>();
-    // double screenWidth = MediaQuery.of(context).size.width;
-    // double screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       extendBody: true,
       body: Container(
@@ -100,18 +95,24 @@ class MyTicketState extends State<MyTicket> {
 
                             // Add your content here SINI WOI
                             child: Column(
-
                               children: [
-                                const Row(
+                                Row(
                                   children: [
-                                    Padding(
-                                      padding: EdgeInsets.only(top: 20, left: 20),
-                                      child: Icon(Icons.keyboard_arrow_left, size: 30.0),
+                                    GestureDetector(
+                                      onTap: () {
+                                        popper(context);
+                                      },
+                                      child: const Padding(
+                                        padding:
+                                            EdgeInsets.only(top: 20, left: 20),
+                                        child: Icon(Icons.keyboard_arrow_left,
+                                            size: 30.0),
+                                      ),
                                     ),
-
-                                    Center(
+                                    const Center(
                                       child: Padding(
-                                        padding: EdgeInsets.only(top: 20, left: 0),
+                                        padding:
+                                            EdgeInsets.only(top: 20, left: 0),
                                         child: Text(
                                           "Your purchase list",
                                           style: TextStyle(
@@ -123,7 +124,6 @@ class MyTicketState extends State<MyTicket> {
                                     ),
                                   ],
                                 ),
-
                                 const SizedBox(height: 20),
                                 Container(
                                   width: 280,
@@ -131,145 +131,202 @@ class MyTicketState extends State<MyTicket> {
                                   // color: Colors.black,
 
                                   child: GridView.count(
-                                  crossAxisCount: 1,
-                                  childAspectRatio: 2.6,
-                                  padding: const EdgeInsets.all(2),
-                                  mainAxisSpacing: 20.0,
-                                  crossAxisSpacing: 20.0,
-                                  children:  [
-                                    
-                                    for(var book in bookList) 
-                                      FutureBuilder<Destinasi>(
-                                        future: ApiDestinasiHelper.getDestinasiById(book.idDestinasi),
-                                        builder: (BuildContext context, AsyncSnapshot<Destinasi> snapshot) {
-                                          if (snapshot.connectionState == ConnectionState.waiting) {
-                                            return const CircularProgressIndicator();
-                                          } else if (snapshot.hasError) {
-                                            return Text('Error: ${snapshot.error}');
-                                          } else if (snapshot.hasData) {
-                                            var destinasiTemp = snapshot.data;
+                                    crossAxisCount: 1,
+                                    childAspectRatio: 2.6,
+                                    padding: const EdgeInsets.all(2),
+                                    mainAxisSpacing: 20.0,
+                                    crossAxisSpacing: 20.0,
+                                    children: [
+                                      for (var book in bookList)
+                                        FutureBuilder<Destinasi>(
+                                          future: ApiDestinasiHelper
+                                              .getDestinasiById(
+                                                  book.idDestinasi),
+                                          builder: (BuildContext context,
+                                              AsyncSnapshot<Destinasi>
+                                                  snapshot) {
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.waiting) {
+                                              return const CircularProgressIndicator();
+                                            } else if (snapshot.hasError) {
+                                              return Text(
+                                                  'Error: ${snapshot.error}');
+                                            } else if (snapshot.hasData) {
+                                              var destinasiTemp = snapshot.data;
 
-                                            return FutureBuilder<Ticket>(
-                                              future: ApiTicketHelper.getTicketById(book.idTicket),
-                                              builder: (BuildContext context, AsyncSnapshot<Ticket> snapshot) {
-                                                if (snapshot.connectionState == ConnectionState.waiting) {
-                                                  return const CircularProgressIndicator();
-                                                } else if (snapshot.hasError) {
-                                                  return Text('Error: ${snapshot.error}');
-                                                } else if (snapshot.hasData) {
-                                                  var ticketTemp = snapshot.data;
+                                              return FutureBuilder<Ticket>(
+                                                future: ApiTicketHelper
+                                                    .getTicketById(
+                                                        book.idTicket),
+                                                builder: (BuildContext context,
+                                                    AsyncSnapshot<Ticket>
+                                                        snapshot) {
+                                                  if (snapshot
+                                                          .connectionState ==
+                                                      ConnectionState.waiting) {
+                                                    return const CircularProgressIndicator();
+                                                  } else if (snapshot
+                                                      .hasError) {
+                                                    return Text(
+                                                        'Error: ${snapshot.error}');
+                                                  } else if (snapshot.hasData) {
+                                                    var ticketTemp =
+                                                        snapshot.data;
 
-                                                  return Padding(
-                                                    padding: const EdgeInsets.only(left: 0, right: 0),
-                                                    child: Container(
-                                                      width: 380,
-                                                      decoration: BoxDecoration(
-                                                        color: Colors.white,
-                                                        borderRadius: BorderRadius.circular(10),
-                                                        boxShadow: const [
-                                                          BoxShadow(
-                                                            color: Colors.black12,
-                                                            spreadRadius: 1,
-                                                            blurRadius: 10,
-                                                            offset: Offset(0, 4),
-                                                          ),
-                                                        ],
-                                                      ),
-
-                                                      child: Row(
-                                                        children: [
-                                                          Container(
-                                                            width: 120,
-                                                            height: 120,
-                                                            decoration: BoxDecoration(
-                                                              borderRadius: BorderRadius.circular(20),
-                                                              image: DecorationImage(
-                                                                image: MemoryImage(base64.decode(destinasiTemp!.destinationImage)),
-                                                                fit: BoxFit.fill,
+                                                    return Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 0,
+                                                              right: 0),
+                                                      child: Container(
+                                                        width: 380,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          boxShadow: const [
+                                                            BoxShadow(
+                                                              color: Colors
+                                                                  .black12,
+                                                              spreadRadius: 1,
+                                                              blurRadius: 10,
+                                                              offset:
+                                                                  Offset(0, 4),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        child: Row(
+                                                          children: [
+                                                            Container(
+                                                              width: 100,
+                                                              height: 120,
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            20),
+                                                                image:
+                                                                    DecorationImage(
+                                                                  image: MemoryImage(
+                                                                      base64.decode(
+                                                                          destinasiTemp!
+                                                                              .destinationImage)),
+                                                                  fit: BoxFit
+                                                                      .fill,
+                                                                ),
                                                               ),
                                                             ),
-                                                          ),
-
-                                                          const SizedBox(width: 12),
-                                                          Column(
-                                                            children: [
-                                                              const SizedBox(height: 12),
-                                                              Text(
-                                                                ticketTemp!.ticketName,
-                                                                style: const TextStyle(
-                                                                  fontWeight: FontWeight.w500,
-                                                                ),
-                                                              ),
-
-                                                              const SizedBox(height: 6),
-                                                              Padding(
-                                                                padding: const EdgeInsets.only(left: 0),
-                                                                child: Text(
-                                                                  book.dateofDeparture,
-                                                                  style: const TextStyle(
-                                                                    fontWeight: FontWeight.w300,
-                                                                    fontSize: 12,
+                                                            const SizedBox(
+                                                                width: 12),
+                                                            Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: [
+                                                                const SizedBox(
+                                                                    height: 12),
+                                                                Text(
+                                                                  ticketTemp!
+                                                                      .ticketName,
+                                                                  style:
+                                                                      const TextStyle(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
                                                                   ),
                                                                 ),
-                                                              ),
-
-                                                              const SizedBox(height: 26),
-                                                              Padding(
-                                                                padding: const EdgeInsets.only(left: 0),
-                                                                child: Container(
-                                                                  width: 100,
-                                                                  height: 20,
-                                                                  decoration: BoxDecoration(
-                                                                    borderRadius: BorderRadius.circular(10),
-                                                                    color: Colors.grey[300],
-                                                                  ),
-                                                                  child: GestureDetector(
-                                                                    onTap: () {
-                                                                      detailPageTicket(context, book);
-                                                                    },
-
-                                                                    child: const Row(
-                                                                      mainAxisAlignment: MainAxisAlignment.center,
-                                                                      children: [
-                                                                        Padding(
-                                                                          padding: EdgeInsets.only(left: 5),
-                                                                          child: Text(
-                                                                            "See Ticket",
-                                                                            style: TextStyle(
-                                                                              fontSize: 12,
-                                                                              fontWeight: FontWeight.w300,
-                                                                            ),
-                                                                          ),
-                                                                        ),                                                       
-
-                                                                        Padding(
-                                                                          padding: EdgeInsets.only(left: 5),
-                                                                          child: Icon(Icons.arrow_forward_ios, size: 12.0),
-                                                                        ),
-                                                                      ],
+                                                                const SizedBox(
+                                                                    height: 6),
+                                                                Align(
+                                                                  alignment:
+                                                                      Alignment
+                                                                          .centerLeft,
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .only(
+                                                                        left:
+                                                                            0),
+                                                                    child: Text(
+                                                                      book.dateofDeparture,
+                                                                      style:
+                                                                          const TextStyle(
+                                                                        fontWeight:
+                                                                            FontWeight.w300,
+                                                                        fontSize:
+                                                                            12,
+                                                                      ),
                                                                     ),
-                                                                  )
-                                                                  
+                                                                  ),
                                                                 ),
-                                                              ),
-
-                                                            ],
-                                                          )
-                                                        ],
+                                                                const SizedBox(
+                                                                    height: 26),
+                                                                Center(
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: const EdgeInsets
+                                                                        .only(
+                                                                        left:
+                                                                            0),
+                                                                    child: Container(
+                                                                        width: 100,
+                                                                        height: 20,
+                                                                        decoration: BoxDecoration(
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10),
+                                                                          color:
+                                                                              Colors.grey[300],
+                                                                        ),
+                                                                        child: GestureDetector(
+                                                                          onTap:
+                                                                              () {
+                                                                            detailPageTicket(context,
+                                                                                book);
+                                                                          },
+                                                                          child:
+                                                                              const Row(
+                                                                            mainAxisAlignment:
+                                                                                MainAxisAlignment.center,
+                                                                            children: [
+                                                                              Padding(
+                                                                                padding: EdgeInsets.only(left: 5),
+                                                                                child: Text(
+                                                                                  "See Ticket",
+                                                                                  style: TextStyle(
+                                                                                    fontSize: 12,
+                                                                                    fontWeight: FontWeight.w300,
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              Padding(
+                                                                                padding: EdgeInsets.only(left: 5),
+                                                                                child: Icon(Icons.arrow_forward_ios, size: 12.0),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        )),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                            )
+                                                          ],
+                                                        ),
                                                       ),
-                                                    ),
-                                                  );
-                                                } else {
-                                                  return const Text('No data V2');
-                                                }
-                                              },
-                                            );
-                                          } else {
-                                            return const Text('No data');
-                                          }
-                                        },
-                                      ),
-
+                                                    );
+                                                  } else {
+                                                    return const Text(
+                                                        'No data V2');
+                                                  }
+                                                },
+                                              );
+                                            } else {
+                                              return const Text('No data');
+                                            }
+                                          },
+                                        ),
                                     ],
                                   ),
                                 ),
@@ -283,6 +340,6 @@ class MyTicketState extends State<MyTicket> {
                 ),
               ),
       ),
-    );    
+    );
   }
 }
