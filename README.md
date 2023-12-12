@@ -1,3 +1,15 @@
+**TUBES KELOMPOK PARIWISATA**
+- 200710613 I Kadek Nikki Lababa // Fuikopoi
+
+- 210711185 Klasik Solafide Kabor Mambri Taidi //  KlasikTaidi02
+
+- 210711186 Carolus Seto Arianto // WIBU1234
+
+- 210711214 Ignasius Axel Cokrodiharjo // axelckj
+
+- 210711481 Gloria Estefania Yaspis // geastfn
+
+
 Kelas A // Kelompok 1 :
 UGD Layout
 - 200710613 I Kadek Nikki Lababa // Membuat theme changer
